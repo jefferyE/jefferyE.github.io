@@ -166,19 +166,19 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-博客简介" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-vue的双向数据绑定" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/24/博客简介/">Hi， jefferye.github.io!</a>
+      <a class="article-title" href="/2018/04/24/vue的双向数据绑定/">Vue的双向数据绑定</a>
     </h1>
   
 
         
-        <a href="/2018/04/24/博客简介/" class="archive-article-date">
+        <a href="/2018/04/24/vue的双向数据绑定/" class="archive-article-date">
   	<time datetime="2018-04-24T07:08:15.896Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-24</time>
 </a>
         
@@ -186,8 +186,14 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>This is my first blog on github, I’ll unscheduled sharing technology blog irregularlly.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">this is a <span class="string">'editor'</span>.</span><br></pre></td></tr></table></figure></p>
-
+        <p>什么是双向数据绑定？Vue是一个MVVM框架，数据绑定简单来说，就是当数据发生变化时，相应的视图会进行更新，当视图更新时，数据也会跟着变化。</p>
+<p>实现数据绑定的方式大致有以下几种：</p>
+<pre><code>- 1、发布者-订阅者模式（backbone.js）
+- 2、脏值检查（angular.js）
+-3、数据劫持（vue.js)
+</code></pre><h2 id="发布者-订阅者模式"><a href="#发布者-订阅者模式" class="headerlink" title="发布者-订阅者模式"></a>发布者-订阅者模式</h2><pre><code>一般通过sub, pub的方式实现数据和视图的绑定监听，更新数据方式通常做法是 vm.set(&apos;property&apos;, value)，有兴趣可参考[这里](http://www.html-js.com/article/Study-of-twoway-data-binding-JavaScript-talk-about-JavaScript-every-day)
+我们更希望可以通过vue.property = value 这种方式进行数据更新，同时自动更新视图。
+</code></pre><h2 id="脏值检查"><a href="#脏值检查" class="headerlink" title="脏值检查"></a>脏值检查</h2><h2 id="数据劫持"><a href="#数据劫持" class="headerlink" title="数据劫持"></a>数据劫持</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">this is a <span class="string">'editor'</span>.</span><br></pre></td></tr></table></figure>
       
 
       
@@ -199,7 +205,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/24/博客简介/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/04/24/vue的双向数据绑定/">展开全文 >></a>
         </p>
       
 
