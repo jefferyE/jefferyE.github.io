@@ -16,10 +16,12 @@
 <meta property="og:site_name" content="Jeffery的博客">
 <meta property="og:description" content="什么是双向数据绑定？Vue是一个MVVM框架，数据绑定简单来说，就是当数据发生变化时，相应的视图会进行更新，当视图更新时，数据也会跟着变化。 实现数据绑定的方式大致有以下几种： - 1、发布者-订阅者模式（backbone.js） - 2、脏值检查（angular.js） - 3、数据劫持（vue.js) 发布者-订阅者模式一般通过sub, pub的方式实现数据和视图的绑定监听，更新数据方式通常做">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-04-24T11:17:28.797Z">
+<meta property="og:image" content="http://yoursite.com/images/vue-bg.png">
+<meta property="og:updated_time" content="2018-04-24T11:24:24.200Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vue的双向数据绑定">
 <meta name="twitter:description" content="什么是双向数据绑定？Vue是一个MVVM框架，数据绑定简单来说，就是当数据发生变化时，相应的视图会进行更新，当视图更新时，数据也会跟着变化。 实现数据绑定的方式大致有以下几种： - 1、发布者-订阅者模式（backbone.js） - 2、脏值检查（angular.js） - 3、数据劫持（vue.js) 发布者-订阅者模式一般通过sub, pub的方式实现数据和视图的绑定监听，更新数据方式通常做">
+<meta name="twitter:image" content="http://yoursite.com/images/vue-bg.png">
   
     <link rel="alternative" href="/atom.xml" title="Jeffery的博客" type="application/atom+xml">
   
@@ -197,8 +199,9 @@
 - 浏览器Location变更事件 ( $location )
 - Timer事件( $timeout , $interval )
 - 执行 $digest() 或 $apply()
-</code></pre><h4 id="数据劫持"><a href="#数据劫持" class="headerlink" title="数据劫持"></a>数据劫持</h4><p> vue.js则是通过数据劫持以及结合发布者-订阅者来实现的，数据劫持是利用ES5的Object.defineProperty(obj, key, val)来劫持各个属性的的setter以及getter，在数据变动时发布消息给订阅者，从而触发相应的回调来更新视图。</p>
-<h3 id="实现思路："><a href="#实现思路：" class="headerlink" title="实现思路："></a>实现思路：</h3><p>1、实现一个数据监听器Obverser，对data中的数据进行监听，若有变化，通知相应的订阅者。<br>2、实现一个指令解析器Compile，对于每个元素上的指令进行解析，根据指令替换数据，更新视图。<br>3、实现一个Watcher，用来连接Obverser和Compile, 并为每个属性绑定相应的订阅者，当数据发生变化时，执行相应的回调函数，从而更新视图。<br>4、构造函数 （new Vue({})）<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">this is a <span class="string">'editor'</span>.</span><br></pre></td></tr></table></figure></p>
+</code></pre><h4 id="数据劫持"><a href="#数据劫持" class="headerlink" title="数据劫持"></a>数据劫持</h4><p> Vue.js则是通过数据劫持以及结合发布者-订阅者来实现的，数据劫持是利用ES5的Object.defineProperty(obj, key, val)来劫持各个属性的的setter以及getter，在数据变动时发布消息给订阅者，从而触发相应的回调来更新视图。</p>
+<h3 id="实现思路："><a href="#实现思路：" class="headerlink" title="实现思路："></a>实现思路：</h3><p>1、实现一个数据监听器Obverser，对data中的数据进行监听，若有变化，通知相应的订阅者。<br>2、实现一个指令解析器Compile，对于每个元素上的指令进行解析，根据指令替换数据，更新视图。<br>3、实现一个Watcher，用来连接Obverser和Compile, 并为每个属性绑定相应的订阅者，当数据发生变化时，执行相应的回调函数，从而更新视图。<br>4、构造函数 （new Vue({})）</p>
+<p>上述流程如图所示：<br><img src="/images/vue-bg.png" alt="vue双向数据绑定原理图"><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">this is a <span class="string">'editor'</span>.</span><br></pre></td></tr></table></figure></p>
 
       
 
