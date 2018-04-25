@@ -6,22 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Vue的双向数据绑定 | Jeffery的博客</title>
+  <title>Hi， Welcome to my blog | Jeffery的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="什么是双向数据绑定？Vue是一个MVVM框架，数据绑定简单来说，就是当数据发生变化时，相应的视图会进行更新，当视图更新时，数据也会跟着变化。 实现数据绑定的方式大致有以下几种： - 1、发布者-订阅者模式（backbone.js） - 2、脏值检查（angular.js） - 3、数据劫持（vue.js) 发布者-订阅者模式一般通过sub, pub的方式实现数据和视图的绑定监听，更新数据方式通常做">
-<meta name="keywords" content="Jeffery">
+  <meta name="description" content="你对本页的描述">
+<meta name="keywords" content="tag1,tag2">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Vue的双向数据绑定">
-<meta property="og:url" content="http://yoursite.com/2018/04/25/vue的双向数据绑定/index.html">
+<meta property="og:title" content="Hi， Welcome to my blog">
+<meta property="og:url" content="http://yoursite.com/2018/04/25/welcome/index.html">
 <meta property="og:site_name" content="Jeffery的博客">
-<meta property="og:description" content="什么是双向数据绑定？Vue是一个MVVM框架，数据绑定简单来说，就是当数据发生变化时，相应的视图会进行更新，当视图更新时，数据也会跟着变化。 实现数据绑定的方式大致有以下几种： - 1、发布者-订阅者模式（backbone.js） - 2、脏值检查（angular.js） - 3、数据劫持（vue.js) 发布者-订阅者模式一般通过sub, pub的方式实现数据和视图的绑定监听，更新数据方式通常做">
+<meta property="og:description" content="你对本页的描述">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/images/vue-bg.png">
-<meta property="og:updated_time" content="2018-04-25T02:01:57.811Z">
+<meta property="og:image" content="http://bruce.u.qiniudn.com/2013/11/27/reading/photos-0.jpg">
+<meta property="og:image" content="http://bruce.u.qiniudn.com/2013/11/27/reading/photos-1.jpg">
+<meta property="og:updated_time" content="2018-04-25T02:24:11.894Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Vue的双向数据绑定">
-<meta name="twitter:description" content="什么是双向数据绑定？Vue是一个MVVM框架，数据绑定简单来说，就是当数据发生变化时，相应的视图会进行更新，当视图更新时，数据也会跟着变化。 实现数据绑定的方式大致有以下几种： - 1、发布者-订阅者模式（backbone.js） - 2、脏值检查（angular.js） - 3、数据劫持（vue.js) 发布者-订阅者模式一般通过sub, pub的方式实现数据和视图的绑定监听，更新数据方式通常做">
-<meta name="twitter:image" content="http://yoursite.com/images/vue-bg.png">
+<meta name="twitter:title" content="Hi， Welcome to my blog">
+<meta name="twitter:description" content="你对本页的描述">
+<meta name="twitter:image" content="http://bruce.u.qiniudn.com/2013/11/27/reading/photos-0.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Jeffery的博客" type="application/atom+xml">
   
@@ -173,45 +174,28 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-vue的双向数据绑定" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-welcome" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Vue的双向数据绑定
+      Hi， Welcome to my blog
     </h1>
   
 
         
-        <a href="/2018/04/25/vue的双向数据绑定/" class="archive-article-date">
-  	<time datetime="2018-04-25T02:16:01.183Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-25</time>
+        <a href="/2018/04/25/welcome/" class="archive-article-date">
+  	<time datetime="2018-04-25T02:16:01.186Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-25</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>什么是双向数据绑定？Vue是一个MVVM框架，数据绑定简单来说，就是当数据发生变化时，相应的视图会进行更新，当视图更新时，数据也会跟着变化。</p>
-<p>实现数据绑定的方式大致有以下几种：</p>
-<pre><code>- 1、发布者-订阅者模式（backbone.js）
-- 2、脏值检查（angular.js）
-- 3、数据劫持（vue.js)
-</code></pre><h4 id="发布者-订阅者模式"><a href="#发布者-订阅者模式" class="headerlink" title="发布者-订阅者模式"></a>发布者-订阅者模式</h4><p>一般通过sub, pub的方式实现数据和视图的绑定监听，更新数据方式通常做法是 vm.set(‘property’, value)，有兴趣可参考<a href="http://www.html-js.com/article/Study-of-twoway-data-binding-JavaScript-talk-about-JavaScript-every-day" target="_blank" rel="noopener">这里</a><br>    我们更希望可以通过 vm.property = value 这种方式进行数据更新，同时自动更新视图。</p>
-<h4 id="脏值检查"><a href="#脏值检查" class="headerlink" title="脏值检查"></a>脏值检查</h4><p>angular是通过脏值检查方式来对比数据是否变化，来决定是否更新视图，最常见的方式是通过setInterval()来监测数据变化，当然，只会在某些指定事件触发时下才进行脏值检查。大致如下：</p>
-<pre><code>- DOM事件，譬如用户输入文本，点击按钮等。( ng-click )
-- XHR响应事件 ( $http )
-- 浏览器Location变更事件 ( $location )
-- Timer事件( $timeout , $interval )
-- 执行 $digest() 或 $apply()
-</code></pre><h4 id="数据劫持"><a href="#数据劫持" class="headerlink" title="数据劫持"></a>数据劫持</h4><p> Vue.js则是通过数据劫持以及结合发布者-订阅者来实现的，数据劫持是利用ES5的Object.defineProperty(obj, key, val)来劫持各个属性的的setter以及getter，在数据变动时发布消息给订阅者，从而触发相应的回调来更新视图。</p>
-<h2 id="一、实现最基础的数据绑定"><a href="#一、实现最基础的数据绑定" class="headerlink" title="一、实现最基础的数据绑定"></a>一、实现最基础的数据绑定</h2><pre><code><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;input <span class="built_in">type</span>=<span class="string">"text"</span> id=<span class="string">"in"</span>/&gt;</span><br><span class="line">输入的值为：&lt;span id=<span class="string">"out"</span>&gt;&lt;/span&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var int = document.getElementById(<span class="string">'in'</span>);</span><br><span class="line">    var out = document.getElementById(<span class="string">'out'</span>);</span><br><span class="line">    var obj = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    Object.defineProperty(obj, <span class="string">'msg'</span>, &#123;</span><br><span class="line">        enumerable: <span class="literal">true</span>,</span><br><span class="line">        configurable: <span class="literal">true</span>,</span><br><span class="line">        <span class="built_in">set</span> (newVal) &#123;</span><br><span class="line">            out.innerHTML = newVal;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    int.addEventListener(<span class="string">'input'</span>, <span class="keyword">function</span>(e) &#123;</span><br><span class="line">        obj.msg = e.target.value;</span><br><span class="line">    &#125;)</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-</code></pre><h2 id="二、双向数据绑定实现"><a href="#二、双向数据绑定实现" class="headerlink" title="二、双向数据绑定实现"></a>二、双向数据绑定实现</h2><p>上面的只是简单的使用了Object.defineProperty(),并不是我们最终想要的效果，最终想要的效果如下：<br>    <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">    &lt;input <span class="built_in">type</span>=<span class="string">"text"</span> v-model=<span class="string">"text"</span> /&gt;</span><br><span class="line">    &#123;&#123; text &#125;&#125;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var vm = new MVue(&#123;</span><br><span class="line">        el: <span class="string">'#app'</span>,</span><br><span class="line">        data: &#123;</span><br><span class="line">            text: <span class="string">'hello world'</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
-<h3 id="实现思路："><a href="#实现思路：" class="headerlink" title="实现思路："></a>实现思路：</h3><p>1、输入框以及文本节点和data中的数据进行绑定<br>2、输入框内容变化时，data中的对应数据同步变化，即 view =&gt; model<br>3、data中数据变化时，对应的文本节点内容同步变化 即 model =&gt; view</p>
-<p>上述流程如图所示：<br><img src="/images/vue-bg.png" alt="vue双向数据绑定原理图"></p>
-<p>1、实现一个数据监听器Obverser，对data中的数据进行监听，若有变化，通知相应的订阅者。<br>2、实现一个指令解析器Compile，对于每个元素上的指令进行解析，根据指令替换数据，更新视图。<br>3、实现一个Watcher，用来连接Obverser和Compile, 并为每个属性绑定相应的订阅者，当数据发生变化时，执行相应的回调函数，从而更新视图。<br>4、构造函数 （new Vue({})）</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">this is a <span class="string">'editor'</span>.</span><br></pre></td></tr></table></figure>
+        <p>This is my first blog on github from Blog Park, I’ll sharing technology blog irregularlly and discuss problems together.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">// 编写一个javscript函数 fn，该函数有一个参数 n（数字类型），其返回值是一个数组，该数组内是 n 个随机且不重复的整数，且整数取值范围是 [2, 32]。</span><br><span class="line"></span><br><span class="line">console.log(<span class="string">'---解法一---'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> fn(n) &#123;</span><br><span class="line"> <span class="built_in">let</span> arr = []</span><br><span class="line"> <span class="keyword">for</span>(<span class="built_in">let</span> i = 0; i &lt; n; i++) &#123;</span><br><span class="line">  <span class="built_in">let</span> num = getRound(2, 32);</span><br><span class="line">  <span class="keyword">if</span> (arr.arrCheck(num)) &#123;</span><br><span class="line">   i--;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">   arr.push(num)</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="built_in">return</span> arr;</span><br><span class="line">&#125;</span><br><span class="line">Array.prototype.arrCheck = Array.prototype.arrCheck ||  <span class="keyword">function</span>(num) &#123;</span><br><span class="line"> <span class="keyword">for</span>(<span class="built_in">let</span> i = 0; i &lt; this.length; i++) &#123;</span><br><span class="line">  <span class="keyword">if</span> (this[i] === num) &#123;</span><br><span class="line">   <span class="built_in">return</span> <span class="literal">true</span></span><br><span class="line">  &#125;</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="built_in">return</span> <span class="literal">false</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> getRound (min, max) &#123;</span><br><span class="line">  <span class="built_in">return</span> parseInt(Math.random() * (max - min + 1) + min)</span><br><span class="line">&#125;</span><br><span class="line">console.log(fn(8))</span><br></pre></td></tr></table></figure>
       
 
       
@@ -240,6 +224,21 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">tag1</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">tag2</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -290,7 +289,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/04/25/vue的双向数据绑定/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/04/25/welcome/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -324,7 +323,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="vue的双向数据绑定" data-title="Vue的双向数据绑定" data-url="http://yoursite.com/2018/04/25/vue的双向数据绑定/"></div>
+	<div class="ds-thread" data-thread-key="welcome" data-title="Hi， Welcome to my blog" data-url="http://yoursite.com/2018/04/25/welcome/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
