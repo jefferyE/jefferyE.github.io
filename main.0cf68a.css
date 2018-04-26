@@ -19,7 +19,12 @@
     text-indent: 2em;
 }
 .article-list ul li{
-    padding-left: 15px;
+    padding: 0 15px;
+    text-align: right;
+    color: #999;
+}
+.article-list ul li a{
+    float: left;
 }
 #examples .wrap h3.p-title {
     font-size: 1.3em;
