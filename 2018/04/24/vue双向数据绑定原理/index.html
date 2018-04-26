@@ -16,19 +16,19 @@
   <script src="/./lightbox/js/lightbox.js"></script>
   <title>Vue的双向数据绑定 | Jeffery的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="什么是双向数据绑定？Vue是一个MVVM框架，数据绑定简单来说，就是当数据发生变化时，相应的视图会进行更新，当视图更新时，数据也会跟着变化。 实现数据绑定的方式大致有以下几种： - 1、发布者-订阅者模式（backbone.js） - 2、脏值检查（angular.js） - 3、数据劫持（vue.js)  发布者-订阅者模式一般通过sub, pub的方式实现数据和视图的绑定监听，更新数据方式通常">
+  <meta name="description" content="什么是双向数据绑定？Vue是一个MVVM框架，数据绑定简单来说，就是当数据发生变化时，相应的视图会进行更新，当视图更新时，数据也会跟着变化。 实现数据绑定的方式大致有以下几种： - 1、发布者-订阅者模式（backbone.js） - 2、脏值检查（angular.js） - 3、数据劫持（vue.js)">
 <meta name="keywords" content="vue,javascript">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Vue的双向数据绑定">
 <meta property="og:url" content="http://yoursite.com/2018/04/24/vue双向数据绑定原理/index.html">
 <meta property="og:site_name" content="Jeffery的博客">
-<meta property="og:description" content="什么是双向数据绑定？Vue是一个MVVM框架，数据绑定简单来说，就是当数据发生变化时，相应的视图会进行更新，当视图更新时，数据也会跟着变化。 实现数据绑定的方式大致有以下几种： - 1、发布者-订阅者模式（backbone.js） - 2、脏值检查（angular.js） - 3、数据劫持（vue.js)  发布者-订阅者模式一般通过sub, pub的方式实现数据和视图的绑定监听，更新数据方式通常">
+<meta property="og:description" content="什么是双向数据绑定？Vue是一个MVVM框架，数据绑定简单来说，就是当数据发生变化时，相应的视图会进行更新，当视图更新时，数据也会跟着变化。 实现数据绑定的方式大致有以下几种： - 1、发布者-订阅者模式（backbone.js） - 2、脏值检查（angular.js） - 3、数据劫持（vue.js)">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/images/vue-bg.png">
-<meta property="og:updated_time" content="2018-04-25T08:27:43.546Z">
+<meta property="og:updated_time" content="2018-04-26T00:49:12.138Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vue的双向数据绑定">
-<meta name="twitter:description" content="什么是双向数据绑定？Vue是一个MVVM框架，数据绑定简单来说，就是当数据发生变化时，相应的视图会进行更新，当视图更新时，数据也会跟着变化。 实现数据绑定的方式大致有以下几种： - 1、发布者-订阅者模式（backbone.js） - 2、脏值检查（angular.js） - 3、数据劫持（vue.js)  发布者-订阅者模式一般通过sub, pub的方式实现数据和视图的绑定监听，更新数据方式通常">
+<meta name="twitter:description" content="什么是双向数据绑定？Vue是一个MVVM框架，数据绑定简单来说，就是当数据发生变化时，相应的视图会进行更新，当视图更新时，数据也会跟着变化。 实现数据绑定的方式大致有以下几种： - 1、发布者-订阅者模式（backbone.js） - 2、脏值检查（angular.js） - 3、数据劫持（vue.js)">
 <meta name="twitter:image" content="http://yoursite.com/images/vue-bg.png">
   
     <link rel="alternative" href="/atom.xml" title="Jeffery的博客" type="application/atom+xml">
@@ -71,28 +71,38 @@
 			<ul>
 			
 				<li>
-					<i class="icon-font icon-zhuye" style="color:#0593d3; font-size: 20px; vertical-align: middle;"></i>
-					<a href="/" style="color:#0593d3;">主页</a>
+					<a href="/" style="color:#0593d3;">
+						<i class="icon-font icon-zhuye" style="color:#0593d3; font-size: 20px; vertical-align: middle;display: inline-block;margin-right: 2px;"></i>
+						主页
+					</a>
 				</li>
 	        
 				<li>
-					<i class="icon-font icon-bi" style="color:#0593d3; font-size: 20px; vertical-align: middle;"></i>
-					<a href="/essay" style="color:#0593d3;">随笔</a>
+					<a href="/essay" style="color:#0593d3;">
+						<i class="icon-font icon-bi" style="color:#0593d3; font-size: 20px; vertical-align: middle;display: inline-block;margin-right: 2px;"></i>
+						随笔
+					</a>
 				</li>
 	        
 				<li>
-					<i class="icon-font icon-jishuwendang" style="color:#0593d3; font-size: 20px; vertical-align: middle;"></i>
-					<a href="/technology" style="color:#0593d3;">技术</a>
+					<a href="/technology" style="color:#0593d3;">
+						<i class="icon-font icon-jishuwendang" style="color:#0593d3; font-size: 20px; vertical-align: middle;display: inline-block;margin-right: 2px;"></i>
+						技术
+					</a>
 				</li>
 	        
 				<li>
-					<i class="icon-font icon-19" style="color:#0593d3; font-size: 20px; vertical-align: middle;"></i>
-					<a href="/album" style="color:#0593d3;">相册</a>
+					<a href="/album" style="color:#0593d3;">
+						<i class="icon-font icon-19" style="color:#0593d3; font-size: 20px; vertical-align: middle;display: inline-block;margin-right: 2px;"></i>
+						相册
+					</a>
 				</li>
 	        
 				<li>
-					<i class="icon-font icon-guanyuwomen" style="color:#0593d3; font-size: 20px; vertical-align: middle;"></i>
-					<a href="/about" style="color:#0593d3;">关于</a>
+					<a href="/about" style="color:#0593d3;">
+						<i class="icon-font icon-guanyuwomen" style="color:#0593d3; font-size: 20px; vertical-align: middle;display: inline-block;margin-right: 2px;"></i>
+						关于
+					</a>
 				</li>
 	        
 			</ul>
@@ -222,15 +232,17 @@
     
     <!-- 目录内容 -->
     
+      <div class="doc-pc">
         <p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
-              <span class="btn-bg"></span>
-              <span class="btn-text">文章导航</span>
-              </p>
-      <div id="toc-article" class="toc-article">
+          <span class="btn-bg"></span>
+          <span class="btn-text">文章导航</span>
+        </p>
+        <div id="toc-article" class="toc-article">
           <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
-        <strong class="toc-title">文章目录</strong>
-              <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#发布者-订阅者模式"><span class="toc-number">1.</span> <span class="toc-text">发布者-订阅者模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#脏值检查"><span class="toc-number">2.</span> <span class="toc-text">脏值检查</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#数据劫持"><span class="toc-number">3.</span> <span class="toc-text">数据劫持</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一、实现最基础的数据绑定"><span class="toc-number"></span> <span class="toc-text">一、实现最基础的数据绑定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、双向数据绑定实现"><span class="toc-number"></span> <span class="toc-text">二、双向数据绑定实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实现思路："><span class="toc-number"></span> <span class="toc-text">实现思路：</span></a>
-            </div>
+          <strong class="toc-title">文章目录</strong>
+          <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#发布者-订阅者模式"><span class="toc-number">1.</span> <span class="toc-text">发布者-订阅者模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#脏值检查"><span class="toc-number">2.</span> <span class="toc-text">脏值检查</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#数据劫持"><span class="toc-number">3.</span> <span class="toc-text">数据劫持</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一、实现最基础的数据绑定"><span class="toc-number"></span> <span class="toc-text">一、实现最基础的数据绑定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、双向数据绑定实现"><span class="toc-number"></span> <span class="toc-text">二、双向数据绑定实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实现思路："><span class="toc-number"></span> <span class="toc-text">实现思路：</span></a>
+        </div>
+      </div>
       <script type="text/javascript">
       function showToc(){
         var toc_article = document.getElementById("toc-article");
@@ -254,7 +266,7 @@
 <pre><code>- 1、发布者-订阅者模式（backbone.js）
 - 2、脏值检查（angular.js）
 - 3、数据劫持（vue.js)
-</code></pre><!-- 查看更多 -->
+</code></pre><a id="more"></a>
 <h4 id="发布者-订阅者模式"><a href="#发布者-订阅者模式" class="headerlink" title="发布者-订阅者模式"></a>发布者-订阅者模式</h4><p>一般通过sub, pub的方式实现数据和视图的绑定监听，更新数据方式通常做法是 vm.set(‘property’, value)，有兴趣可参考<a href="http://www.html-js.com/article/Study-of-twoway-data-binding-JavaScript-talk-about-JavaScript-every-day" target="_blank" rel="noopener">这里</a><br>    我们更希望可以通过 vm.property = value 这种方式进行数据更新，同时自动更新视图。</p>
 <h4 id="脏值检查"><a href="#脏值检查" class="headerlink" title="脏值检查"></a>脏值检查</h4><p>angular是通过脏值检查方式来对比数据是否变化，来决定是否更新视图，最常见的方式是通过setInterval()来监测数据变化，当然，只会在某些指定事件触发时下才进行脏值检查。大致如下：</p>
 <pre><code>- DOM事件，譬如用户输入文本，点击按钮等。( ng-click )

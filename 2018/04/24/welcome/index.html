@@ -69,28 +69,38 @@
 			<ul>
 			
 				<li>
-					<i class="icon-font icon-zhuye" style="color:#0593d3; font-size: 20px; vertical-align: middle;"></i>
-					<a href="/" style="color:#0593d3;">主页</a>
+					<a href="/" style="color:#0593d3;">
+						<i class="icon-font icon-zhuye" style="color:#0593d3; font-size: 20px; vertical-align: middle;display: inline-block;margin-right: 2px;"></i>
+						主页
+					</a>
 				</li>
 	        
 				<li>
-					<i class="icon-font icon-bi" style="color:#0593d3; font-size: 20px; vertical-align: middle;"></i>
-					<a href="/essay" style="color:#0593d3;">随笔</a>
+					<a href="/essay" style="color:#0593d3;">
+						<i class="icon-font icon-bi" style="color:#0593d3; font-size: 20px; vertical-align: middle;display: inline-block;margin-right: 2px;"></i>
+						随笔
+					</a>
 				</li>
 	        
 				<li>
-					<i class="icon-font icon-jishuwendang" style="color:#0593d3; font-size: 20px; vertical-align: middle;"></i>
-					<a href="/technology" style="color:#0593d3;">技术</a>
+					<a href="/technology" style="color:#0593d3;">
+						<i class="icon-font icon-jishuwendang" style="color:#0593d3; font-size: 20px; vertical-align: middle;display: inline-block;margin-right: 2px;"></i>
+						技术
+					</a>
 				</li>
 	        
 				<li>
-					<i class="icon-font icon-19" style="color:#0593d3; font-size: 20px; vertical-align: middle;"></i>
-					<a href="/album" style="color:#0593d3;">相册</a>
+					<a href="/album" style="color:#0593d3;">
+						<i class="icon-font icon-19" style="color:#0593d3; font-size: 20px; vertical-align: middle;display: inline-block;margin-right: 2px;"></i>
+						相册
+					</a>
 				</li>
 	        
 				<li>
-					<i class="icon-font icon-guanyuwomen" style="color:#0593d3; font-size: 20px; vertical-align: middle;"></i>
-					<a href="/about" style="color:#0593d3;">关于</a>
+					<a href="/about" style="color:#0593d3;">
+						<i class="icon-font icon-guanyuwomen" style="color:#0593d3; font-size: 20px; vertical-align: middle;display: inline-block;margin-right: 2px;"></i>
+						关于
+					</a>
 				</li>
 	        
 			</ul>
@@ -220,15 +230,17 @@
     
     <!-- 目录内容 -->
     
+      <div class="doc-pc">
         <p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
-              <span class="btn-bg"></span>
-              <span class="btn-text">文章导航</span>
-              </p>
-      <div id="toc-article" class="toc-article">
+          <span class="btn-bg"></span>
+          <span class="btn-text">文章导航</span>
+        </p>
+        <div id="toc-article" class="toc-article">
           <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
-        <strong class="toc-title">文章目录</strong>
-              <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#分享一个面试题"><span class="toc-number">1.</span> <span class="toc-text">分享一个面试题</span></a></li></ol>
-            </div>
+          <strong class="toc-title">文章目录</strong>
+          <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#分享一个面试题"><span class="toc-number">1.</span> <span class="toc-text">分享一个面试题</span></a></li></ol>
+        </div>
+      </div>
       <script type="text/javascript">
       function showToc(){
         var toc_article = document.getElementById("toc-article");
