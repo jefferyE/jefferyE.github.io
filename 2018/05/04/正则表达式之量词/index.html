@@ -27,7 +27,7 @@
 <meta property="og:site_name" content="Jeffery的博客">
 <meta property="og:description" content="我们知道，在正则表达式中，可以使用[0-9]或\d来匹配单个数字字符，但是，如果需要验证一个更复杂的字符串呢，比如大陆地区的邮政编码。不过邮政编码并没有特别规定，只有由6个数字组成的字符串而已， 如246512，根据[0-9]或\d，我们可以很快的实现匹配的正则表达式，\d\d\d\d\d\d，可以看出，我们重复用了6个单个字符来实现匹配，由于目前数字较少，看着还可以接受，那如果不是6个数字组成的">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-05-04T08:33:11.376Z">
+<meta property="og:updated_time" content="2018-05-04T08:34:16.463Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="正则表达式之量词">
 <meta name="twitter:description" content="我们知道，在正则表达式中，可以使用[0-9]或\d来匹配单个数字字符，但是，如果需要验证一个更复杂的字符串呢，比如大陆地区的邮政编码。不过邮政编码并没有特别规定，只有由6个数字组成的字符串而已， 如246512，根据[0-9]或\d，我们可以很快的实现匹配的正则表达式，\d\d\d\d\d\d，可以看出，我们重复用了6个单个字符来实现匹配，由于目前数字较少，看着还可以接受，那如果不是6个数字组成的">
@@ -271,8 +271,33 @@
         <p>我们知道，在正则表达式中，可以使用[0-9]或\d来匹配单个数字字符，但是，如果需要验证一个更复杂的字符串呢，比如大陆地区的邮政编码。<br>不过邮政编码并没有特别规定，只有由6个数字组成的字符串而已， 如246512，根据[0-9]或\d，我们可以很快的实现匹配的正则表达式，\d\d\d\d\d\d，<br>可以看出，我们重复用了6个单个字符来实现匹配，由于目前数字较少，看着还可以接受，那如果不是6个数字组成的，10个？20个？甚至是更多呢，显然这种方式是不行的，正则表达式提供了量词，用来限定出现的次数，可以很好解决这个问题。</p>
 <a id="more"></a>
 <p>首先，看下量词的表示形式：</p>
-<h2 id="量词的一般形式"><a href="#量词的一般形式" class="headerlink" title="量词的一般形式"></a>量词的一般形式</h2><p>| 量词 | 说明 |<br>| {n} | 量词前面的元素必须出现n次 |<br>| {n,m} | 量词前面的元素至少出现n次，最多出现m次 |<br>| {n,} | 量词前面的元素至少出现n次，无上限 |<br>| {0,m} | 量词前面的元素可以不出现，也可以出现，最多出现m次 |</p>
-<p><font color="#f00" size="14" face="黑体">注意：{n,m}之间的逗号后面不能出现空格，否则无法正确匹配。</font></p>
+<h2 id="量词的一般形式"><a href="#量词的一般形式" class="headerlink" title="量词的一般形式"></a>量词的一般形式</h2><table>
+<thead>
+<tr>
+<th style="text-align:center">量词</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">{n}</td>
+<td style="text-align:center">量词前面的元素必须出现n次</td>
+</tr>
+<tr>
+<td style="text-align:center">{n,m}</td>
+<td style="text-align:center">量词前面的元素至少出现n次，最多出现m次</td>
+</tr>
+<tr>
+<td style="text-align:center">{n,}</td>
+<td style="text-align:center">量词前面的元素至少出现n次，无上限</td>
+</tr>
+<tr>
+<td style="text-align:center">{0,m}</td>
+<td style="text-align:center">量词前面的元素可以不出现，也可以出现，最多出现m次</td>
+</tr>
+</tbody>
+</table>
+<p><font color="#f00" size="12" face="黑体">注意：{n,m}之间的逗号后面不能出现空格，否则无法正确匹配。</font></p>
 <h3 id="分享一个题目"><a href="#分享一个题目" class="headerlink" title="分享一个题目"></a>分享一个题目</h3><p>// 编写一个javscript函数 fn，该函数有一个参数 n（数字类型），其返回值是一个数组，该数组内是 n 个随机且不重复的整数，且整数取值范围是 [2, 32]。</p>
 
       
