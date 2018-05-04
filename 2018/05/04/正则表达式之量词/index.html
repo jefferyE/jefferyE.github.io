@@ -28,7 +28,7 @@
 <meta property="og:description" content="&amp;nbsp;&amp;nbsp;我们知道，在正则表达式中，可以使用[0-9]或\d来匹配单个数字字符，但是，如果需要验证一个更复杂的字符串呢，比如大陆地区的邮政编码。&amp;nbsp;&amp;nbsp;不过邮政编码并没有特别规定，只有由6个数字组成的字符串而已， 如246512，根据[0-9]或\d，我们可以很快的实现匹配的正则表达式，\d\d\d\d\d\d。&amp;nbsp;&amp;nbsp;从上可以看出，我们重复用了6个单">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/images/technology/backtracking.png">
-<meta property="og:updated_time" content="2018-05-04T10:28:05.926Z">
+<meta property="og:updated_time" content="2018-05-04T10:51:51.316Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="正则表达式之量词">
 <meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;我们知道，在正则表达式中，可以使用[0-9]或\d来匹配单个数字字符，但是，如果需要验证一个更复杂的字符串呢，比如大陆地区的邮政编码。&amp;nbsp;&amp;nbsp;不过邮政编码并没有特别规定，只有由6个数字组成的字符串而已， 如246512，根据[0-9]或\d，我们可以很快的实现匹配的正则表达式，\d\d\d\d\d\d。&amp;nbsp;&amp;nbsp;从上可以看出，我们重复用了6个单">
@@ -249,7 +249,7 @@
         <div id="toc-article" class="toc-article">
           <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
           <strong class="toc-title">文章目录</strong>
-          <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#量词的一般形式"><span class="toc-number">1.</span> <span class="toc-text">量词的一般形式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#表：一般形式"><span class="toc-number">1.1.</span> <span class="toc-text">表：一般形式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#注意："><span class="toc-number">1.1.1.</span> <span class="toc-text">注意：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#忽略优先量词"><span class="toc-number">1.2.</span> <span class="toc-text">忽略优先量词</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#表：匹配优先量词与忽略优先量词"><span class="toc-number">1.3.</span> <span class="toc-text">表：匹配优先量词与忽略优先量词</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#转义"><span class="toc-number">1.4.</span> <span class="toc-text">转义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#正则分析"><span class="toc-number">1.5.</span> <span class="toc-text">正则分析</span></a></li></ol></li></ol>
+          <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#量词的一般形式"><span class="toc-number">1.</span> <span class="toc-text">量词的一般形式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#表：一般形式"><span class="toc-number">1.1.</span> <span class="toc-text">表：一般形式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#注意："><span class="toc-number">1.1.1.</span> <span class="toc-text">注意：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#忽略优先量词"><span class="toc-number">1.2.</span> <span class="toc-text">忽略优先量词</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#表：匹配优先量词与忽略优先量词"><span class="toc-number">1.3.</span> <span class="toc-text">表：匹配优先量词与忽略优先量词</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#转义"><span class="toc-number">2.</span> <span class="toc-text">转义</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#表：各种量词的转义"><span class="toc-number">2.1.</span> <span class="toc-text">表：各种量词的转义</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#正则分析"><span class="toc-number">3.</span> <span class="toc-text">正则分析</span></a></li></ol>
         </div>
       </div>
       <script type="text/javascript">
@@ -342,7 +342,61 @@
 </tr>
 </tbody>
 </table>
-<h3 id="转义"><a href="#转义" class="headerlink" title="转义"></a>转义</h3><h3 id="正则分析"><a href="#正则分析" class="headerlink" title="正则分析"></a>正则分析</h3><p>// 编写一个javscript函数 fn，该函数有一个参数 n（数字类型），其返回值是一个数组，该数组内是 n 个随机且不重复的整数，且整数取值范围是 [2, 32]。</p>
+<h2 id="转义"><a href="#转义" class="headerlink" title="转义"></a>转义</h2><p>在正则表达式中，<u>+</u>、<u>?</u>、<u><em></em></u>等量词是特殊字符，具有特殊含义，但是有些情况下，只想表达字符自身，则需要转义，即在字符前加反斜线\。对于一般形式的量词{n,m}，虽然含有特殊含义的字符不止一个，但转义时只需要给{添加反斜线\即可，如需要匹配{n,m}，则是{n,m}。<br>注意：忽略优先字符不像一般形式字符{n,m}一样，只需要添加一个反斜线\，如?，必须都要添加反斜线\，即正则表达式必须写作：*\?，而不是*?，后者的意思是”*这个字符有可能出现，有可能不出现“。</p>
+<h3 id="表：各种量词的转义"><a href="#表：各种量词的转义" class="headerlink" title="表：各种量词的转义"></a>表：各种量词的转义</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">量词</th>
+<th style="text-align:center">转义形式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">*</td>
+<td style="text-align:center">*</td>
+</tr>
+<tr>
+<td style="text-align:center">+</td>
+<td style="text-align:center">+</td>
+</tr>
+<tr>
+<td style="text-align:center">?</td>
+<td style="text-align:center">\?</td>
+</tr>
+<tr>
+<td style="text-align:center">*?</td>
+<td style="text-align:center">*\?</td>
+</tr>
+<tr>
+<td style="text-align:center">+?</td>
+<td style="text-align:center">+\?</td>
+</tr>
+<tr>
+<td style="text-align:center">??</td>
+<td style="text-align:center">\?\?</td>
+</tr>
+<tr>
+<td style="text-align:center">{n}</td>
+<td style="text-align:center">{n}</td>
+</tr>
+<tr>
+<td style="text-align:center">{n,m}</td>
+<td style="text-align:center">{n,m}</td>
+</tr>
+<tr>
+<td style="text-align:center">{n,}</td>
+<td style="text-align:center">{n,}</td>
+</tr>
+<tr>
+<td style="text-align:center">{,m}</td>
+<td style="text-align:center">{,m}</td>
+</tr>
+</tbody>
+</table>
+<p>除此之外，元字符点.也需要加反斜线\来进行转义。<br>由于点.表示除了换行符之外的字符，也包括点号（.），所以很多人忽略了对其转义，但如果忽略了对其转义，则在严格匹配点号时会出错。比如匹配小数（3.14）、IP地址（192.168.1.1）、Email地址（<a href="mailto:some@host.com" target="_blank" rel="noopener">some@host.com</a>）等，所以若是要匹配的文本包含点号，一定不要忘了对其进行转义，否则会出现如下的出错:<br>    <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/^\d+.\d+$/.<span class="built_in">test</span>(<span class="string">"3.14"</span>) // =&gt; <span class="literal">true</span></span><br><span class="line">/^\d+.\d+$/.<span class="built_in">test</span>(<span class="string">"3@14"</span>) // =&gt; <span class="literal">true</span></span><br><span class="line"></span><br><span class="line">/^\d+\.\d+$/.<span class="built_in">test</span>(<span class="string">"3.14"</span>) // =&gt; <span class="literal">true</span></span><br><span class="line">/^\d+\.\d+$/.<span class="built_in">test</span>(<span class="string">"3@14"</span>) // =&gt; <span class="literal">false</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="正则分析"><a href="#正则分析" class="headerlink" title="正则分析"></a>正则分析</h2><font color="#005aa0" size="2"><br>1、密码长度在6-12个字符之间<br>2、只能由小写字母，数字和横线组成<br>3、开头和结尾不能为横线<br>4、不能全部为数字<br>5、不允许有连续（2个及以上）的横线<br></font>
+
+
 
       
 
@@ -488,7 +542,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#量词的一般形式"><span class="toc-number">1.</span> <span class="toc-text">量词的一般形式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#表：一般形式"><span class="toc-number">1.1.</span> <span class="toc-text">表：一般形式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#注意："><span class="toc-number">1.1.1.</span> <span class="toc-text">注意：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#忽略优先量词"><span class="toc-number">1.2.</span> <span class="toc-text">忽略优先量词</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#表：匹配优先量词与忽略优先量词"><span class="toc-number">1.3.</span> <span class="toc-text">表：匹配优先量词与忽略优先量词</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#转义"><span class="toc-number">1.4.</span> <span class="toc-text">转义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#正则分析"><span class="toc-number">1.5.</span> <span class="toc-text">正则分析</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#量词的一般形式"><span class="toc-number">1.</span> <span class="toc-text">量词的一般形式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#表：一般形式"><span class="toc-number">1.1.</span> <span class="toc-text">表：一般形式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#注意："><span class="toc-number">1.1.1.</span> <span class="toc-text">注意：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#忽略优先量词"><span class="toc-number">1.2.</span> <span class="toc-text">忽略优先量词</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#表：匹配优先量词与忽略优先量词"><span class="toc-number">1.3.</span> <span class="toc-text">表：匹配优先量词与忽略优先量词</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#转义"><span class="toc-number">2.</span> <span class="toc-text">转义</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#表：各种量词的转义"><span class="toc-number">2.1.</span> <span class="toc-text">表：各种量词的转义</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#正则分析"><span class="toc-number">3.</span> <span class="toc-text">正则分析</span></a></li></ol>
                     </div>
                 </span>
             </div>
