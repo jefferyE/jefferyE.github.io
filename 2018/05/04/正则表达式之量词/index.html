@@ -19,18 +19,18 @@
   
   <title>正则表达式之量词 | Jeffery的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="This is my first blog on github from Blog Park, I’ll sharing technology blog irregularlly and discuss problems together. 分享一个面试题// 编写一个javscript函数 fn，该函数有一个参数 n（数字类型），其返回值是一个数组，该数组内是 n 个随机且不重复的整数，且整数取">
+  <meta name="description" content="我们知道，在正则表达式中，可以使用[0-9]或\d来匹配单个数字字符，但是，如果需要验证一个更复杂的字符串呢，比如大陆地区的邮政编码。不过邮政编码并没有特别规定，只有由6个数字组成的字符串而已， 如246512，根据[0-9]或\d，我们可以很快的实现匹配的正则表达式，\d\d\d\d\d\d，可以看出，我们重复用了6个单个字符来实现匹配，由于目前数字较少，看着还可以接受，那如果不是6个数字组成的">
 <meta name="keywords" content="正则表达式,量词,贪婪模式,懒惰模式">
 <meta property="og:type" content="article">
 <meta property="og:title" content="正则表达式之量词">
 <meta property="og:url" content="http://yoursite.com/2018/05/04/正则表达式之量词/index.html">
 <meta property="og:site_name" content="Jeffery的博客">
-<meta property="og:description" content="This is my first blog on github from Blog Park, I’ll sharing technology blog irregularlly and discuss problems together. 分享一个面试题// 编写一个javscript函数 fn，该函数有一个参数 n（数字类型），其返回值是一个数组，该数组内是 n 个随机且不重复的整数，且整数取">
+<meta property="og:description" content="我们知道，在正则表达式中，可以使用[0-9]或\d来匹配单个数字字符，但是，如果需要验证一个更复杂的字符串呢，比如大陆地区的邮政编码。不过邮政编码并没有特别规定，只有由6个数字组成的字符串而已， 如246512，根据[0-9]或\d，我们可以很快的实现匹配的正则表达式，\d\d\d\d\d\d，可以看出，我们重复用了6个单个字符来实现匹配，由于目前数字较少，看着还可以接受，那如果不是6个数字组成的">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-05-04T08:02:26.218Z">
+<meta property="og:updated_time" content="2018-05-04T08:32:13.440Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="正则表达式之量词">
-<meta name="twitter:description" content="This is my first blog on github from Blog Park, I’ll sharing technology blog irregularlly and discuss problems together. 分享一个面试题// 编写一个javscript函数 fn，该函数有一个参数 n（数字类型），其返回值是一个数组，该数组内是 n 个随机且不重复的整数，且整数取">
+<meta name="twitter:description" content="我们知道，在正则表达式中，可以使用[0-9]或\d来匹配单个数字字符，但是，如果需要验证一个更复杂的字符串呢，比如大陆地区的邮政编码。不过邮政编码并没有特别规定，只有由6个数字组成的字符串而已， 如246512，根据[0-9]或\d，我们可以很快的实现匹配的正则表达式，\d\d\d\d\d\d，可以看出，我们重复用了6个单个字符来实现匹配，由于目前数字较少，看着还可以接受，那如果不是6个数字组成的">
   
     <link rel="alternative" href="/atom.xml" title="Jeffery的博客" type="application/atom+xml">
   
@@ -247,7 +247,7 @@
         <div id="toc-article" class="toc-article">
           <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
           <strong class="toc-title">文章目录</strong>
-          <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#分享一个面试题"><span class="toc-number">1.</span> <span class="toc-text">分享一个面试题</span></a></li></ol>
+          <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#量词的一般形式"><span class="toc-number">1.</span> <span class="toc-text">量词的一般形式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#分享一个题目"><span class="toc-number">1.1.</span> <span class="toc-text">分享一个题目</span></a></li></ol></li></ol>
         </div>
       </div>
       <script type="text/javascript">
@@ -268,8 +268,10 @@
     <!-- 目录内容结束 -->
     <div class="article-entry blog-check" itemprop="articleBody">
       
-        <p>This is my first blog on github from Blog Park, I’ll sharing technology blog irregularlly and discuss problems together.</p>
-<h3 id="分享一个面试题"><a href="#分享一个面试题" class="headerlink" title="分享一个面试题"></a>分享一个面试题</h3><p>// 编写一个javscript函数 fn，该函数有一个参数 n（数字类型），其返回值是一个数组，该数组内是 n 个随机且不重复的整数，且整数取值范围是 [2, 32]。</p>
+        <p>我们知道，在正则表达式中，可以使用[0-9]或\d来匹配单个数字字符，但是，如果需要验证一个更复杂的字符串呢，比如大陆地区的邮政编码。<br>不过邮政编码并没有特别规定，只有由6个数字组成的字符串而已， 如246512，根据[0-9]或\d，我们可以很快的实现匹配的正则表达式，\d\d\d\d\d\d，<br>可以看出，我们重复用了6个单个字符来实现匹配，由于目前数字较少，看着还可以接受，那如果不是6个数字组成的，10个？20个？甚至是更多呢，显然这种方式是不行的，正则表达式提供了量词，用来限定出现的次数，可以很好解决这个问题。<br>首先，看下量词的表示形式：</p>
+<h2 id="量词的一般形式"><a href="#量词的一般形式" class="headerlink" title="量词的一般形式"></a>量词的一般形式</h2><p>| 量词 | 说明 |<br>| {n} | 量词前面的元素必须出现n次 |<br>| {n,m} | 量词前面的元素至少出现n次，最多出现m次 |<br>| {n,} | 量词前面的元素至少出现n次，无上限 |<br>| {0,m} | 量词前面的元素可以不出现，也可以出现，最多出现m次 |</p>
+<p><font color="#f00" size="14" face="黑体">注意：{n,m}之间的逗号后面不能出现空格，否则无法正确匹配。</font></p>
+<h3 id="分享一个题目"><a href="#分享一个题目" class="headerlink" title="分享一个题目"></a>分享一个题目</h3><p>// 编写一个javscript函数 fn，该函数有一个参数 n（数字类型），其返回值是一个数组，该数组内是 n 个随机且不重复的整数，且整数取值范围是 [2, 32]。</p>
 <a id="more"></a>
 
       
@@ -416,7 +418,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#分享一个面试题"><span class="toc-number">1.</span> <span class="toc-text">分享一个面试题</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#量词的一般形式"><span class="toc-number">1.</span> <span class="toc-text">量词的一般形式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#分享一个题目"><span class="toc-number">1.1.</span> <span class="toc-text">分享一个题目</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
