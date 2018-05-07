@@ -28,7 +28,7 @@
 <meta property="og:description" content="&amp;nbsp;&amp;nbsp;我们知道，在正则表达式中，可以使用[0-9]或\d来匹配单个数字字符，但是，如果需要验证一个更复杂的字符串呢，比如大陆地区的邮政编码。&amp;nbsp;&amp;nbsp;不过邮政编码并没有特别规定，只有由6个数字组成的字符串而已， 如246512，根据[0-9]或\d，我们可以很快的实现匹配的正则表达式，\d\d\d\d\d\d。&amp;nbsp;&amp;nbsp;从上可以看出，我们重复用了6个单">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/images/technology/backtracking.png">
-<meta property="og:updated_time" content="2018-05-07T01:10:27.767Z">
+<meta property="og:updated_time" content="2018-05-07T01:13:26.564Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="正则表达式之量词">
 <meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;我们知道，在正则表达式中，可以使用[0-9]或\d来匹配单个数字字符，但是，如果需要验证一个更复杂的字符串呢，比如大陆地区的邮政编码。&amp;nbsp;&amp;nbsp;不过邮政编码并没有特别规定，只有由6个数字组成的字符串而已， 如246512，根据[0-9]或\d，我们可以很快的实现匹配的正则表达式，\d\d\d\d\d\d。&amp;nbsp;&amp;nbsp;从上可以看出，我们重复用了6个单">
@@ -335,10 +335,10 @@
 <p>如:<br>    <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">new RegExp(<span class="string">"^.*$"</span>).<span class="built_in">exec</span>(<span class="string">"quoted 'string '"</span>)</span><br><span class="line">new RegExp(<span class="string">"^(([a-z]+)\\s')+$"</span>).<span class="built_in">exec</span>(<span class="string">"quoted 'string '"</span>)</span><br></pre></td></tr></table></figure></p>
 <p>如上，匹配的结果将会是整个字符串：”quoted ‘string ‘“，这就是我们常说的贪婪模式。<br>要弄清楚为什么会是这个结果，则必须了解表达式的匹配原理，以”.*“为例。<br>在正则表达式中，点号.可以用来匹配除了换行符之外的所有字符，而*表示匹配的字符串长度没有限制，所以在”.*“匹配过程中，每遇到一个字符， “.*“都可以匹配，到底是匹配它，还是忽略它，将其留给最后的”来匹配呢？<br>答案是由量词来决定的，在正则表达式中量词分为几类，匹配优先量词（贪婪量词）和忽略优先量词（惰性量词）（还有一种支配量词，这里就不介绍了，请自行百度）</p>
 <h3 id="匹配优先量词"><a href="#匹配优先量词" class="headerlink" title="匹配优先量词"></a>匹配优先量词</h3><p>匹配优先量词，顾名思义，在拿不准是否匹配某个字符时，优先尝试匹配，并且记下这个状态，以备将来“反悔”。<br>具体过程：</p>
-<font color="#005aa0" size="2"><br>一开始，<u>“</u>匹配”，然后到字符q，<u>.*</u>可以匹配q，也可以不匹配，但使用了匹配优先量词<u>*</u>，所有<u>.*</u>会尝试先匹配q，并且记录下这个状态。<br>接下来是字符字符u，<u>.*</u>可以匹配u，也可以不匹配，但使用了匹配优先量词<u>*</u>，所有<u>.*</u>会尝试先匹配u，并且记录下这个状态。<br>…<br>轮到字符’，<u>.*</u>可以匹配’，也可以不匹配，但使用了匹配优先量词<u>*</u>，所有<u>.*</u>会尝试先匹配’，并且记录下这个状态。<br>最后是字符串末尾的”，<u>.*</u>可以匹配”，也可以不匹配，但使用了匹配优先量词<u>*</u>，所有<u>.*</u>会尝试先匹配”，并且记录下这个状态。<br>这个时候，字符串后面已经没有字符了，但是正则表达式中还是有”没有匹配，所以只能查看之前保存的备用状态，看看能不能回退几步，以便匹配”，于是让<u>.*</u>后退几步，以便让<u>“</u>可以匹配”，发现正好可以匹配，所以整个匹配宣告结束，这个”反悔“的过程，专业术语叫回溯。<br></font>    
+<font color="#005aa0" size="2"><br>一开始，<u>“</u>匹配”，然后到字符q，<u>.*</u>可以匹配q，也可以不匹配，但使用了匹配优先量词<u>*</u>，所有<u>.*</u>会尝试先匹配q，并且记录下这个状态。<br>接下来是字符字符u，<u>.*</u>可以匹配u，也可以不匹配，但使用了匹配优先量词<u>*</u>，所有<u>.*</u>会尝试先匹配u，并且记录下这个状态。<br>…<br>轮到字符’，<u>.*</u>可以匹配’，也可以不匹配，但使用了匹配优先量词<u>*</u>，所有<u>.*</u>会尝试先匹配’，并且记录下这个状态。<br>最后是字符串末尾的”，<u>.*</u>可以匹配”，也可以不匹配，但使用了匹配优先量词<u>*</u>，所有<u>.*</u>会尝试先匹配”，并且记录下这个状态。<br>这个时候，字符串后面已经没有字符了，但是正则表达式中还是有”没有匹配，所以只能查看之前保存的备用状态，看看能不能回退几步，以便匹配”，于是让<u>.*</u>后退几步，以便让<u>“</u>可以匹配”，发现正好可以匹配，所以整个匹配宣告结束，这个“反悔”的过程，专业术语叫回溯。<br></font>    
 
 <p><img src="/images/technology/backtracking.png" alt="表达式&quot;.*&quot;对字符串&quot;quoted &#39;string &#39;&quot;的匹配过程"></p>
-<h3 id="忽略优先量词"><a href="#忽略优先量词" class="headerlink" title="忽略优先量词"></a>忽略优先量词</h3><p>忽略优先量词，与匹配优先量词相反，在不确定是否匹配某个字符时，会优先选择”不匹配“的状态，在尝试匹配表达式之后的字符，如果匹配失败，则再回溯，选择之前保存的”匹配的“状态，这样保证了匹配的正确性。<br>只需要把<u>.*</u>改为<u>.*?</u>即可变成忽略优先量词。<br>具体过程： 类似于匹配优先量词<br>这种匹配可以用于完成很多功能，比如匹配注释，标签等。</p>
+<h3 id="忽略优先量词"><a href="#忽略优先量词" class="headerlink" title="忽略优先量词"></a>忽略优先量词</h3><p>忽略优先量词，与匹配优先量词相反，在不确定是否匹配某个字符时，会优先选择“不匹配”的状态，在尝试匹配表达式之后的字符，如果匹配失败，则再回溯，选择之前保存的“匹配的”状态，这样保证了匹配的正确性。<br>只需要把<u>.*</u>改为<u>.*?</u>即可变成忽略优先量词。<br>具体过程： 类似于匹配优先量词<br>这种匹配可以用于完成很多功能，比如匹配注释，标签等。</p>
 <h3 id="表：匹配优先量词与忽略优先量词"><a href="#表：匹配优先量词与忽略优先量词" class="headerlink" title="表：匹配优先量词与忽略优先量词"></a>表：匹配优先量词与忽略优先量词</h3><table>
 <thead>
 <tr>
