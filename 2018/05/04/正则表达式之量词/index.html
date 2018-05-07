@@ -28,7 +28,7 @@
 <meta property="og:description" content="&amp;nbsp;&amp;nbsp;我们知道，在正则表达式中，可以使用[0-9]或\d来匹配单个数字字符，但是，如果需要验证一个更复杂的字符串呢，比如大陆地区的邮政编码。&amp;nbsp;&amp;nbsp;不过邮政编码并没有特别规定，只有由6个数字组成的字符串而已， 如246512，根据[0-9]或\d，我们可以很快的实现匹配的正则表达式，\d\d\d\d\d\d。&amp;nbsp;&amp;nbsp;从上可以看出，我们重复用了6个单">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/images/technology/backtracking.png">
-<meta property="og:updated_time" content="2018-05-07T01:13:26.564Z">
+<meta property="og:updated_time" content="2018-05-07T01:48:59.978Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="正则表达式之量词">
 <meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;我们知道，在正则表达式中，可以使用[0-9]或\d来匹配单个数字字符，但是，如果需要验证一个更复杂的字符串呢，比如大陆地区的邮政编码。&amp;nbsp;&amp;nbsp;不过邮政编码并没有特别规定，只有由6个数字组成的字符串而已， 如246512，根据[0-9]或\d，我们可以很快的实现匹配的正则表达式，\d\d\d\d\d\d。&amp;nbsp;&amp;nbsp;从上可以看出，我们重复用了6个单">
@@ -429,9 +429,7 @@
 </tbody>
 </table>
 <p>除此之外，元字符点.也需要加反斜线\来进行转义。<br>由于点.表示除了换行符之外的字符，也包括点号（.），所以很多人忽略了对其转义，但如果忽略了对其转义，则在严格匹配点号时会出错。比如匹配小数（3.14）、IP地址（192.168.1.1）、Email地址（<a href="mailto:some@host.com" target="_blank" rel="noopener">some@host.com</a>）等，所以若是要匹配的文本包含点号，一定不要忘了对其进行转义，否则会出现如下的出错:<br>    <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/^\d+.\d+$/.<span class="built_in">test</span>(<span class="string">"3.14"</span>) // =&gt; <span class="literal">true</span></span><br><span class="line">/^\d+.\d+$/.<span class="built_in">test</span>(<span class="string">"3@14"</span>) // =&gt; <span class="literal">true</span></span><br><span class="line"></span><br><span class="line">/^\d+\.\d+$/.<span class="built_in">test</span>(<span class="string">"3.14"</span>) // =&gt; <span class="literal">true</span></span><br><span class="line">/^\d+\.\d+$/.<span class="built_in">test</span>(<span class="string">"3@14"</span>) // =&gt; <span class="literal">false</span></span><br></pre></td></tr></table></figure></p>
-<h2 id="正则分析"><a href="#正则分析" class="headerlink" title="正则分析"></a>正则分析</h2><font color="#005aa0" size="2"><br>1、密码长度在6-12个字符之间<br>2、只能由小写字母，数字和横线组成<br>3、开头和结尾不能为横线<br>4、不能全部为数字<br>5、不允许有连续（2个及以上）的横线<br></font>
-
-
+<h2 id="正则分析"><a href="#正则分析" class="headerlink" title="正则分析"></a>正则分析</h2><p><font color="#005aa0" size="2"><br>1、密码长度在6-12个字符之间<br>2、只能由小写字母，数字和横线组成<br>3、开头和结尾不能为横线<br>4、不能全部为数字<br>5、不允许有连续（2个及以上）的横线<br></font><br>    <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/^(?!-)(?!\d+$)[0-9a-z-]&#123;6,12&#125;(?&lt;!-)$/.<span class="built_in">test</span>(<span class="string">'bdaddf--a'</span>)</span><br></pre></td></tr></table></figure></p>
 
       
 
