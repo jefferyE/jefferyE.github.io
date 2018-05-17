@@ -19,18 +19,20 @@
   
   <title>vue插件之轮播 | Jeffery的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前段时间，正好在vue项目中需要用到文字的无缝滚动，而在github或npm中没有找到合适的插件，有的没有演示，有的不符合需求，最后还是自己手动撸了一个。虽然花了不少时间，但对我自身而言，也是一种成长，熟悉了怎么在npm发布包的流程，下面简单介绍下自己撸的插件的一些配置及使用方法。 demo效果">
+  <meta name="description" content="前段时间，正好在vue项目中需要用到文字的无缝滚动，而在github或npm中没有找到合适的插件，有的没有演示，有的不符合需求，最后还是自己手动撸了一个。虽然花了不少时间，但对我自身而言，也是一种成长，熟悉了怎么在npm发布包的流程，下面简单介绍下自己撸的插件的一些配置及使用方法。 非常抱歉，该插件目前不能使用，尽快解决。demo效果    点击查看更多效果">
 <meta name="keywords" content="vue,插件,轮播,滚动">
 <meta property="og:type" content="article">
 <meta property="og:title" content="vue插件之轮播">
 <meta property="og:url" content="http://yoursite.com/2018/05/17/vue插件之轮播/index.html">
 <meta property="og:site_name" content="Jeffery的博客">
-<meta property="og:description" content="前段时间，正好在vue项目中需要用到文字的无缝滚动，而在github或npm中没有找到合适的插件，有的没有演示，有的不符合需求，最后还是自己手动撸了一个。虽然花了不少时间，但对我自身而言，也是一种成长，熟悉了怎么在npm发布包的流程，下面简单介绍下自己撸的插件的一些配置及使用方法。 demo效果">
+<meta property="og:description" content="前段时间，正好在vue项目中需要用到文字的无缝滚动，而在github或npm中没有找到合适的插件，有的没有演示，有的不符合需求，最后还是自己手动撸了一个。虽然花了不少时间，但对我自身而言，也是一种成长，熟悉了怎么在npm发布包的流程，下面简单介绍下自己撸的插件的一些配置及使用方法。 非常抱歉，该插件目前不能使用，尽快解决。demo效果    点击查看更多效果">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-05-17T07:12:31.471Z">
+<meta property="og:image" content="http://yoursite.com/images/technology/effect.png">
+<meta property="og:updated_time" content="2018-05-17T08:00:49.288Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vue插件之轮播">
-<meta name="twitter:description" content="前段时间，正好在vue项目中需要用到文字的无缝滚动，而在github或npm中没有找到合适的插件，有的没有演示，有的不符合需求，最后还是自己手动撸了一个。虽然花了不少时间，但对我自身而言，也是一种成长，熟悉了怎么在npm发布包的流程，下面简单介绍下自己撸的插件的一些配置及使用方法。 demo效果">
+<meta name="twitter:description" content="前段时间，正好在vue项目中需要用到文字的无缝滚动，而在github或npm中没有找到合适的插件，有的没有演示，有的不符合需求，最后还是自己手动撸了一个。虽然花了不少时间，但对我自身而言，也是一种成长，熟悉了怎么在npm发布包的流程，下面简单介绍下自己撸的插件的一些配置及使用方法。 非常抱歉，该插件目前不能使用，尽快解决。demo效果    点击查看更多效果">
+<meta name="twitter:image" content="http://yoursite.com/images/technology/effect.png">
   
     <link rel="alternative" href="/atom.xml" title="Jeffery的博客" type="application/atom+xml">
   
@@ -247,7 +249,7 @@
         <div id="toc-article" class="toc-article">
           <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
           <strong class="toc-title">文章目录</strong>
-          <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#demo效果"><span class="toc-number">1.</span> <span class="toc-text">demo效果</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用方式"><span class="toc-number">2.</span> <span class="toc-text">使用方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参数配置"><span class="toc-number">3.</span> <span class="toc-text">参数配置</span></a></li></ol>
+          <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#非常抱歉，该插件目前不能使用，尽快解决。"><span class="toc-number">1.</span> <span class="toc-text">非常抱歉，该插件目前不能使用，尽快解决。</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#demo效果"><span class="toc-number">1.1.</span> <span class="toc-text">demo效果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用方式"><span class="toc-number">1.2.</span> <span class="toc-text">使用方式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#安装依赖"><span class="toc-number">1.2.1.</span> <span class="toc-text">安装依赖</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#项目中引用"><span class="toc-number">1.2.2.</span> <span class="toc-text">项目中引用</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参数配置"><span class="toc-number">1.3.</span> <span class="toc-text">参数配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#注意："><span class="toc-number">1.3.1.</span> <span class="toc-text">注意：</span></a></li></ol></li></ol></li></ol>
         </div>
       </div>
       <script type="text/javascript">
@@ -269,8 +271,108 @@
     <div class="article-entry blog-check" itemprop="articleBody">
       
         <p>前段时间，正好在vue项目中需要用到文字的无缝滚动，而在github或npm中没有找到合适的插件，有的没有演示，有的不符合需求，最后还是自己手动撸了一个。虽然花了不少时间，但对我自身而言，也是一种成长，熟悉了怎么在npm发布包的流程，下面简单介绍下自己撸的插件的一些配置及使用方法。</p>
-<h2 id="demo效果"><a href="#demo效果" class="headerlink" title="demo效果"></a>demo效果</h2>  <a id="more"></a>
-<h2 id="使用方式"><a href="#使用方式" class="headerlink" title="使用方式"></a>使用方式</h2><h2 id="参数配置"><a href="#参数配置" class="headerlink" title="参数配置"></a>参数配置</h2><p>最后，欢迎大家使用，提bug，更欢迎去github上star。<br>github地址：<a href="https://github.com/jefferyE/vue-rich-carousel" target="_blank" rel="noopener">https://github.com/jefferyE</a><br>代码示例请参考，猛戳<a href="/examples/2018-05/vue插件之轮播-demo.html">这里</a></p>
+<h2 id="非常抱歉，该插件目前不能使用，尽快解决。"><a href="#非常抱歉，该插件目前不能使用，尽快解决。" class="headerlink" title="非常抱歉，该插件目前不能使用，尽快解决。"></a>非常抱歉，该插件目前不能使用，尽快解决。</h2><h3 id="demo效果"><a href="#demo效果" class="headerlink" title="demo效果"></a>demo效果</h3><p>  <img src="/images/technology/effect.png" alt="效果图"><br>  <a href="/examples/2018-05/vue插件之轮播-demo.html">点击查看更多效果</a><br>  <a id="more"></a></p>
+<h3 id="使用方式"><a href="#使用方式" class="headerlink" title="使用方式"></a>使用方式</h3><h4 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h4><pre><code><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># cd project</span></span><br><span class="line"><span class="built_in">cd</span> project</span><br><span class="line"></span><br><span class="line"><span class="comment"># install dependencies</span></span><br><span class="line">npm install vue-rich-carousel --save-dev</span><br><span class="line"></span><br><span class="line"><span class="comment"># serve with hot reload at localhost:8080</span></span><br><span class="line">npm run dev</span><br><span class="line"></span><br><span class="line"><span class="comment"># build for production with minification</span></span><br><span class="line">npm run build</span><br></pre></td></tr></table></figure>
+</code></pre><h4 id="项目中引用"><a href="#项目中引用" class="headerlink" title="项目中引用"></a>项目中引用</h4><p>  在main.js中引入：<br>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">import Vue from <span class="string">'vue'</span>;</span><br><span class="line">import VueCarousel from <span class="string">'vue-rich-carousel'</span>;</span><br><span class="line">Vue.use(VueCarousel);</span><br></pre></td></tr></table></figure></p>
+<p>  在组件中使用：<br>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"> &lt;vue-rich-carousel :autoplay=<span class="string">"autoplay"</span>&gt;</span><br><span class="line">  &lt;vue-rich-slide&gt;</span><br><span class="line">    &lt;a &gt;这里是文字1&lt;/a&gt;</span><br><span class="line">  &lt;/vue-rich-slide&gt;</span><br><span class="line">    &lt;vue-rich-slide&gt;</span><br><span class="line">    &lt;a &gt;这里是文字1&lt;/a&gt;</span><br><span class="line">  &lt;/vue-rich-slide&gt;</span><br><span class="line">  &lt;vue-rich-slide&gt;</span><br><span class="line">    &lt;a &gt;这里是文字1&lt;/a&gt;</span><br><span class="line">  &lt;/vue-rich-slide&gt;</span><br><span class="line">&lt;/vue-rich-carousel&gt;</span><br></pre></td></tr></table></figure></p>
+<h3 id="参数配置"><a href="#参数配置" class="headerlink" title="参数配置"></a>参数配置</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">配置项</th>
+<th style="text-align:center">参数类型</th>
+<th style="text-align:center">可选值</th>
+<th style="text-align:center">默认值</th>
+<th style="text-align:center">说明</th>
+<th style="text-align:center">备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">effect</td>
+<td style="text-align:center">String</td>
+<td style="text-align:center">left/top/right/bottom/leftMarquee/topMarquee/rightMarquee/bottomMarquee/fade/fold</td>
+<td style="text-align:center">left</td>
+<td style="text-align:center">效果类型</td>
+<td style="text-align:center">目前不支持right/bottom/fade/fold模式，且fade/fold模式只支持vis为1</td>
+</tr>
+<tr>
+<td style="text-align:center">loop</td>
+<td style="text-align:center">Boolean</td>
+<td style="text-align:center">true/false</td>
+<td style="text-align:center">true</td>
+<td style="text-align:center">是否无限循环</td>
+<td style="text-align:center">目前暂不支持，只有.*Marquee模式支持loop</td>
+</tr>
+<tr>
+<td style="text-align:center">autoplay</td>
+<td style="text-align:center">Boolean</td>
+<td style="text-align:center">true/false</td>
+<td style="text-align:center">true</td>
+<td style="text-align:center">是否自动播放</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:center">arrows</td>
+<td style="text-align:center">Boolean</td>
+<td style="text-align:center">true/false</td>
+<td style="text-align:center">true</td>
+<td style="text-align:center">是否显示箭头</td>
+<td style="text-align:center">.*Marquee模式不会显示</td>
+</tr>
+<tr>
+<td style="text-align:center">dots</td>
+<td style="text-align:center">Boolean</td>
+<td style="text-align:center">true/false</td>
+<td style="text-align:center">true</td>
+<td style="text-align:center">是否显示小圆点</td>
+<td style="text-align:center">.*Marquee模式不会显示</td>
+</tr>
+<tr>
+<td style="text-align:center">trigger</td>
+<td style="text-align:center">String</td>
+<td style="text-align:center">hover/click</td>
+<td style="text-align:center">hover</td>
+<td style="text-align:center">切换方式</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:center">easing</td>
+<td style="text-align:center">String</td>
+<td style="text-align:center">Linear</td>
+<td style="text-align:center">Linear</td>
+<td style="text-align:center">动画效果</td>
+<td style="text-align:center">目前只支持Linear效果</td>
+</tr>
+<tr>
+<td style="text-align:center">duration</td>
+<td style="text-align:center">Number</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">1500</td>
+<td style="text-align:center">动画时长</td>
+<td style="text-align:center">单位：毫秒</td>
+</tr>
+<tr>
+<td style="text-align:center">scroll</td>
+<td style="text-align:center">Number</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">滚动个数</td>
+<td style="text-align:center">目前暂不支持，最大值为vis个数</td>
+</tr>
+<tr>
+<td style="text-align:center">vis</td>
+<td style="text-align:center">Number</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">可视个数</td>
+<td style="text-align:center">最大值为页面自定义总个数</td>
+</tr>
+</tbody>
+</table>
+<h4 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h4><font color="#f00" size="2">除非注明不支持，否则均为支持</font>
+
+<p><br></p>
+<p>最后，欢迎大家使用，提bug，更欢迎去github上star。<br>github地址：<a href="https://github.com/jefferyE/vue-rich-carousel" target="_blank" rel="noopener">https://github.com/jefferyE</a><br>代码示例请参考，猛戳<a href="/examples/2018-05/vue插件之轮播-demo.html">这里</a></p>
 
       
 
@@ -416,7 +518,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#demo效果"><span class="toc-number">1.</span> <span class="toc-text">demo效果</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用方式"><span class="toc-number">2.</span> <span class="toc-text">使用方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参数配置"><span class="toc-number">3.</span> <span class="toc-text">参数配置</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#非常抱歉，该插件目前不能使用，尽快解决。"><span class="toc-number">1.</span> <span class="toc-text">非常抱歉，该插件目前不能使用，尽快解决。</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#demo效果"><span class="toc-number">1.1.</span> <span class="toc-text">demo效果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用方式"><span class="toc-number">1.2.</span> <span class="toc-text">使用方式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#安装依赖"><span class="toc-number">1.2.1.</span> <span class="toc-text">安装依赖</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#项目中引用"><span class="toc-number">1.2.2.</span> <span class="toc-text">项目中引用</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参数配置"><span class="toc-number">1.3.</span> <span class="toc-text">参数配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#注意："><span class="toc-number">1.3.1.</span> <span class="toc-text">注意：</span></a></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
