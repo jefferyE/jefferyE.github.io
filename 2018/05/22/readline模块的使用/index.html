@@ -19,18 +19,18 @@
   
   <title>readline模块的使用 | Jeffery的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="什么是readline  readline允许从可读流中以逐行的方式读取数据，比如process.stdin等。  在node.js命令行模式下默认引入了readline模块，但如果是node.js脚本的话，需要自己通过require(‘readline’)方式手动引入该模块。 怎么使用readline###创建实例&amp;nbsp;&amp;nbsp;首先、创建一个接口实例，提供一个Object类型的参数。参">
+  <meta name="description" content="什么是readline  readline允许从可读流中以逐行的方式读取数据，比如process.stdin等。  在node.js命令行模式下默认引入了readline模块，但如果是node.js脚本的话，需要自己通过require(‘readline’)方式手动引入该模块。 怎么使用readline">
 <meta name="keywords" content="readline,nodejs">
 <meta property="og:type" content="article">
 <meta property="og:title" content="readline模块的使用">
 <meta property="og:url" content="http://yoursite.com/2018/05/22/readline模块的使用/index.html">
 <meta property="og:site_name" content="Jeffery的博客">
-<meta property="og:description" content="什么是readline  readline允许从可读流中以逐行的方式读取数据，比如process.stdin等。  在node.js命令行模式下默认引入了readline模块，但如果是node.js脚本的话，需要自己通过require(‘readline’)方式手动引入该模块。 怎么使用readline###创建实例&amp;nbsp;&amp;nbsp;首先、创建一个接口实例，提供一个Object类型的参数。参">
+<meta property="og:description" content="什么是readline  readline允许从可读流中以逐行的方式读取数据，比如process.stdin等。  在node.js命令行模式下默认引入了readline模块，但如果是node.js脚本的话，需要自己通过require(‘readline’)方式手动引入该模块。 怎么使用readline">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-05-22T08:02:29.029Z">
+<meta property="og:updated_time" content="2018-05-22T08:03:45.357Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="readline模块的使用">
-<meta name="twitter:description" content="什么是readline  readline允许从可读流中以逐行的方式读取数据，比如process.stdin等。  在node.js命令行模式下默认引入了readline模块，但如果是node.js脚本的话，需要自己通过require(‘readline’)方式手动引入该模块。 怎么使用readline###创建实例&amp;nbsp;&amp;nbsp;首先、创建一个接口实例，提供一个Object类型的参数。参">
+<meta name="twitter:description" content="什么是readline  readline允许从可读流中以逐行的方式读取数据，比如process.stdin等。  在node.js命令行模式下默认引入了readline模块，但如果是node.js脚本的话，需要自己通过require(‘readline’)方式手动引入该模块。 怎么使用readline">
   
     <link rel="alternative" href="/atom.xml" title="Jeffery的博客" type="application/atom+xml">
   
@@ -269,7 +269,8 @@
     <div class="article-entry blog-check" itemprop="articleBody">
       
         <h2 id="什么是readline"><a href="#什么是readline" class="headerlink" title="什么是readline"></a>什么是readline</h2><p>  readline允许从可读流中以逐行的方式读取数据，比如process.stdin等。<br>  在node.js命令行模式下默认引入了readline模块，但如果是node.js脚本的话，需要自己通过require(‘readline’)方式手动引入该模块。</p>
-<h2 id="怎么使用readline"><a href="#怎么使用readline" class="headerlink" title="怎么使用readline"></a>怎么使用readline</h2><p>###创建实例<br>&nbsp;&nbsp;首先、创建一个接口实例，提供一个Object类型的参数。参数如下：<br>input: 监听的可读流（必需）<br>output: 写入readline的可写流（必需）<br>completer: 用于 Tab 自动补全的可选函数（不常用）<br>terminal: 如果希望 input 和 output 流像 TTY 一样对待，那么传递参数 true ，并且经由 ANSI/VT100 转码。 默认情况下检查 isTTY 是否在 output 流上实例化。(不常用)<br>historySize: </p>
+<h2 id="怎么使用readline"><a href="#怎么使用readline" class="headerlink" title="怎么使用readline"></a>怎么使用readline</h2><a id="more"></a>
+<p>###创建实例<br>&nbsp;&nbsp;首先、创建一个接口实例，提供一个Object类型的参数。参数如下：<br>input: 监听的可读流（必需）<br>output: 写入readline的可写流（必需）<br>completer: 用于 Tab 自动补全的可选函数（不常用）<br>terminal: 如果希望 input 和 output 流像 TTY 一样对待，那么传递参数 true ，并且经由 ANSI/VT100 转码。 默认情况下检查 isTTY 是否在 output 流上实例化。(不常用)<br>historySize: </p>
 <h4 id="第一种方式：只传入两个必传参数"><a href="#第一种方式：只传入两个必传参数" class="headerlink" title="第一种方式：只传入两个必传参数"></a>第一种方式：只传入两个必传参数</h4>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const readLine = require(<span class="string">'readline'</span>);</span><br><span class="line"><span class="built_in">let</span> rds = readLine.createInterface(process.stdin, process.stdout);</span><br></pre></td></tr></table></figure>
 <h4 id="第二种方式：可以传入其他非必需参数"><a href="#第二种方式：可以传入其他非必需参数" class="headerlink" title="第二种方式：可以传入其他非必需参数"></a>第二种方式：可以传入其他非必需参数</h4>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const readLine = require(<span class="string">'readline'</span>);</span><br><span class="line"><span class="built_in">let</span> rds = readLine.createInterface(&#123;</span><br><span class="line">  input: process.stdin,</span><br><span class="line">  output: process.stdout,</span><br><span class="line">  // 其他参数省略</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 <h4 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h4>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">const readLine = require(<span class="string">'readline'</span>);</span><br><span class="line"><span class="built_in">let</span> rds = readLine.createInterface(&#123;</span><br><span class="line">  input: process.stdin,</span><br><span class="line">  output: process.stdout,</span><br><span class="line">  prompt: <span class="string">'&gt; 请输入'</span></span><br><span class="line">&#125;)</span><br><span class="line">// 调用</span><br><span class="line">rds.prompt(); //控制台结果显示：&gt;请输入</span><br></pre></td></tr></table></figure>
