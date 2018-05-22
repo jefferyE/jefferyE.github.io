@@ -214,6 +214,105 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-readline模块的使用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/22/readline模块的使用/">readline模块的使用</a>
+    </h1>
+  
+
+
+
+  <a href="javascript:;" class="archive-article-date">
+      <i class="icon-smile icon"></i> 阅读数:<span id="/2018/05/22/readline模块的使用/" class="pageViews">0</span>次
+  </a>
+
+        
+        <a href="/2018/05/22/readline模块的使用/" class="archive-article-date">
+  	<time datetime="2018-05-21T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-22</time>
+</a>
+        
+      </header>
+    
+    <!-- 目录内容 -->
+    
+    <!-- 目录内容结束 -->
+    <div class="article-entry blog-check" itemprop="articleBody">
+      
+        <h2 id="什么是readline"><a href="#什么是readline" class="headerlink" title="什么是readline"></a>什么是readline</h2><p>  readline允许从可读流中以逐行的方式读取数据，比如process.stdin等。<br>  在node.js命令行模式下默认引入了readline模块，但如果是node.js脚本的话，需要自己通过require(‘readline’)方式手动引入该模块。</p>
+<h2 id="怎么使用readline"><a href="#怎么使用readline" class="headerlink" title="怎么使用readline"></a>怎么使用readline</h2><p>###创建实例<br>&nbsp;&nbsp;首先、创建一个接口实例，提供一个Object类型的参数。参数如下：<br>input: 监听的可读流（必需）<br>output: 写入readline的可写流（必需）<br>completer: 用于 Tab 自动补全的可选函数（不常用）<br>terminal: 如果希望 input 和 output 流像 TTY 一样对待，那么传递参数 true ，并且经由 ANSI/VT100 转码。 默认情况下检查 isTTY 是否在 output 流上实例化。(不常用)<br>historySize: </p>
+<h4 id="第一种方式：只传入两个必传参数"><a href="#第一种方式：只传入两个必传参数" class="headerlink" title="第一种方式：只传入两个必传参数"></a>第一种方式：只传入两个必传参数</h4>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const readLine = require(<span class="string">'readline'</span>);</span><br><span class="line"><span class="built_in">let</span> rds = readLine.createInterface(process.stdin, process.stdout);</span><br></pre></td></tr></table></figure>
+<h4 id="第二种方式：可以传入其他非必需参数"><a href="#第二种方式：可以传入其他非必需参数" class="headerlink" title="第二种方式：可以传入其他非必需参数"></a>第二种方式：可以传入其他非必需参数</h4>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const readLine = require(<span class="string">'readline'</span>);</span><br><span class="line"><span class="built_in">let</span> rds = readLine.createInterface(&#123;</span><br><span class="line">  input: process.stdin,</span><br><span class="line">  output: process.stdout,</span><br><span class="line">  // 其他参数省略</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h4 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h4>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">const readLine = require(<span class="string">'readline'</span>);</span><br><span class="line"><span class="built_in">let</span> rds = readLine.createInterface(&#123;</span><br><span class="line">  input: process.stdin,</span><br><span class="line">  output: process.stdout,</span><br><span class="line">  prompt: <span class="string">'&gt; 请输入'</span></span><br><span class="line">&#125;)</span><br><span class="line">// 调用</span><br><span class="line">rds.prompt(); //控制台结果显示：&gt;请输入</span><br></pre></td></tr></table></figure>
+<p>###接口</p>
+<h4 id="1、rds-setPrompt-prompt"><a href="#1、rds-setPrompt-prompt" class="headerlink" title="1、rds.setPrompt([prompt])"></a>1、rds.setPrompt([prompt])</h4>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"> </span><br></pre></td></tr></table></figure>
+<h4 id="2、rds-prompt-preserveCursor"><a href="#2、rds-prompt-preserveCursor" class="headerlink" title="2、rds.prompt([preserveCursor])"></a>2、rds.prompt([preserveCursor])</h4><h4 id="3、rds-write-data-key"><a href="#3、rds-write-data-key" class="headerlink" title="3、rds.write(data[, key])"></a>3、rds.write(data[, key])</h4><h4 id="4、rds-question-query-callback"><a href="#4、rds-question-query-callback" class="headerlink" title="4、rds.question(query, callback)"></a>4、rds.question(query, callback)</h4><h4 id="5、rds-pause"><a href="#5、rds-pause" class="headerlink" title="5、rds.pause()"></a>5、rds.pause()</h4><h4 id="6、rds-resume"><a href="#6、rds-resume" class="headerlink" title="6、rds.resume()"></a>6、rds.resume()</h4><h4 id="7、rds-close"><a href="#7、rds-close" class="headerlink" title="7、rds.close()"></a>7、rds.close()</h4><p>###事件</p>
+<h4 id="1、line事件"><a href="#1、line事件" class="headerlink" title="1、line事件"></a>1、line事件</h4><h4 id="2、pause事件"><a href="#2、pause事件" class="headerlink" title="2、pause事件"></a>2、pause事件</h4><h4 id="3、close事件"><a href="#3、close事件" class="headerlink" title="3、close事件"></a>3、close事件</h4><h4 id="4、SIGCOUT"><a href="#4、SIGCOUT" class="headerlink" title="4、SIGCOUT"></a>4、SIGCOUT</h4><h4 id="5、SIGINT"><a href="#5、SIGINT" class="headerlink" title="5、SIGINT"></a>5、SIGINT</h4><h4 id="6、SIGTSTP"><a href="#6、SIGTSTP" class="headerlink" title="6、SIGTSTP"></a>6、SIGTSTP</h4>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"> </span><br></pre></td></tr></table></figure>
+<p>参见<a href="http://nodejs.cn/doc/node/readline.html" target="_blank" rel="noopener">官方文档</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">readline</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">nodejs</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/05/22/readline模块的使用/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+<script>
+  $('.blog-check img').zoomify();
+</script>
+  
     <article id="post-vue插件之轮播" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -907,6 +1006,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">风景</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">readline</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">nodejs</a>
               </li>
             
             <div class="clearfix"></div>
