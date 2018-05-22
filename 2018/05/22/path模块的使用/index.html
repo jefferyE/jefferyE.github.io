@@ -17,20 +17,20 @@
   <link rel="stylesheet" href="/./zoomify/zoomify.min.css">
   <script src="/./zoomify/zoomify.min.js"></script>
   
-  <title>Jeffery的博客</title>
+  <title>path模块的使用 | Jeffery的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="2018-04    welcome 2018-04-24 vue双向数据绑定原理  2018-04-24    2018-05    正则表达式之量词  2018-05-04 vue插件之轮播  2018-05-17 readline模块的使用 2018-05-22 path模块的使用 2018-05-22">
-<meta name="keywords" content="Jeffery">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Jeffery的博客">
-<meta property="og:url" content="http://yoursite.com/technology/index.html">
+  <meta name="description" content="path模块包含一系列处理和转换文件路径的工具集，通过 require(‘path’) 可用来访问这个模块。  知识点：对window系统，目录分隔为’\’, 对于UNIX系统，分隔符为’/‘，针对’..’返回上一级，发现多个斜杠或反斜杠时会替换成一个，/，//，\与\都被统一转换为\ 方法1、path.resolve([path1], [path2], …)&amp;nbsp;&amp;nbsp;按照顺序依">
+<meta name="keywords" content="nodejs,path">
+<meta property="og:type" content="article">
+<meta property="og:title" content="path模块的使用">
+<meta property="og:url" content="http://yoursite.com/2018/05/22/path模块的使用/index.html">
 <meta property="og:site_name" content="Jeffery的博客">
-<meta property="og:description" content="2018-04    welcome 2018-04-24 vue双向数据绑定原理  2018-04-24    2018-05    正则表达式之量词  2018-05-04 vue插件之轮播  2018-05-17 readline模块的使用 2018-05-22 path模块的使用 2018-05-22">
+<meta property="og:description" content="path模块包含一系列处理和转换文件路径的工具集，通过 require(‘path’) 可用来访问这个模块。  知识点：对window系统，目录分隔为’\’, 对于UNIX系统，分隔符为’/‘，针对’..’返回上一级，发现多个斜杠或反斜杠时会替换成一个，/，//，\与\都被统一转换为\ 方法1、path.resolve([path1], [path2], …)&amp;nbsp;&amp;nbsp;按照顺序依">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-05-22T10:41:11.778Z">
+<meta property="og:updated_time" content="2018-05-22T12:21:04.651Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Jeffery的博客">
-<meta name="twitter:description" content="2018-04    welcome 2018-04-24 vue双向数据绑定原理  2018-04-24    2018-05    正则表达式之量词  2018-05-04 vue插件之轮播  2018-05-17 readline模块的使用 2018-05-22 path模块的使用 2018-05-22">
+<meta name="twitter:title" content="path模块的使用">
+<meta name="twitter:description" content="path模块包含一系列处理和转换文件路径的工具集，通过 require(‘path’) 可用来访问这个模块。  知识点：对window系统，目录分隔为’\’, 对于UNIX系统，分隔符为’/‘，针对’..’返回上一级，发现多个斜杠或反斜杠时会替换成一个，/，//，\与\都被统一转换为\ 方法1、path.resolve([path1], [path2], …)&amp;nbsp;&amp;nbsp;按照顺序依">
   
     <link rel="alternative" href="/atom.xml" title="Jeffery的博客" type="application/atom+xml">
   
@@ -213,41 +213,125 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="list-" class="article article-type-list " itemscope itemprop="blogPost">
+            <article id="post-path模块的使用" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
-    <div class="article-entry article-list" itemprop="articleBody">
-      
+      <header class="article-header">
         
-          <blockquote>
-<p><strong>2018-04</strong> </p>
-</blockquote>
-<ul>
-<li><a href="/2018/04/24/welcome">welcome</a> 2018-04-24</li>
-<li><a href="/2018/04/24/vue双向数据绑定原理">vue双向数据绑定原理</a>  2018-04-24</li>
-</ul>
-<hr>
-<blockquote>
-<p><strong>2018-05</strong> </p>
-</blockquote>
-<ul>
-<li><a href="/2018/05/04/正则表达式之量词">正则表达式之量词</a>  2018-05-04</li>
-<li><a href="/2018/05/17/vue插件之轮播">vue插件之轮播</a>  2018-05-17</li>
-<li><a href="/2018/05/22/readline模块的使用">readline模块的使用</a> 2018-05-22</li>
-<li><a href="/2018/05/22/path模块的使用">path模块的使用</a> 2018-05-22</li>
-</ul>
-<hr>
-<!-- > **2017-12**
+  
+    <h1 class="article-title" itemprop="name">
+      path模块的使用
+    </h1>
+  
 
-- [vue双向数据绑定原理](/2018/04/24/vue双向数据绑定原理)
-- [vue双向数据绑定原理](/2018/04/24/vue双向数据绑定原理) 
---- -->
+
+
+  <a href="javascript:;" class="archive-article-date">
+      <i class="icon-smile icon"></i> 阅读数:<span id="/2018/05/22/path模块的使用/" class="pageViews">0</span>次
+  </a>
+
         
+        <a href="/2018/05/22/path模块的使用/" class="archive-article-date">
+  	<time datetime="2018-05-21T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-22</time>
+</a>
+        
+      </header>
+    
+    <!-- 目录内容 -->
+    
+      <div class="doc-pc" id="container">
+        <p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
+          <span class="btn-bg"></span>
+          <span class="btn-text">文章导航</span>
+        </p>
+        <div id="toc-article" class="toc-article">
+          <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
+          <strong class="toc-title">文章目录</strong>
+          <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#方法"><span class="toc-number">1.</span> <span class="toc-text">方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1、path-resolve-path1-path2-…"><span class="toc-number">1.1.</span> <span class="toc-text">1、path.resolve([path1], [path2], …)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、path-join-path1-path2-…"><span class="toc-number">1.2.</span> <span class="toc-text">2、path.join([path1], [path2], …)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3、path-relative"><span class="toc-number">1.3.</span> <span class="toc-text">3、path.relative()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4、path-isAbsolute"><span class="toc-number">1.4.</span> <span class="toc-text">4、path.isAbsolute()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5、path-normalize-path"><span class="toc-number">1.5.</span> <span class="toc-text">5、path.normalize(path)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6、path-format-pathObject"><span class="toc-number">1.6.</span> <span class="toc-text">6、path.format(pathObject)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7、path-parse"><span class="toc-number">1.7.</span> <span class="toc-text">7、path.parse()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8、path-dirname"><span class="toc-number">1.8.</span> <span class="toc-text">8、path.dirname()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#10、path-extname"><span class="toc-number">1.9.</span> <span class="toc-text">10、path.extname()</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#属性"><span class="toc-number">2.</span> <span class="toc-text">属性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1、path-win32和path-posix"><span class="toc-number">2.1.</span> <span class="toc-text">1、path.win32和path.posix</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、path-delimiter"><span class="toc-number">2.2.</span> <span class="toc-text">2、path.delimiter</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3、path-sep"><span class="toc-number">2.3.</span> <span class="toc-text">3、path.sep</span></a></li></ol></li></ol>
+        </div>
+      </div>
+      <script type="text/javascript">
+      function showToc(){
+        var toc_article = document.getElementById("toc-article");
+        var show_toc_btn = document.getElementById("show-toc-btn");
+        toc_article.setAttribute("style","display:block");
+        show_toc_btn.setAttribute("style","display:none");
+        };
+      function showBtn(){
+        var toc_article = document.getElementById("toc-article");
+        var show_toc_btn = document.getElementById("show-toc-btn");
+        toc_article.setAttribute("style","display:none");
+        show_toc_btn.setAttribute("style","display:block");
+        };
+      </script>
+          
+    <!-- 目录内容结束 -->
+    <div class="article-entry blog-check" itemprop="articleBody">
+      
+        <p>  path模块包含一系列处理和转换文件路径的工具集，通过 require(‘path’) 可用来访问这个模块。<br>  知识点：对window系统，目录分隔为’\’, 对于UNIX系统，分隔符为’/‘，针对’..’返回上一级，发现多个斜杠或反斜杠时会替换成一个，/，//，\与\都被统一转换为\</p>
+<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><h4 id="1、path-resolve-path1-path2-…"><a href="#1、path-resolve-path1-path2-…" class="headerlink" title="1、path.resolve([path1], [path2], …)"></a>1、path.resolve([path1], [path2], …)</h4><p>&nbsp;&nbsp;按照顺序依次拼接，获取的是绝对路径，路径末尾的不会带有路径分隔符，若合并后的路径没有构成一个绝对路径，则会默认使用当前工作目录的绝对路径。<br>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 拼接路径中没有带有绝对路径</span><br><span class="line">var _path = path.resolve(<span class="string">'path3'</span>, <span class="string">'path4'</span>, <span class="string">'a/b\\cc\\'</span>); // 没有末尾的路径分隔符\</span><br><span class="line">// 结果为：D:\others\node\examples\path3\path4\a\b\cc</span><br><span class="line">// 拼接路径中带有绝对路径</span><br><span class="line">var _path = path.resolve(<span class="string">'D://work/ready/demo'</span>, <span class="string">'path3'</span>, <span class="string">'path4'</span>, <span class="string">'a/b\\cc\\'</span>);</span><br><span class="line">// 结果为：D:\work\ready\demo\path3\path4\a\b\cc</span><br></pre></td></tr></table></figure></p>
+<p>  <font color="#f00">注意： 其中的D:\others\node\examples\为我的工作路径，请对应替换自己的路径查看</font></p>
+<h4 id="2、path-join-path1-path2-…"><a href="#2、path-join-path1-path2-…" class="headerlink" title="2、path.join([path1], [path2], …)"></a>2、path.join([path1], [path2], …)</h4><p>&nbsp;&nbsp;按照顺序，依次拼接路径、并转为normalize后的结果路径，路径末尾的带有路径分隔符。<br>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var _path = path.join(<span class="string">'path1'</span>, <span class="string">'path2\\p/cc//'</span>, <span class="string">'/c/../ttt\\'</span>);</span><br><span class="line">// 结果为：path1\path2\p\cc\ttt\</span><br></pre></td></tr></table></figure></p>
+<h4 id="3、path-relative"><a href="#3、path-relative" class="headerlink" title="3、path.relative()"></a>3、path.relative()</h4><p>&nbsp;&nbsp;获取相对路径，获取两个路径之间的相对关系。<br>/**</p>
+<ul>
+<li>from 当前路径，并且方法返回值是基于from指定到to的相对路径，路径末尾的不带有路径分隔符</li>
+<li>to   到哪路径<br>*/<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var from = <span class="string">'D:\\work\\server\\'</span>,</span><br><span class="line">    to = <span class="string">'D:/work/ready/demo'</span>;</span><br><span class="line">var _path = path.relative(from, to); // 表示从from 到 to的相对路径</span><br><span class="line">// 结果为：..\ready\demo</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="4、path-isAbsolute"><a href="#4、path-isAbsolute" class="headerlink" title="4、path.isAbsolute()"></a>4、path.isAbsolute()</h4><p>&nbsp;&nbsp;获取绝对路径，是一个绝对路径(比如 ‘E:/abc’或’E:\‘)，或者是以“/”或“\”开头的路径，二者都会返回true。<br>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">console.log(path.isAbsolute(<span class="string">'D:\\work\\server\\'</span>)); // <span class="literal">true</span></span><br><span class="line">console.log(path.isAbsolute(<span class="string">'\\work\\server'</span>)) // <span class="literal">true</span></span><br><span class="line">console.log(path.isAbsolute(<span class="string">'/temp/../..'</span>)); // <span class="literal">true</span></span><br><span class="line">console.log(path.isAbsolute(<span class="string">'E:/github/nodeAPI/abc/efg'</span>)); // <span class="literal">true</span></span><br><span class="line">console.log(path.isAbsolute(<span class="string">'///temp123'</span>)); // <span class="literal">true</span></span><br><span class="line">console.log(path.isAbsolute(<span class="string">'//temp123'</span>)); // <span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="5、path-normalize-path"><a href="#5、path-normalize-path" class="headerlink" title="5、path.normalize(path)"></a>5、path.normalize(path)</h4><p>&nbsp;&nbsp;路径解析、得到规范化的格式。<br>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var _path = path.normalize(__dirname + <span class="string">'//test/a//b/..//c\\'</span>);</span><br><span class="line">// 结果为：D:\others\node\examples\<span class="built_in">test</span>\a\c\</span><br></pre></td></tr></table></figure></p>
+<h4 id="6、path-format-pathObject"><a href="#6、path-format-pathObject" class="headerlink" title="6、path.format(pathObject)"></a>6、path.format(pathObject)</h4><p>&nbsp;&nbsp;该方法用于将一个字符串类型的路径转化为一个路径对象（pathObject）。该路径对象当中包括文件目录，文件名，扩展名等。<br>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var _path = path.parse(__dirname + <span class="string">'/test/util you.mp3'</span>);</span><br><span class="line">// 结果为：</span><br><span class="line">// &#123; root: <span class="string">'D:\\'</span>,</span><br><span class="line">//   dir: <span class="string">'D:\\others\\node\\examples/test'</span>,</span><br><span class="line">//   base: <span class="string">'util you.mp3'</span>,</span><br><span class="line">//   ext: <span class="string">'.mp3'</span>,</span><br><span class="line">//   name: <span class="string">'util you'</span> </span><br><span class="line">// &#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="7、path-parse"><a href="#7、path-parse" class="headerlink" title="7、path.parse()"></a>7、path.parse()</h4><p>&nbsp;&nbsp;该方法用于将一个路径对象转化为一个字符串类型的路径（pathString）。<br>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var _path = path.parse(__dirname + <span class="string">'/test/util you.mp3'</span>);</span><br><span class="line">// 结果为：</span><br><span class="line">// &#123; root: <span class="string">'D:\\'</span>,</span><br><span class="line">//   dir: <span class="string">'D:\\others\\node\\examples/test'</span>,</span><br><span class="line">//   base: <span class="string">'util you.mp3'</span>,</span><br><span class="line">//   ext: <span class="string">'.mp3'</span>,</span><br><span class="line">//   name: <span class="string">'util you'</span> </span><br><span class="line">// &#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="8、path-dirname"><a href="#8、path-dirname" class="headerlink" title="8、path.dirname()"></a>8、path.dirname()</h4><p>&nbsp;&nbsp;获取路径中目录结构，不会转为normalize后的结果路径。<br>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">    var _path = path.dirname(__dirname + <span class="string">'/test/hha/util you.mp3'</span>); // 注意/</span><br><span class="line">    // 结果为：D:\others\node\examples/<span class="built_in">test</span>/hha </span><br><span class="line">    var _path = path.dirname(__dirname + <span class="string">'/test/hha/'</span>); // 注意/</span><br><span class="line">    // 结果为：D:\others\node\examples/<span class="built_in">test</span></span><br><span class="line">  ``` </span><br><span class="line"><span class="comment">#### 9、path.basename()</span></span><br><span class="line">&amp;nbsp;&amp;nbsp;获取路径中文件名（.ext则包括后缀名）。</span><br><span class="line">  ```bash</span><br><span class="line">  var _path = path.basename(__dirname + <span class="string">'/test/util you.mp3'</span>, <span class="string">'.mp3'</span>);</span><br><span class="line">  var _path = path.basename(__dirname + <span class="string">'/test/util you'</span>, <span class="string">'.mp3'</span>);</span><br><span class="line">  var _path = path.basename(__dirname + <span class="string">'/test/util you'</span>, <span class="string">'.ext'</span>);</span><br><span class="line">  // 结果为：util you</span><br><span class="line">  var _path = path.basename(__dirname + <span class="string">'/test/util you.mp3'</span>);</span><br><span class="line">  var _path = path.basename(__dirname + <span class="string">'/test/util you.mp3'</span>, <span class="string">''</span>);</span><br><span class="line">  var _path = path.basename(__dirname + <span class="string">'/test/util you.mp3'</span>, <span class="string">'.ext'</span>);</span><br><span class="line">  // 结果为：util you.mp3</span><br><span class="line">  var _path = path.basename(__dirname + <span class="string">'/test/'</span>, <span class="string">'.mp3'</span>);</span><br><span class="line">  // 结果为：<span class="built_in">test</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="10、path-extname"><a href="#10、path-extname" class="headerlink" title="10、path.extname()"></a>10、path.extname()</h4><p>&nbsp;&nbsp;获取路径中文件后缀名。<br>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var _path = path.extname(__dirname + <span class="string">'/test/util you.mp3'</span>);</span><br><span class="line">// 结果为：.mp3</span><br><span class="line">var _path = path.extname(__dirname + <span class="string">'/test/util you'</span>);</span><br><span class="line">// 结果为：为空</span><br></pre></td></tr></table></figure></p>
+<h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><h4 id="1、path-win32和path-posix"><a href="#1、path-win32和path-posix" class="headerlink" title="1、path.win32和path.posix"></a>1、path.win32和path.posix</h4><p>&nbsp;&nbsp;这两个均为属性。<br>&nbsp;&nbsp;path：会根据当前操作系统来确定是使用windows的方式来操作路径，还是使用linux的方式来操作路径。<br>&nbsp;&nbsp;path.win32：允许在任意操作系统上使用windows的方式来操作路径。<br>&nbsp;&nbsp;path.posix：允许在任意操作系统上使用linux的方式来操作路径。<br>&nbsp;&nbsp;故在windows系统中，path==path.win32，而在linux系统当中，path==path.posix。<br>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">console.log(path == path.win32); // <span class="literal">true</span></span><br><span class="line">console.log(path == path.posix); // <span class="literal">false</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="2、path-delimiter"><a href="#2、path-delimiter" class="headerlink" title="2、path.delimiter"></a>2、path.delimiter</h4><p>&nbsp;&nbsp;返回操作系统中目录分隔符，如window是’;’, Unix中是’:’。<br>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">console.log(path.delimiter);</span><br><span class="line">// 结果为：;</span><br></pre></td></tr></table></figure></p>
+<h4 id="3、path-sep"><a href="#3、path-sep" class="headerlink" title="3、path.sep"></a>3、path.sep</h4><p>&nbsp;&nbsp;返回操作系统中文件分隔符； window是’\‘, Unix是’/‘。<br>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">console.log(path.sep);</span><br><span class="line">// 结果为：\</span><br><span class="line">console.log(<span class="string">'foo\\bar\\baz'</span>.split(path.sep));  </span><br><span class="line">// [ <span class="string">'foo'</span>, <span class="string">'bar'</span>, <span class="string">'baz'</span> ]</span><br><span class="line">console.log(<span class="string">'foo/bar/baz'</span>.split(path.sep));  </span><br><span class="line">// win下返回[<span class="string">'foo/bar/baz'</span>]，但在*nix系统下会返回[<span class="string">'foo'</span>,<span class="string">'bar'</span>,<span class="string">'baz'</span>]</span><br></pre></td></tr></table></figure></p>
+<p>参见<a href="http://nodejs.cn/doc/node/path.html" target="_blank" rel="noopener">官方文档</a></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
-    <div class="article-info article-info-index" style="border-top: 0">
+    <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">nodejs</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">path</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -298,7 +382,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/technology/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/05/22/path模块的使用/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -310,6 +394,25 @@
 </article>
 
   
+<nav id="article-nav">
+  
+    <a href="/2018/05/22/readline模块的使用/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          readline模块的使用
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/05/17/vue插件之轮播/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">vue插件之轮播</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -324,6 +427,19 @@
         </div>
         
         
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#方法"><span class="toc-number">1.</span> <span class="toc-text">方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1、path-resolve-path1-path2-…"><span class="toc-number">1.1.</span> <span class="toc-text">1、path.resolve([path1], [path2], …)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、path-join-path1-path2-…"><span class="toc-number">1.2.</span> <span class="toc-text">2、path.join([path1], [path2], …)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3、path-relative"><span class="toc-number">1.3.</span> <span class="toc-text">3、path.relative()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4、path-isAbsolute"><span class="toc-number">1.4.</span> <span class="toc-text">4、path.isAbsolute()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5、path-normalize-path"><span class="toc-number">1.5.</span> <span class="toc-text">5、path.normalize(path)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6、path-format-pathObject"><span class="toc-number">1.6.</span> <span class="toc-text">6、path.format(pathObject)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7、path-parse"><span class="toc-number">1.7.</span> <span class="toc-text">7、path.parse()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8、path-dirname"><span class="toc-number">1.8.</span> <span class="toc-text">8、path.dirname()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#10、path-extname"><span class="toc-number">1.9.</span> <span class="toc-text">10、path.extname()</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#属性"><span class="toc-number">2.</span> <span class="toc-text">属性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1、path-win32和path-posix"><span class="toc-number">2.1.</span> <span class="toc-text">1、path.win32和path.posix</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、path-delimiter"><span class="toc-number">2.2.</span> <span class="toc-text">2、path.delimiter</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3、path-sep"><span class="toc-number">2.3.</span> <span class="toc-text">3、path.sep</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
     </div>
 </aside>
 
@@ -332,7 +448,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="" data-title="" data-url="http://yoursite.com/technology/index.html"></div>
+	<div class="ds-thread" data-thread-key="path模块的使用" data-title="path模块的使用" data-url="http://yoursite.com/2018/05/22/path模块的使用/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -360,6 +476,9 @@
   
 
 
+<script>
+  $('.blog-check img').zoomify();
+</script>
           </div>
         </div>
       </div>
@@ -380,7 +499,7 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
