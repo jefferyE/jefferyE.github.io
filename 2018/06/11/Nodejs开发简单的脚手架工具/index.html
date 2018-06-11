@@ -17,19 +17,20 @@
   <link rel="stylesheet" href="/./zoomify/zoomify.min.css">
   <script src="/./zoomify/zoomify.min.js"></script>
   
-  <title>Tag: 滚动 | Jeffery的博客</title>
+  <title>Nodejs开发简单的脚手架工具 | Jeffery的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前端开发工程师一枚">
-<meta name="keywords" content="Jeffery">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Jeffery的博客">
-<meta property="og:url" content="http://yoursite.com/tags/滚动/index.html">
+  <meta name="description" content="&amp;nbsp;&amp;nbsp;脚手架，这个对于前端来说，并不陌生吧，像vue-cli，react-native-cli等，全局安装后，只需要在命令行中敲入一个简单的命令，便可帮我们快速的生成一个始项目，如vue init webpack projectName，即可生成一个初始的vue项目。主要是介绍开发一个简单的脚手架，了解开发的基本流程、最终通过npm link链接到全局包。">
+<meta name="keywords" content="javascript,nodejs,cli">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nodejs开发简单的脚手架工具">
+<meta property="og:url" content="http://yoursite.com/2018/06/11/Nodejs开发简单的脚手架工具/index.html">
 <meta property="og:site_name" content="Jeffery的博客">
-<meta property="og:description" content="前端开发工程师一枚">
+<meta property="og:description" content="&amp;nbsp;&amp;nbsp;脚手架，这个对于前端来说，并不陌生吧，像vue-cli，react-native-cli等，全局安装后，只需要在命令行中敲入一个简单的命令，便可帮我们快速的生成一个始项目，如vue init webpack projectName，即可生成一个初始的vue项目。主要是介绍开发一个简单的脚手架，了解开发的基本流程、最终通过npm link链接到全局包。">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-06-11T12:11:22.592Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Jeffery的博客">
-<meta name="twitter:description" content="前端开发工程师一枚">
+<meta name="twitter:title" content="Nodejs开发简单的脚手架工具">
+<meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;脚手架，这个对于前端来说，并不陌生吧，像vue-cli，react-native-cli等，全局安装后，只需要在命令行中敲入一个简单的命令，便可帮我们快速的生成一个始项目，如vue init webpack projectName，即可生成一个初始的vue项目。主要是介绍开发一个简单的脚手架，了解开发的基本流程、最终通过npm link链接到全局包。">
   
     <link rel="alternative" href="/atom.xml" title="Jeffery的博客" type="application/atom+xml">
   
@@ -212,80 +213,286 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Nodejs开发简单的脚手架工具" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/05/17/vue插件之轮播/" class="archive-article-date">
-  	<time datetime="2018-05-16T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-17</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/17/vue插件之轮播/">vue插件之轮播</a>
+    <h1 class="article-title" itemprop="name">
+      Nodejs开发简单的脚手架工具
     </h1>
   
 
 
 
   <a href="javascript:;" class="archive-article-date">
-      <i class="icon-smile icon"></i> 阅读数:<span id="/2018/05/17/vue插件之轮播/" class="pageViews">0</span>次
+      <i class="icon-smile icon"></i> 阅读数:<span id="/2018/06/11/Nodejs开发简单的脚手架工具/" class="pageViews">0</span>次
   </a>
 
-        <div class="article-info info-on-right">
+        
+        <a href="/2018/06/11/Nodejs开发简单的脚手架工具/" class="archive-article-date">
+  	<time datetime="2018-06-10T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-11</time>
+</a>
+        
+      </header>
+    
+    <!-- 目录内容 -->
+    
+      <div class="doc-pc" id="container">
+        <p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
+          <span class="btn-bg"></span>
+          <span class="btn-text">文章导航</span>
+        </p>
+        <div id="toc-article" class="toc-article">
+          <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
+          <strong class="toc-title">文章目录</strong>
+          <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#脚手架的作用"><span class="toc-number">1.</span> <span class="toc-text">脚手架的作用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#node相关基础知识"><span class="toc-number">2.</span> <span class="toc-text">node相关基础知识</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#思路"><span class="toc-number">3.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#初始化项目"><span class="toc-number">4.</span> <span class="toc-text">初始化项目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装依赖"><span class="toc-number">5.</span> <span class="toc-text">安装依赖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置入口文件"><span class="toc-number">6.</span> <span class="toc-text">配置入口文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#处理命令行"><span class="toc-number">7.</span> <span class="toc-text">处理命令行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#下载模板"><span class="toc-number">8.</span> <span class="toc-text">下载模板</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#交互命令行"><span class="toc-number">9.</span> <span class="toc-text">交互命令行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#渲染package模板"><span class="toc-number">10.</span> <span class="toc-text">渲染package模板</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#链接全局命令"><span class="toc-number">11.</span> <span class="toc-text">链接全局命令</span></a></li></ol>
+        </div>
+      </div>
+      <script type="text/javascript">
+      function showToc(){
+        var toc_article = document.getElementById("toc-article");
+        var show_toc_btn = document.getElementById("show-toc-btn");
+        toc_article.setAttribute("style","display:block");
+        show_toc_btn.setAttribute("style","display:none");
+        };
+      function showBtn(){
+        var toc_article = document.getElementById("toc-article");
+        var show_toc_btn = document.getElementById("show-toc-btn");
+        toc_article.setAttribute("style","display:none");
+        show_toc_btn.setAttribute("style","display:block");
+        };
+      </script>
           
+    <!-- 目录内容结束 -->
+    <div class="article-entry blog-check" itemprop="articleBody">
+      
+        <p>&nbsp;&nbsp;脚手架，这个对于前端来说，并不陌生吧，像vue-cli，react-native-cli等，全局安装后，只需要在命令行中敲入一个简单的命令，便可帮我们快速的生成一个始项目，如vue init webpack projectName，即可生成一个初始的vue项目。<br>主要是介绍开发一个简单的脚手架，了解开发的基本流程、最终通过npm link链接到全局包。<br><a id="more"></a></p>
+<h3 id="脚手架的作用"><a href="#脚手架的作用" class="headerlink" title="脚手架的作用"></a>脚手架的作用</h3><p>&nbsp;&nbsp;<br>1、减少时间，不必从零开始搭建初始项目，提高开发效率。<br>2、便于多人协作。<br>3、项目更新同步方便，只需要更新代码库中项目模板，即可下载最新的项目。</p>
+<h3 id="node相关基础知识"><a href="#node相关基础知识" class="headerlink" title="node相关基础知识"></a>node相关基础知识</h3><p>&nbsp;&nbsp;在开始项目前，先简单说下node相关的一些知识，通过npm init初始化一个node项目时，会生成一个package.json的配置文件，包括项目名称、版本、作者、依赖等相关信息，主要说一下其中的bin字段。<br>&nbsp;&nbsp;很多包都有一个或多个可执行的文件，希望放在PATH中，（实际上，就是这个功能让npm可执行的）。<br>&nbsp;&nbsp;当你要用这个功能时，需要给package.json中的bin字段添加一个命令名，并指向需要执行的文件（即后文的入口文件）。初始化的时候npm会将他链接到prefix/bin（全局初始化）或者./node_modules/.bin/（本地初始化）。<br>比如，npm有：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123; <span class="string">"bin"</span> : &#123; <span class="string">"npm"</span> : <span class="string">"./npm-cli.js"</span> &#125; &#125;</span><br></pre></td></tr></table></figure></p>
+<p>所以，当你初始化npm，它会创建一个符号链接到npm-cli.js脚本到/usr/local/bin/npm。</p>
+<p>如果你只有一个可执行文件，并且名字和包名一样。那么你可以只用一个字符串，比如：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123; <span class="string">"name"</span>: <span class="string">"my-program"</span></span><br><span class="line">, <span class="string">"version"</span>: <span class="string">"1.2.5"</span></span><br><span class="line">, <span class="string">"bin"</span>: <span class="string">"./path/to/program"</span> &#125;</span><br></pre></td></tr></table></figure></p>
+<p>结果和这个一样：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123; <span class="string">"name"</span>: <span class="string">"my-program"</span></span><br><span class="line">, <span class="string">"version"</span>: <span class="string">"1.2.5"</span></span><br><span class="line">, <span class="string">"bin"</span> : &#123; <span class="string">"my-program"</span> : <span class="string">"./path/to/program"</span> &#125; &#125;</span><br></pre></td></tr></table></figure></p>
+<p>了解package.json详细配置，请参考<a href="http://javascript.ruanyifeng.com/nodejs/packagejson.html" target="_blank" rel="noopener">这篇文章</a></p>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>&nbsp;&nbsp;要开发脚手架，首先要理清思路，脚手架是如何工作的？我们可以借鉴 vue-cli 的基本思路。vue-cli 是将项目模板放在 git 上，运行的时候再根据用户交互下载不同的模板，经过模板引擎渲染出来，生成项目。这样将模板和脚手架分离，就可以各自维护，即使模板有变动，只需要上传最新的模板即可，而不需要用户去更新脚手架就可以生成最新的项目。那么就可以按照这个思路来进行开发了。</p>
+<h3 id="初始化项目"><a href="#初始化项目" class="headerlink" title="初始化项目"></a>初始化项目</h3><p>&nbsp;&nbsp;新建一个文件夹，打开命令行工具，通过npm init 进行项目初始化，会生成package.json文件。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm init</span><br></pre></td></tr></table></figure></p>
+<h3 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install commander download-git-repo inquirer handlebars ora chalk <span class="built_in">log</span>-symbols shelljs -S</span><br></pre></td></tr></table></figure>
+<p>同时，使用了nodejs的几个内置模块：fs、path、child_process</p>
+<p><font color="#f00"><br>commander.js：可以自动的解析命令和参数，用于处理用户输入的命令。</font></p>
+<p>download-git-repo：下载并提取 git 仓库，用于下载项目模板。</p>
+<p>Inquirer.js：通用的命令行用户界面集合，用于和用户进行交互。</p>
+<p>handlebars.js：模板引擎，将用户提交的信息动态填充到文件中。</p>
+<p>ora：下载过程久的话，可以用于显示下载中的动画效果。</p>
+<p>chalk：可以给终端的字体加上颜色。</p>
+<p>log-symbols：可以在终端上显示出 √ 或 × 等的图标。</p>
+<p>fs：node内置的文件处理模块。</p>
+<p>path：node内置的路径处理、解析模块。</p>
+<p>child_process：node中创建子进程模块。<br></p>
+<h3 id="配置入口文件"><a href="#配置入口文件" class="headerlink" title="配置入口文件"></a>配置入口文件</h3><p>1、在package.json文件中增加bin字段，暂且命名为okcli。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"bin"</span>: &#123;</span><br><span class="line">  <span class="string">"okcli"</span>: <span class="string">"./index.js"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>2、在项目根目录新建index.js文件，在index.js文件顶部添加以下代码：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env node</span></span><br></pre></td></tr></table></figure></p>
+<p>即可进行开发。<br>在这里，简单介绍下这行代码含义。</p>
+<p><font color="#f00"><br>!/usr/bin/node是告诉操作系统执行这个脚本的时候，调用/usr/bin下的node解释器；<br>!/usr/bin/env node这种用法是为了防止操作系统用户没有将node装在默认的/usr/bin路径里。当系统看到这一行的时候，首先会到env设置里查找node的安装路径，再调用对应路径下的解释器程序完成操作。<br>!/usr/bin/node相当于写死了node路径;<br>!/usr/bin/env node会去环境设置寻找node目录,推荐这种写法<br></font></p>
+<h3 id="处理命令行"><a href="#处理命令行" class="headerlink" title="处理命令行"></a>处理命令行</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">const program = require(<span class="string">'commander'</span>);</span><br><span class="line">const inquirer = require(<span class="string">'inquirer'</span>);</span><br><span class="line">const symbols = require(<span class="string">'log-symbols'</span>);</span><br><span class="line">const download = require(<span class="string">'download-git-repo'</span>);</span><br><span class="line">const handlebars = require(<span class="string">'handlebars'</span>);</span><br><span class="line">const chalk = require(<span class="string">'chalk'</span>);</span><br><span class="line">const ora = require(<span class="string">'ora'</span>);</span><br><span class="line">const shell = require(<span class="string">'shelljs'</span>);</span><br><span class="line">const child_process = require(<span class="string">'child_process'</span>);</span><br><span class="line">const fs = require(<span class="string">'fs'</span>);</span><br><span class="line">const path = require(<span class="string">'path'</span>);</span><br><span class="line">program.version(<span class="string">'1.0.0'</span>, <span class="string">'-v, --version'</span>)</span><br><span class="line">.<span class="built_in">command</span>(<span class="string">'init &lt;name&gt;'</span>)</span><br><span class="line">.action((name) =&gt; &#123;</span><br><span class="line">  console.log(name);</span><br><span class="line">&#125;);</span><br><span class="line">program.parse(process.argv);</span><br></pre></td></tr></table></figure>
+<p>调用program.version(‘1.0.0’, ‘-v, –version’)会将-v和–version添加到命令行中，调用时可通过带上该参数获取该脚手架的版本号（命令 -v/–version）<br>调用comand(‘init <name>‘)定义初始化命令，name参数必传，作为项目的文件夹名，如vue init webpack parojectName<br>action是执行command命令时发生的回调，参数为命令行中输入的name，即init <name>中的name，项目生成过程便发生在回调函数中。<br>现在可以通过调用node index.js init test，可以看到控制台中已经打印了输入的项目名。<br>其中：program.parse(process.argv)解析命令行中的参数，解析出name,并传入action回调。</name></name></p>
+<h3 id="下载模板"><a href="#下载模板" class="headerlink" title="下载模板"></a>下载模板</h3><p>通过download-git-repo或者直接使用shelljs或者child_process直接运行命令进行下载模块（个人选择的是第三种）。<br>download-git-repo 支持从 Github、Gitlab 和 Bitbucket 下载仓库，各自的具体用法可以参考官方文档。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">download(<span class="string">'https://github.com/jefferyE/webpack-configuration-for-vue'</span>, name, &#123;<span class="built_in">clone</span>: <span class="literal">true</span>&#125;, (err) =&gt; &#123;</span><br><span class="line">  <span class="keyword">if</span>(err)&#123;</span><br><span class="line">   // spinner.fail();</span><br><span class="line">    console.log(symbols.error, chalk.red(err));</span><br><span class="line">  &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">   // spinner.fail();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>或者<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (shell.exec(<span class="string">'git clone https://github.com/jefferyE/webpack-configuration-for-vue'</span>).code == 0) &#123;</span><br><span class="line"> // spinner.succeed();</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line"> // spinner.fail();</span><br><span class="line">  console.log(symbols.error, chalk.red(<span class="string">'模板下载失败'</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>或者<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">child_process.exec(<span class="string">'git clone https://github.com/jefferyE/webpack-configuration-for-vue'</span>, <span class="keyword">function</span>(err, stdout, stderr) &#123;</span><br><span class="line">  <span class="keyword">if</span> (err) &#123;</span><br><span class="line">  //  spinner.fail();</span><br><span class="line">    console.log(symbols.error, chalk.red(<span class="string">'模板下载失败'</span>))</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  //  spinner.succeed();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>其中：download() 第一个参数就是仓库地址，但是有一点点不一样。实际的仓库地址是 <a href="http://xxxxxx:9999/HTML5/H5Template#master" target="_blank" rel="noopener">http://xxxxxx:9999/HTML5/H5Template#master</a> ，可以看到端口号后面的 ‘/‘ 在参数中要写成 ‘:’，#master 代表的就是分支名，不同的模板可以放在不同的分支中，更改分支便可以实现下载不同的模板文件了。第二个参数是路径，上面我们直接在当前路径下创建一个 name 的文件夹存放模板，也可以使用二级目录比如 test/${name}</p>
+<h3 id="交互命令行"><a href="#交互命令行" class="headerlink" title="交互命令行"></a>交互命令行</h3><p>命令行交互功能可以在用户执行 init 命令后，向用户提出问题，接收用户的输入并作出相应的处理。这里使用 inquirer.js 来实现，也可以自己使用node内置的readline模块。<br>具体可以参考<a href="https://jefferye.github.io/2018/05/22/readline%E6%A8%A1%E5%9D%97%E7%9A%84%E4%BD%BF%E7%94%A8/#more" target="_blank" rel="noopener">我的这篇文章</a><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">inquirer.prompt([</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">type</span>: <span class="string">'input'</span>,</span><br><span class="line">        name: <span class="string">'author'</span>,</span><br><span class="line">        message: <span class="string">'请输入作者名称'</span></span><br><span class="line">    &#125;</span><br><span class="line">]).<span class="keyword">then</span>((answers) =&gt; &#123;</span><br><span class="line">    console.log(answers.author);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>通过这里例子可以看出，问题就放在 prompt() 中，问题的类型为 input 就是输入类型，name 就是作为答案对象中的 key，message 就是问题了，用户输入的答案就在 answers 中，使用起来就是这么简单。更多的参数设置可以参考官方文档。</p>
+<h3 id="渲染package模板"><a href="#渲染package模板" class="headerlink" title="渲染package模板"></a>渲染package模板</h3><p>这里用 handlebars 的语法对 HTML5/H5Template 仓库的模板中的 package.json 文件做一些修改。并在下载模板完成之后将用户输入的答案渲染到 package.json 中。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"name"</span>: <span class="string">"&#123;&#123;name&#125;&#125;"</span>,</span><br><span class="line">  <span class="string">"version"</span>: <span class="string">"1.0.0"</span>,</span><br><span class="line">  <span class="string">"description"</span>: <span class="string">"&#123;&#123;description&#125;&#125;"</span>,</span><br><span class="line">  <span class="string">"scripts"</span>: &#123;</span><br><span class="line">    <span class="string">"test"</span>: <span class="string">"echo \"Error: no test specified\" &amp;&amp; exit 1"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"author"</span>: <span class="string">"&#123;&#123;author&#125;&#125;"</span>,</span><br><span class="line">  <span class="string">"license"</span>: <span class="string">"ISC"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>注意：由于我的项目没有更改package模板，因此通过在下载模板后，解析时进行动态修改的。<br>除此之外，通过ora、chalk模块也进行了一些视觉美化。具体请参考完整代码。<br>完整代码如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env node</span></span><br><span class="line"></span><br><span class="line">const program = require(<span class="string">'commander'</span>);</span><br><span class="line">const chalk = require(<span class="string">'chalk'</span>);</span><br><span class="line">const ora = require(<span class="string">'ora'</span>);</span><br><span class="line">const fs = require(<span class="string">'fs'</span>);</span><br><span class="line">const inquirer = require(<span class="string">'inquirer'</span>);</span><br><span class="line">const shell = require(<span class="string">'shelljs'</span>);</span><br><span class="line">const symbols = require(<span class="string">'log-symbols'</span>);</span><br><span class="line">const download = require(<span class="string">'download-git-repo'</span>);</span><br><span class="line">const child_process = require(<span class="string">'child_process'</span>);</span><br><span class="line">const handlebars = require(<span class="string">'handlebars'</span>);</span><br><span class="line">const path = require(<span class="string">'path'</span>);</span><br><span class="line"></span><br><span class="line">program.version(<span class="string">'1.0.0'</span>, <span class="string">'-v, --version'</span>).</span><br><span class="line"><span class="built_in">command</span>(<span class="string">'init &lt;name&gt;'</span>).</span><br><span class="line">action(name =&gt; &#123;</span><br><span class="line">  console.log(name);</span><br><span class="line">  <span class="keyword">if</span> (!fs.existsSync(name)) &#123;</span><br><span class="line">    console.log(<span class="string">'正在创建项目...'</span>);</span><br><span class="line">    inquirer.prompt([</span><br><span class="line">      &#123;</span><br><span class="line">          name: <span class="string">'description'</span>,</span><br><span class="line">          message: <span class="string">'请输入项目描述'</span></span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">          name: <span class="string">'author'</span>,</span><br><span class="line">          message: <span class="string">'请输入作者名称'</span></span><br><span class="line">      &#125;</span><br><span class="line">    ]).<span class="keyword">then</span>(answers =&gt; &#123;</span><br><span class="line">      console.log(answers)</span><br><span class="line">      const spinner = ora(<span class="string">'正在向下载模板...\n'</span>);</span><br><span class="line">      spinner.start();</span><br><span class="line">      child_process.exec(<span class="string">'git clone https://github.com/jefferyE/webpack-configuration-for-vue'</span>, <span class="keyword">function</span>(err, stdout, stderr) &#123;</span><br><span class="line">        <span class="keyword">if</span> (err) &#123;</span><br><span class="line">          spinner.fail();</span><br><span class="line">          console.log(symbols.error, chalk.red(<span class="string">'模板下载失败'</span>))</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          spinner.succeed();</span><br><span class="line">          shell.mv(__dirname + <span class="string">'/webpack-configuration-for-vue'</span>, __dirname + <span class="string">'/'</span> + name)</span><br><span class="line">          const filename = `<span class="variable">$&#123;name&#125;</span>/package.json`;</span><br><span class="line">          const meta = &#123;</span><br><span class="line">            name,</span><br><span class="line">            description: answers.description,</span><br><span class="line">            author: answers.author</span><br><span class="line">          &#125;</span><br><span class="line">          <span class="keyword">if</span> (fs.existsSync(filename)) &#123;</span><br><span class="line">            const content = fs.readFileSync(filename).toString();</span><br><span class="line">            <span class="built_in">let</span> dt = JSON.parse(content);</span><br><span class="line">            dt.name = <span class="string">'&#123;&#123;name&#125;&#125;'</span>;</span><br><span class="line">            dt.description = <span class="string">'&#123;&#123;description&#125;&#125;'</span></span><br><span class="line">            const result = handlebars.compile(JSON.stringify(dt, null, 2))(meta);</span><br><span class="line">            fs.writeFileSync(filename, result);</span><br><span class="line">            console.log(symbols.success, chalk.green(<span class="string">'项目初始化完成'</span>));</span><br><span class="line">          &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            console.log(symbols.error, chalk.red(<span class="string">'package不存在'</span>))</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    console.log(symbols.error, chalk.red(<span class="string">'项目已存在'</span>));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line">program.parse(process.argv);</span><br></pre></td></tr></table></figure></p>
+<p>其中：<br>1、在用户输入答案之后，开始下载模板，这时候使用 ora 来提示用户正在下载中。<br>2、然后通过 chalk 来为打印信息加上样式，比如成功信息为绿色，失败信息为红色，这样子会让用户更加容易分辨，同时也让终端的显示更加的好看。<br>3、除了给打印信息加上颜色之外，还可以使用 log-symbols 在信息前面加上 √ 或 × 等的图标。</p>
+<p>完成之后，就可以把脚手架发布到 npm 上面，通过 -g 进行全局安装，就可以在自己本机上执行 okcli init [name] 来初始化项目，这样便完成了一个简单的脚手架工具了。</p>
+<h3 id="链接全局命令"><a href="#链接全局命令" class="headerlink" title="链接全局命令"></a>链接全局命令</h3><p>在根目录运行 npm link命令，将包链接到全局环境。<br>npm link命令可以将一个任意位置的npm包链接到全局执行环境，从而在任意位置使用命令行都可以直接运行该npm包。<br>具体请参考<a href="https://blog.csdn.net/juhaotian/article/details/78672390" target="_blank" rel="noopener">这篇文章</a></p>
+<p>感谢：<br>参考<a href="https://mp.weixin.qq.com/s/o4D4DI59GzdeI8KTp0RGuA" target="_blank" rel="noopener">文章1</a><br>   <a href="https://www.cnblogs.com/tzyy/p/5193811.html" target="_blank" rel="noopener">文章2</a></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">插件</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">nodejs</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">轮播</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">滚动</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">cli</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/06/11/Nodejs开发简单的脚手架工具/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2018/05/22/readline模块的使用/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">readline模块的使用</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#脚手架的作用"><span class="toc-number">1.</span> <span class="toc-text">脚手架的作用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#node相关基础知识"><span class="toc-number">2.</span> <span class="toc-text">node相关基础知识</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#思路"><span class="toc-number">3.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#初始化项目"><span class="toc-number">4.</span> <span class="toc-text">初始化项目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装依赖"><span class="toc-number">5.</span> <span class="toc-text">安装依赖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置入口文件"><span class="toc-number">6.</span> <span class="toc-text">配置入口文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#处理命令行"><span class="toc-number">7.</span> <span class="toc-text">处理命令行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#下载模板"><span class="toc-number">8.</span> <span class="toc-text">下载模板</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#交互命令行"><span class="toc-number">9.</span> <span class="toc-text">交互命令行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#渲染package模板"><span class="toc-number">10.</span> <span class="toc-text">渲染package模板</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#链接全局命令"><span class="toc-number">11.</span> <span class="toc-text">链接全局命令</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Nodejs开发简单的脚手架工具" data-title="Nodejs开发简单的脚手架工具" data-url="http://yoursite.com/2018/06/11/Nodejs开发简单的脚手架工具/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
+<script>
+  $('.blog-check img').zoomify();
+</script>
           </div>
         </div>
       </div>
@@ -306,9 +513,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,

@@ -27,7 +27,7 @@
 <meta property="og:site_name" content="Jeffery的博客">
 <meta property="og:description" content="什么是readline  readline允许从可读流中以逐行的方式读取数据，比如process.stdin等。  在node.js命令行模式下默认引入了readline模块，但如果是使用node.js运行脚本的话，则需要自己通过require(‘readline’)方式手动引入该模块。 怎么使用readline">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-05-22T10:34:40.130Z">
+<meta property="og:updated_time" content="2018-06-11T11:22:34.382Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="readline模块的使用">
 <meta name="twitter:description" content="什么是readline  readline允许从可读流中以逐行的方式读取数据，比如process.stdin等。  在node.js命令行模式下默认引入了readline模块，但如果是使用node.js运行脚本的话，则需要自己通过require(‘readline’)方式手动引入该模块。 怎么使用readline">
@@ -291,7 +291,7 @@
 <h5 id="5、SIGCOUT（该事件在window系统上不起作用）"><a href="#5、SIGCOUT（该事件在window系统上不起作用）" class="headerlink" title="5、SIGCOUT（该事件在window系统上不起作用）"></a>5、SIGCOUT（该事件在window系统上不起作用）</h5><p>&nbsp;&nbsp;当使用<ctrl>-Z将Node.js进程移动到后台时，SIGCONT事件将会被触发。然后可以使用 fg(1) 命令将它移动到前台。<br>&nbsp;&nbsp;如果输入流在收到SIGTSIP之前就已经被暂停了，那么该事件就不会触发。</ctrl></p>
 <h5 id="6、SIGINT"><a href="#6、SIGINT" class="headerlink" title="6、SIGINT"></a>6、SIGINT</h5><p>&nbsp;&nbsp;当输入流收到<ctrl>-C命令时，我们熟知的SIGINT事件就会被触发。如果当时并没有注册任何SIGINT事件监听器，那么当输入流接收到SIGINT信号时，’pause’事件和’close’事件均会被触发。</ctrl></p>
 <h5 id="7、SIGTSTP（该事件在window系统上不起作用）"><a href="#7、SIGTSTP（该事件在window系统上不起作用）" class="headerlink" title="7、SIGTSTP（该事件在window系统上不起作用）"></a>7、SIGTSTP（该事件在window系统上不起作用）</h5><p>&nbsp;&nbsp;当输入流收到<ctrl>-Z命令时，我们熟知的SIGTSTP事件就会被触发。如果没有注册SIGTSTP事件监听器，那么当输入流收到SIGTSTP事件时，Node.js进程就将会被移动到后台。<br>&nbsp;&nbsp;如果输入在进程被发送到后台之前就已经被暂停了，那么’pause’和’SIGCONT’事件就将不会被触发。</ctrl></p>
-<p>参见<a href="http://nodejs.cn/doc/node/readline.html" target="_blank" rel="noopener">官方文档</a></p>
+<p>参见<a href="http://nodejs.cn/doc/node/readline.html" target="_blank" rel="noopener">官方文档</a><br>参考案例<a href="https://mp.weixin.qq.com/s/ri7P0sJ_wh6bFoYwNeKPNQ" target="_blank" rel="noopener">看笑话</a></p>
 
       
 
@@ -399,6 +399,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2018/06/11/Nodejs开发简单的脚手架工具/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Nodejs开发简单的脚手架工具
+        
+      </div>
+    </a>
   
   
     <a href="/2018/05/22/path模块的使用/" id="article-nav-older" class="article-nav-link-wrap">
@@ -690,6 +699,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">path</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">cli</a>
               </li>
             
             <div class="clearfix"></div>
