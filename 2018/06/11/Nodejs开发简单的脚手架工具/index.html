@@ -19,18 +19,18 @@
   
   <title>Nodejs开发简单的脚手架工具 | Jeffery的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="脚手架，这个名词对于作为前端的我们来说，并不陌生吧，像vue-cli，react-native-cli等，全局安装后，只需要在命令行中敲入一个简单的命令，便可帮我们快速的生成一个初始项目，如vue init webpack projectName，即可生成一个初始的vue项目。本文主要是介绍开发一个简单的脚手架，了解开发的基本流程、最终通过npm link链接到全局包。">
+  <meta name="description" content="脚手架，这个名词对于作为前端的我们来说，也许并不陌生吧，像vue-cli，react-native-cli等，全局安装后，只需要在命令行中敲入一个简单的命令，便可帮我们快速的生成一个初始项目，如vue init webpack projectName，即可生成一个初始的vue项目。本文主要是介绍开发一个简单的脚手架，了解开发的基本流程、最终通过npm link链接到全局包。">
 <meta name="keywords" content="cli,javascript,nodejs">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Nodejs开发简单的脚手架工具">
 <meta property="og:url" content="http://yoursite.com/2018/06/11/Nodejs开发简单的脚手架工具/index.html">
 <meta property="og:site_name" content="Jeffery的博客">
-<meta property="og:description" content="脚手架，这个名词对于作为前端的我们来说，并不陌生吧，像vue-cli，react-native-cli等，全局安装后，只需要在命令行中敲入一个简单的命令，便可帮我们快速的生成一个初始项目，如vue init webpack projectName，即可生成一个初始的vue项目。本文主要是介绍开发一个简单的脚手架，了解开发的基本流程、最终通过npm link链接到全局包。">
+<meta property="og:description" content="脚手架，这个名词对于作为前端的我们来说，也许并不陌生吧，像vue-cli，react-native-cli等，全局安装后，只需要在命令行中敲入一个简单的命令，便可帮我们快速的生成一个初始项目，如vue init webpack projectName，即可生成一个初始的vue项目。本文主要是介绍开发一个简单的脚手架，了解开发的基本流程、最终通过npm link链接到全局包。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-06-13T01:13:02.640Z">
+<meta property="og:updated_time" content="2018-06-13T01:15:59.300Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Nodejs开发简单的脚手架工具">
-<meta name="twitter:description" content="脚手架，这个名词对于作为前端的我们来说，并不陌生吧，像vue-cli，react-native-cli等，全局安装后，只需要在命令行中敲入一个简单的命令，便可帮我们快速的生成一个初始项目，如vue init webpack projectName，即可生成一个初始的vue项目。本文主要是介绍开发一个简单的脚手架，了解开发的基本流程、最终通过npm link链接到全局包。">
+<meta name="twitter:description" content="脚手架，这个名词对于作为前端的我们来说，也许并不陌生吧，像vue-cli，react-native-cli等，全局安装后，只需要在命令行中敲入一个简单的命令，便可帮我们快速的生成一个初始项目，如vue init webpack projectName，即可生成一个初始的vue项目。本文主要是介绍开发一个简单的脚手架，了解开发的基本流程、最终通过npm link链接到全局包。">
   
     <link rel="alternative" href="/atom.xml" title="Jeffery的博客" type="application/atom+xml">
   
@@ -268,7 +268,7 @@
     <!-- 目录内容结束 -->
     <div class="article-entry blog-check" itemprop="articleBody">
       
-        <p>脚手架，这个名词对于作为前端的我们来说，并不陌生吧，像vue-cli，react-native-cli等，全局安装后，只需要在命令行中敲入一个简单的命令，便可帮我们快速的生成一个初始项目，如vue init webpack projectName，即可生成一个初始的vue项目。<br>本文主要是介绍开发一个简单的脚手架，了解开发的基本流程、最终通过npm link链接到全局包。<br><a id="more"></a></p>
+        <p>脚手架，这个名词对于作为前端的我们来说，也许并不陌生吧，像vue-cli，react-native-cli等，全局安装后，只需要在命令行中敲入一个简单的命令，便可帮我们快速的生成一个初始项目，如vue init webpack projectName，即可生成一个初始的vue项目。<br>本文主要是介绍开发一个简单的脚手架，了解开发的基本流程、最终通过npm link链接到全局包。<br><a id="more"></a></p>
 <h3 id="脚手架的作用"><a href="#脚手架的作用" class="headerlink" title="脚手架的作用"></a>脚手架的作用</h3><p>1、减少时间，不必从零开始搭建初始项目，提高开发效率。<br>2、便于多人协作。<br>3、项目更新同步方便，只需要更新代码库中项目模板，即可下载最新的项目。</p>
 <h3 id="node相关基础知识"><a href="#node相关基础知识" class="headerlink" title="node相关基础知识"></a>node相关基础知识</h3><p>在开始项目前，先简单介绍下node相关的一些基础知识，通过npm init初始化一个node项目时，会生成一个package.json的配置文件，包括项目名称、版本、作者、依赖等相关信息，主要说一下其中的bin字段。<br>很多包都有一个或多个可执行的文件，希望放在PATH中，（实际上，就是这个功能让npm可执行的）。<br>当你要用这个功能时，需要给package.json中的bin字段添加一个命令名，并指向需要执行的文件（即后文的入口文件）。初始化的时候npm会将他链接到prefix/bin（全局初始化）或者./node_modules/.bin/（本地初始化）。<br>比如，npm有：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123; <span class="string">"bin"</span> : &#123; <span class="string">"npm"</span> : <span class="string">"./npm-cli.js"</span> &#125; &#125;</span><br></pre></td></tr></table></figure></p>
 <p>所以，当你初始化npm，它会创建一个符号链接到npm-cli.js脚本到/usr/local/bin/npm。</p>
@@ -279,25 +279,16 @@
 <h3 id="初始化项目"><a href="#初始化项目" class="headerlink" title="初始化项目"></a>初始化项目</h3><p>新建一个文件夹，打开命令行工具，通过npm init 进行项目初始化，会在项目根目录下生成package.json文件。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm init</span><br></pre></td></tr></table></figure></p>
 <h3 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install commander download-git-repo inquirer handlebars ora chalk <span class="built_in">log</span>-symbols shelljs -S</span><br></pre></td></tr></table></figure>
 <p>除此之外，还使用了nodejs的几个内置模块：fs、path、child_process</p>
-<font color="#f00">commander.js：可以自动的解析命令和参数，用于处理用户输入的命令。</font>
-
-<font color="#f00">download-git-repo：下载并提取 git 仓库，用于下载项目模板。</font>
-
-<font color="#f00">Inquirer.js：通用的命令行用户界面集合，用于和用户进行交互。</font>
-
-<font color="#f00">handlebars.js：模板引擎，将用户提交的信息动态填充到文件中。</font>
-
-<font color="#f00">ora：下载过程久的话，可以用于显示下载中的动画效果。</font>
-
-<font color="#f00">chalk：可以给终端的字体加上颜色。</font>
-
-<font color="#f00">log-symbols：可以在终端上显示出 √ 或 × 等的图标。</font>
-
-<font color="#f00">fs：node内置的文件处理模块。</font>
-
-<font color="#f00">path：node内置的路径处理、解析模块。</font>
-
-<p><font color="#f00">child_process：node中创建子进程模块。</font></p>
+<p><font color="#f00">commander.js：可以自动的解析命令和参数，用于处理用户输入的命令。</font><br></p>
+<p><font color="#f00">download-git-repo：下载并提取 git 仓库，用于下载项目模板。</font><br></p>
+<p><font color="#f00">Inquirer.js：通用的命令行用户界面集合，用于和用户进行交互。</font><br></p>
+<p><font color="#f00">handlebars.js：模板引擎，将用户提交的信息动态填充到文件中。</font><br></p>
+<p><font color="#f00">ora：下载过程久的话，可以用于显示下载中的动画效果。</font><br></p>
+<p><font color="#f00">chalk：可以给终端的字体加上颜色。</font><br></p>
+<p><font color="#f00">log-symbols：可以在终端上显示出 √ 或 × 等的图标。</font><br></p>
+<p><font color="#f00">fs：node内置的文件处理模块。</font><br></p>
+<p><font color="#f00">path：node内置的路径处理、解析模块。</font><br></p>
+<p><font color="#f00">child_process：node中创建子进程模块。</font><br></p>
 <h3 id="配置入口文件"><a href="#配置入口文件" class="headerlink" title="配置入口文件"></a>配置入口文件</h3><p>1、在package.json文件中增加bin字段，暂且先命名为okcli吧。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"bin"</span>: &#123;</span><br><span class="line">  <span class="string">"okcli"</span>: <span class="string">"./index.js"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>2、在项目根目录新建index.js文件，在index.js文件顶部添加以下代码：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env node</span></span><br></pre></td></tr></table></figure></p>
 <p>即可进行开发。<br>在这里，简单介绍下这行代码含义。</p>
