@@ -19,18 +19,18 @@
   
   <title>path模块的使用 | Jeffery的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="path模块包含一系列处理和转换文件路径的工具集，通过 require(‘path’) 可用来访问这个模块。  知识点：对window系统，目录分隔为’\’, 对于UNIX系统，分隔符为’/‘，针对’..’返回上一级，发现多个斜杠或反斜杠时会替换成一个，/，//，\与\都被统一转换为\ 方法1、path.resolve([path1], [path2], …)&amp;nbsp;&amp;nbsp;按照顺序依">
+  <meta name="description" content="path模块包含一系列处理和转换文件路径的工具集，通过 require(‘path’) 可用来访问这个模块。  知识点：对window系统，目录分隔为’\’, 对于UNIX系统，分隔符为’/‘，针对’..’返回上一级，发现多个斜杠或反斜杠时会替换成一个，/，//，\与\都被统一转换为\">
 <meta name="keywords" content="nodejs,path">
 <meta property="og:type" content="article">
 <meta property="og:title" content="path模块的使用">
 <meta property="og:url" content="http://yoursite.com/2018/05/22/path模块的使用/index.html">
 <meta property="og:site_name" content="Jeffery的博客">
-<meta property="og:description" content="path模块包含一系列处理和转换文件路径的工具集，通过 require(‘path’) 可用来访问这个模块。  知识点：对window系统，目录分隔为’\’, 对于UNIX系统，分隔符为’/‘，针对’..’返回上一级，发现多个斜杠或反斜杠时会替换成一个，/，//，\与\都被统一转换为\ 方法1、path.resolve([path1], [path2], …)&amp;nbsp;&amp;nbsp;按照顺序依">
+<meta property="og:description" content="path模块包含一系列处理和转换文件路径的工具集，通过 require(‘path’) 可用来访问这个模块。  知识点：对window系统，目录分隔为’\’, 对于UNIX系统，分隔符为’/‘，针对’..’返回上一级，发现多个斜杠或反斜杠时会替换成一个，/，//，\与\都被统一转换为\">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-05-23T01:01:36.239Z">
+<meta property="og:updated_time" content="2018-06-14T10:19:35.608Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="path模块的使用">
-<meta name="twitter:description" content="path模块包含一系列处理和转换文件路径的工具集，通过 require(‘path’) 可用来访问这个模块。  知识点：对window系统，目录分隔为’\’, 对于UNIX系统，分隔符为’/‘，针对’..’返回上一级，发现多个斜杠或反斜杠时会替换成一个，/，//，\与\都被统一转换为\ 方法1、path.resolve([path1], [path2], …)&amp;nbsp;&amp;nbsp;按照顺序依">
+<meta name="twitter:description" content="path模块包含一系列处理和转换文件路径的工具集，通过 require(‘path’) 可用来访问这个模块。  知识点：对window系统，目录分隔为’\’, 对于UNIX系统，分隔符为’/‘，针对’..’返回上一级，发现多个斜杠或反斜杠时会替换成一个，/，//，\与\都被统一转换为\">
   
     <link rel="alternative" href="/atom.xml" title="Jeffery的博客" type="application/atom+xml">
   
@@ -268,7 +268,7 @@
     <!-- 目录内容结束 -->
     <div class="article-entry blog-check" itemprop="articleBody">
       
-        <p>  path模块包含一系列处理和转换文件路径的工具集，通过 require(‘path’) 可用来访问这个模块。<br>  知识点：对window系统，目录分隔为’\’, 对于UNIX系统，分隔符为’/‘，针对’..’返回上一级，发现多个斜杠或反斜杠时会替换成一个，/，//，\与\都被统一转换为\</p>
+        <p>  path模块包含一系列处理和转换文件路径的工具集，通过 require(‘path’) 可用来访问这个模块。<br>  知识点：对window系统，目录分隔为’\’, 对于UNIX系统，分隔符为’/‘，针对’..’返回上一级，发现多个斜杠或反斜杠时会替换成一个，/，//，\与\都被统一转换为\<br>  <a id="more"></a></p>
 <h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><h5 id="1、path-resolve-path1-path2-…"><a href="#1、path-resolve-path1-path2-…" class="headerlink" title="1、path.resolve([path1], [path2], …)"></a>1、path.resolve([path1], [path2], …)</h5><p>&nbsp;&nbsp;按照顺序依次拼接，获取的是绝对路径，路径末尾的不会带有路径分隔符，若合并后的路径没有构成一个绝对路径，则会默认使用当前工作目录的绝对路径。<br>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 拼接路径中没有带有绝对路径</span><br><span class="line">var _path = path.resolve(<span class="string">'path3'</span>, <span class="string">'path4'</span>, <span class="string">'a/b\\cc\\'</span>); // 没有末尾的路径分隔符\</span><br><span class="line">// 结果为：D:\others\node\examples\path3\path4\a\b\cc</span><br><span class="line">// 拼接路径中带有绝对路径</span><br><span class="line">var _path = path.resolve(<span class="string">'D://work/ready/demo'</span>, <span class="string">'path3'</span>, <span class="string">'path4'</span>, <span class="string">'a/b\\cc\\'</span>);</span><br><span class="line">// 结果为：D:\work\ready\demo\path3\path4\a\b\cc</span><br></pre></td></tr></table></figure></p>
 <p>  <font color="#f00">注意： 其中的D:\others\node\examples\为我的工作路径，请对应替换自己的路径查看</font></p>
 <h5 id="2、path-join-path1-path2-…"><a href="#2、path-join-path1-path2-…" class="headerlink" title="2、path.join([path1], [path2], …)"></a>2、path.join([path1], [path2], …)</h5><p>&nbsp;&nbsp;按照顺序，依次拼接路径、并转为normalize后的结果路径，路径末尾的带有路径分隔符。<br>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var _path = path.join(<span class="string">'path1'</span>, <span class="string">'path2\\p/cc//'</span>, <span class="string">'/c/../ttt\\'</span>);</span><br><span class="line">// 结果为：path1\path2\p\cc\ttt\</span><br></pre></td></tr></table></figure></p>
