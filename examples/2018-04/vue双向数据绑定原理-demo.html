@@ -82,6 +82,7 @@
             this.node = node;
             this.name = name;
             this.vm = vm;
+            this.index = 1;
             this.update();
             Dep.target = null;
         }
@@ -89,14 +90,21 @@
         Watcher.prototype = {
             update () {
                 this.get();
+                let _name;
+                if (this.index === 1) {
+                    _name = this.name;
+                } else {
+                    _name = this.value;
+                }
                // this.node.nodeValue = this.value;
                if (this.node.nodeName === 'INPUT') {
                     // 可以添加TEXTAREA、SELECT等
                     this.node.value = this.value;
                 } else {
                   //  this.node.nodeValue = this.value;
-                  this.node.nodeValue = this.node.nodeValue.replace(new RegExp('\\{\\{\\s*(' + this.name + ')\\s*\\}\\}'), this.value);
-                } 
+                  this.node.nodeValue = this.node.nodeValue.replace(new RegExp('\\{?\\{?\\s*(' + _name + ')\\s*\\}?\\}?'), this.value);
+                }
+                ++this.index;
             },
             get () {
                 this.value = this.vm.$data[this.name]
