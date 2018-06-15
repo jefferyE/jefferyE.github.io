@@ -22,7 +22,7 @@
             while (child = node.firstChild) {
                 compile(child, vm);
                 if (child.firstChild) {
-                    var dom = this.nodeToFragment(child, vm);
+                    var dom = nodeToFragment(child, vm);
                     child.appendChild(dom);
                 }
                 flag.appendChild(child);
