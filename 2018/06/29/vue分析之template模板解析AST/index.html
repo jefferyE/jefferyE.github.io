@@ -17,19 +17,24 @@
   <link rel="stylesheet" href="/./zoomify/zoomify.min.css">
   <script src="/./zoomify/zoomify.min.js"></script>
   
-  <title>Archives: 2018/4 | Jeffery的博客</title>
+  <title>vue分析之template模板解析AST | Jeffery的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前端开发工程师一枚">
-<meta name="keywords" content="Jeffery">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Jeffery的博客">
-<meta property="og:url" content="http://yoursite.com/archives/2018/04/index.html">
+  <meta name="description" content="通过查看vue源码，可以知道Vue源码中使用了虚拟DOM（Virtual Dom），虚拟DOM构建经历 template编译成AST语法树 -&amp;gt; 再转换为render函数 最终返回一个VNode(VNode就是Vue的虚拟DOM节点) 。本文通过对Vue源码中的AST转化部分进行简单提取，返回静态的AST结构（不考虑兼容性及属性的具体解析）。并最终根据一个实例的template转化为最终的A">
+<meta name="keywords" content="javascript,vue,template,AST,源码">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue分析之template模板解析AST">
+<meta property="og:url" content="http://yoursite.com/2018/06/29/vue分析之template模板解析AST/index.html">
 <meta property="og:site_name" content="Jeffery的博客">
-<meta property="og:description" content="前端开发工程师一枚">
+<meta property="og:description" content="通过查看vue源码，可以知道Vue源码中使用了虚拟DOM（Virtual Dom），虚拟DOM构建经历 template编译成AST语法树 -&amp;gt; 再转换为render函数 最终返回一个VNode(VNode就是Vue的虚拟DOM节点) 。本文通过对Vue源码中的AST转化部分进行简单提取，返回静态的AST结构（不考虑兼容性及属性的具体解析）。并最终根据一个实例的template转化为最终的A">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/images/technology/toFunction.png">
+<meta property="og:image" content="http://yoursite.com/images/technology/AST1.png">
+<meta property="og:image" content="http://yoursite.com/images/technology/AST2.png">
+<meta property="og:updated_time" content="2018-06-29T10:44:39.959Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Jeffery的博客">
-<meta name="twitter:description" content="前端开发工程师一枚">
+<meta name="twitter:title" content="vue分析之template模板解析AST">
+<meta name="twitter:description" content="通过查看vue源码，可以知道Vue源码中使用了虚拟DOM（Virtual Dom），虚拟DOM构建经历 template编译成AST语法树 -&amp;gt; 再转换为render函数 最终返回一个VNode(VNode就是Vue的虚拟DOM节点) 。本文通过对Vue源码中的AST转化部分进行简单提取，返回静态的AST结构（不考虑兼容性及属性的具体解析）。并最终根据一个实例的template转化为最终的A">
+<meta name="twitter:image" content="http://yoursite.com/images/technology/toFunction.png">
   
     <link rel="alternative" href="/atom.xml" title="Jeffery的博客" type="application/atom+xml">
   
@@ -212,42 +217,116 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-vue分析之template模板解析AST" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/04/24/vue双向数据绑定原理/" class="archive-article-date">
-  	<time datetime="2018-04-23T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-24</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/04/24/vue双向数据绑定原理/">Vue的双向数据绑定</a>
+    <h1 class="article-title" itemprop="name">
+      vue分析之template模板解析AST
     </h1>
   
 
 
 
   <a href="javascript:;" class="archive-article-date">
-      <i class="icon-smile icon"></i> 阅读数:<span id="/2018/04/24/vue双向数据绑定原理/" class="pageViews">0</span>次
+      <i class="icon-smile icon"></i> 阅读数:<span id="/2018/06/29/vue分析之template模板解析AST/" class="pageViews">0</span>次
   </a>
 
-        <div class="article-info info-on-right">
+        
+        <a href="/2018/06/29/vue分析之template模板解析AST/" class="archive-article-date">
+  	<time datetime="2018-06-28T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-29</time>
+</a>
+        
+      </header>
+    
+    <!-- 目录内容 -->
+    
+      <div class="doc-pc" id="container">
+        <p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
+          <span class="btn-bg"></span>
+          <span class="btn-text">文章导航</span>
+        </p>
+        <div id="toc-article" class="toc-article">
+          <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
+          <strong class="toc-title">文章目录</strong>
+          <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是AST"><span class="toc-number">1.</span> <span class="toc-text">什么是AST</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#代码分析"><span class="toc-number">2.</span> <span class="toc-text">代码分析</span></a></li></ol>
+        </div>
+      </div>
+      <script type="text/javascript">
+      function showToc(){
+        var toc_article = document.getElementById("toc-article");
+        var show_toc_btn = document.getElementById("show-toc-btn");
+        toc_article.setAttribute("style","display:block");
+        show_toc_btn.setAttribute("style","display:none");
+        };
+      function showBtn(){
+        var toc_article = document.getElementById("toc-article");
+        var show_toc_btn = document.getElementById("show-toc-btn");
+        toc_article.setAttribute("style","display:none");
+        show_toc_btn.setAttribute("style","display:block");
+        };
+      </script>
           
+    <!-- 目录内容结束 -->
+    <div class="article-entry blog-check" itemprop="articleBody">
+      
+        <p>通过查看vue源码，可以知道Vue源码中使用了虚拟DOM（Virtual Dom），虚拟DOM构建经历 template编译成AST语法树 -&gt; 再转换为render函数 最终返回一个VNode(VNode就是Vue的虚拟DOM节点) 。<br>本文通过对Vue源码中的AST转化部分进行简单提取，返回静态的AST结构（不考虑兼容性及属性的具体解析）。并最终根据一个实例的template转化为最终的AST结构。<br><a id="more"></a></p>
+<h3 id="什么是AST"><a href="#什么是AST" class="headerlink" title="什么是AST"></a>什么是AST</h3><p>在Vue的mount过程中，template会被编译成AST语法树，AST是指抽象语法树（abstract syntax tree或者缩写为AST），或者语法树（syntax tree），是源代码的抽象语法结构的树状表现形式。</p>
+<h3 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h3><p>首先、定义一个简单的html DOM结构、其中包括比较常见的标签、文本以及注释，用来生成AST结构。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">"app"</span> class=<span class="string">"demo"</span>&gt;</span><br><span class="line">  &lt;!-- 注意看注释 --&gt;</span><br><span class="line">  &lt;p&gt;</span><br><span class="line">    &lt;b&gt;很粗&lt;/b&gt;</span><br><span class="line">  &lt;/p&gt;</span><br><span class="line">  很简单，我就是一程序员</span><br><span class="line">  &lt;br/&gt;</span><br><span class="line">  &lt;h1&gt;</span><br><span class="line">    姓名：&#123;&#123;name&#125;&#125;，年龄：&#123;&#123;age&#125;&#125;，</span><br><span class="line">    请联系我吧</span><br><span class="line">  &lt;/h1&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  var vm = new Vue(&#123;</span><br><span class="line">    el: <span class="string">'#app'</span>,</span><br><span class="line">    // template: <span class="string">'#template'</span>,</span><br><span class="line">    // template: <span class="string">'string template'</span>,</span><br><span class="line">    // template: document.querySelector(<span class="string">'#template'</span>),</span><br><span class="line">    <span class="function"><span class="title">data</span></span> () &#123;</span><br><span class="line">      <span class="built_in">return</span> &#123;</span><br><span class="line">        name: <span class="string">'Jeffery'</span>,</span><br><span class="line">        age: <span class="string">'26'</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    comments: <span class="literal">true</span>, // 是否保留注释</span><br><span class="line">    // delimiters: [<span class="string">'&#123;'</span>, <span class="string">'&#125;'</span>] // 定义分隔符，默认为<span class="string">"&#123;&#123;&#125;&#125;"</span></span><br><span class="line">  &#125;)</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>对于转成AST，则需要先获取template，对于这部分内容，做一个简单的分析，具体的请自行查看Vue源码。<br>具体目录请参考： ‘/src/platforms/web/entry-runtime-with-compiler’<br>从vue官网中知道，vue提供了两个版本，完整版和只包含运行时版，差别是完整版包含编译器，就是将template模板编译成AST，再转化为render函数的过程，因此只包含运行时版必须提供render函数。<br>注意：此处处理比较简单，只是为了获取template，以便用于生成AST。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> Vue (options) &#123;</span><br><span class="line">  // 如果没有提供render函数，则处理template，否则直接使用render函数</span><br><span class="line">  <span class="keyword">if</span> (!options.render) &#123;</span><br><span class="line">    <span class="built_in">let</span> template = options.template;</span><br><span class="line">    // 如果提供了template模板</span><br><span class="line">    <span class="keyword">if</span> (template) &#123;</span><br><span class="line">      // template: <span class="string">'#template'</span>,</span><br><span class="line">      // template: <span class="string">'&lt;div&gt;&lt;/div&gt;'</span>,</span><br><span class="line">      <span class="keyword">if</span> (typeof template === <span class="string">'string'</span>) &#123;</span><br><span class="line">        // 如果为<span class="string">'#template'</span></span><br><span class="line">        <span class="keyword">if</span> (template.charAt(0) === <span class="string">'#'</span>) &#123;</span><br><span class="line">          <span class="built_in">let</span> tpl = query(template);</span><br><span class="line">          template = tpl ? tpl.innerHTML : <span class="string">''</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        // 否则不做处理，如：<span class="string">'&lt;div&gt;&lt;/div&gt;'</span></span><br><span class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span> (template.nodeType) &#123;</span><br><span class="line">        // 如果模板为DOM节点，如：template: document.querySelector(<span class="string">'#template'</span>)</span><br><span class="line">        // 比如：&lt;script <span class="built_in">type</span>=<span class="string">"text/x-template"</span> id=<span class="string">"template"</span>&gt;&lt;/script&gt;</span><br><span class="line">        template = template.innerHTML;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (options.el) &#123;</span><br><span class="line">      // 如果没有模板，则使用el</span><br><span class="line">      template = getOuterHTML(query(options.el));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (template) &#123;   </span><br><span class="line">      // 将template模板编译成AST（此处省略一系列函数、参数处理过程，具体见下图及源码）</span><br><span class="line">      <span class="built_in">let</span> ast = null;</span><br><span class="line">      ast = parse(template, options);</span><br><span class="line">      console.log(ast)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><img src="/images/technology/toFunction.png" alt="请查看源码"></p>
+<p>可以看出：在options中，vue默认先使用render函数，如果没有提供render函数，则会使用template模板，最后再使用el，通过解析模板编译AST，最终转化为render。<br>其中函数如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> query (el) &#123;</span><br><span class="line">  <span class="keyword">if</span> (typeof el === <span class="string">'string'</span>) &#123;</span><br><span class="line">    var selected = document.querySelector(el);</span><br><span class="line">    <span class="keyword">if</span> (!selected) &#123;</span><br><span class="line">      console.error(<span class="string">'Cannot find element: '</span> + el);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> selected;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">return</span> el;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> getOuterHTML (el) &#123;</span><br><span class="line">  <span class="keyword">if</span> (el.outerHTML) &#123;</span><br><span class="line">    <span class="built_in">return</span> el.outerHTML;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    var dom = document.createElement(<span class="string">'div'</span>);</span><br><span class="line">    dom.appendChild(el.cloneNode(<span class="literal">true</span>));</span><br><span class="line">    <span class="built_in">return</span> dom.innerHTML;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>对于定义组件模板形式，可以参考下这篇<a href="https://www.w3cplus.com/vue/seven-ways-to-define-a-component-template-by-vuejs.html" target="_blank" rel="noopener">文章</a></p>
+<p>说了这么多，也不废话了，下面重点介绍template编译成AST的过程。<br>根据源码，先定义一些基本工具方法，以及对相关html标签进行分类处理等。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">// script、style、textarea标签</span><br><span class="line"><span class="keyword">function</span> isPlainTextElement (tag) &#123;</span><br><span class="line">  <span class="built_in">let</span> tags = &#123;</span><br><span class="line">    script: <span class="literal">true</span>,</span><br><span class="line">    style: <span class="literal">true</span>,</span><br><span class="line">    textarea: <span class="literal">true</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">return</span> tags[tag]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// script、style标签</span><br><span class="line"><span class="keyword">function</span> isForbiddenTag (tag) &#123;</span><br><span class="line">  <span class="built_in">let</span> tags = &#123;</span><br><span class="line">    script: <span class="literal">true</span>,</span><br><span class="line">    style: <span class="literal">true</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">return</span> tags[tag]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 自闭和标签</span><br><span class="line"><span class="keyword">function</span> isUnaryTag (tag) &#123;</span><br><span class="line">  <span class="built_in">let</span> strs = `area,base,br,col,embed,frame,hr,img,input,isindex,keygen,link,meta,param,<span class="built_in">source</span>,track,wbr`;</span><br><span class="line">  <span class="built_in">let</span> tags = makeMap(strs);</span><br><span class="line">  <span class="built_in">return</span> tags[tag];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 结束标签可以省略<span class="string">"/"</span></span><br><span class="line"><span class="keyword">function</span> canBeLeftOpenTag (tag) &#123;</span><br><span class="line">  <span class="built_in">let</span> strs = `colgroup,dd,dt,li,options,p,td,tfoot,th,thead,tr,<span class="built_in">source</span>`;</span><br><span class="line">  <span class="built_in">let</span> tags = makeMap(strs);</span><br><span class="line">  <span class="built_in">return</span> tags[tag];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 段落标签</span><br><span class="line"><span class="keyword">function</span> isNonPhrasingTag (tag) &#123;</span><br><span class="line">  <span class="built_in">let</span> strs = `address,article,aside,base,blockquote,body,caption,col,colgroup,dd,details,dialog,div,dl,dt,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,head,header,hgroup,hr,html,legend,li,menuitem,meta,optgroup,option,param,rp,rt,<span class="built_in">source</span>,style,summary,tbody,td,tfoot,th,thead,title,tr,track`;</span><br><span class="line">  <span class="built_in">let</span> tags = makeMap(strs);</span><br><span class="line">  <span class="built_in">return</span> tags[tag];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 结构：如</span><br><span class="line">  <span class="comment"># &#123;</span></span><br><span class="line">  <span class="comment">#   script: true,</span></span><br><span class="line">  <span class="comment">#   style: true</span></span><br><span class="line">  <span class="comment"># &#125;</span></span><br><span class="line"><span class="keyword">function</span> makeMap(strs) &#123;</span><br><span class="line">  <span class="built_in">let</span> tags = strs.split(<span class="string">','</span>);</span><br><span class="line">  <span class="built_in">let</span> o = &#123;&#125;</span><br><span class="line">  <span class="keyword">for</span> (<span class="built_in">let</span> i = 0; i &lt; tags.length; i++) &#123;</span><br><span class="line">    o[tags[i]] = <span class="literal">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">return</span> o;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>定义正则如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// 匹配属性</span><br><span class="line">const attribute = /^\s*([^\s<span class="string">"'&lt;&gt;\/=]+)(?:\s*(=)\s*(?:"</span>([^<span class="string">"]*)"</span>+|<span class="string">'([^'</span>]*)<span class="string">'+|([^\s"'</span>=&lt;&gt;`]+)))?/</span><br><span class="line">const ncname = <span class="string">'[a-zA-Z_][\\w\\-\\.]*'</span></span><br><span class="line">const qnameCapture = `((?:<span class="variable">$&#123;ncname&#125;</span>\\:)?<span class="variable">$&#123;ncname&#125;</span>)`</span><br><span class="line">// 匹配开始标签开始部分</span><br><span class="line">const startTagOpen = new RegExp(`^&lt;<span class="variable">$&#123;qnameCapture&#125;</span>`)</span><br><span class="line">// 匹配开始标签结束部分</span><br><span class="line">const startTagClose = /^\s*(\/?)&gt;/</span><br><span class="line">// 匹配结束标签</span><br><span class="line">const endTag = new RegExp(`^&lt;\\/<span class="variable">$&#123;qnameCapture&#125;</span>[^&gt;]*&gt;`)</span><br><span class="line">// 匹配注释</span><br><span class="line">const comment = /^&lt;!\--/</span><br><span class="line">// 匹配默认的分隔符 <span class="string">"&#123;&#123;&#125;&#125;"</span></span><br><span class="line">const defaultTagRE = /\&#123;\&#123;((?:.|\n)+?)\&#125;\&#125;/g</span><br></pre></td></tr></table></figure></p>
+<p>定义标签结构：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> createASTElement (tag, attrs, parent) &#123;</span><br><span class="line">  // attrs：</span><br><span class="line">  <span class="comment"># [</span></span><br><span class="line">  <span class="comment">#   &#123;</span></span><br><span class="line">  <span class="comment">#     name: 'id',</span></span><br><span class="line">  <span class="comment">#     value: 'app'</span></span><br><span class="line">  <span class="comment">#   &#125;,</span></span><br><span class="line">  <span class="comment">#   &#123;</span></span><br><span class="line">  <span class="comment">#     name: 'class',</span></span><br><span class="line">  <span class="comment">#     value: 'demo'</span></span><br><span class="line">  <span class="comment">#   &#125;</span></span><br><span class="line">  <span class="comment"># ]</span></span><br><span class="line">  <span class="built_in">let</span> attrsMap = &#123;&#125;</span><br><span class="line">  <span class="keyword">for</span> (<span class="built_in">let</span> i = 0, len = attrs.length; i &lt; len; i++) &#123;</span><br><span class="line">    attrsMap[attrs[i].name] = attrs[i].value;</span><br><span class="line">  &#125;</span><br><span class="line">  // attrsMap：</span><br><span class="line">  <span class="comment"># &#123;</span></span><br><span class="line">  <span class="comment">#   id: 'app',</span></span><br><span class="line">  <span class="comment">#   class: 'demo'</span></span><br><span class="line">  <span class="comment"># &#125;</span></span><br><span class="line">  <span class="built_in">return</span> &#123;</span><br><span class="line">    <span class="built_in">type</span>: 1,</span><br><span class="line">    tag,</span><br><span class="line">    attrsList: attrs,</span><br><span class="line">    attrsMap: attrsMap,</span><br><span class="line">    parent,</span><br><span class="line">    children: []</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>主要的parse具体代码如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> parse (template, options) &#123;</span><br><span class="line">  <span class="built_in">let</span> root; // 最终返回的AST</span><br><span class="line">  <span class="built_in">let</span> currentParent; // 设置当前标签的父节点</span><br><span class="line">  <span class="built_in">let</span> stack = []; // 维护一个栈，保存解析过程中的开始标签，用于匹配结束标签</span><br><span class="line">  // 解析模板的具体实现</span><br><span class="line">  parseHTML(template, &#123;</span><br><span class="line">    expectHTML: <span class="literal">true</span>, </span><br><span class="line">    shouldKeepComment: options.comments, // 是否保存注释</span><br><span class="line">    delimiters: options.delimiters, // 自定义的分隔符</span><br><span class="line">    start (tag, attrs, unary) &#123;(</span><br><span class="line">      // 处理开始标签，解析的开始标签入栈，设置children以及parent等（其中的属性解析请查看源码）</span><br><span class="line">      <span class="built_in">let</span> element = createASTElement(tag, attrs, currentParent);</span><br><span class="line"></span><br><span class="line">      // 如果tag为script/style标签，设置属性，返回的AST中不含该标签元素结构</span><br><span class="line">      <span class="keyword">if</span> (isForbiddenTag(tag)) &#123;</span><br><span class="line">        element.forbidden = <span class="literal">true</span>;</span><br><span class="line">        console.error(<span class="string">'Templates should only be responsible for mapping the state to the '</span> +</span><br><span class="line">        <span class="string">'UI. Avoid placing tags with side-effects in your templates, such as '</span> +</span><br><span class="line">        <span class="string">"&lt;"</span> + tag + <span class="string">"&gt;"</span> + <span class="string">', as they will not be parsed.'</span>)</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      // 设置根元素节点</span><br><span class="line">      <span class="keyword">if</span> (!root) &#123;</span><br><span class="line">        root = element;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      // 设置元素的父节点，将当前元素的添加到父节点的children中</span><br><span class="line">      <span class="keyword">if</span> (currentParent &amp;&amp; !element.forbidden) &#123;</span><br><span class="line">        currentParent.children.push(element);</span><br><span class="line">        element.parent = currentParent;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      // 如果不是自闭和标签（没有对应的结束标签），则需要将当前tag入栈，用于匹配结束标签时，调用end方法匹配最近的标签，同时设置父节点为当前元素</span><br><span class="line">      <span class="keyword">if</span> (!unary) &#123;</span><br><span class="line">        currentParent = element;</span><br><span class="line">        stack.push(element);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="function"><span class="title">end</span></span> () &#123;</span><br><span class="line">       // 将匹配结束的标签出栈，修改父节点为之前上一个元素</span><br><span class="line">      <span class="built_in">let</span> element = stack.pop();</span><br><span class="line">      currentParent = stack[stack.length - 1];</span><br><span class="line">    &#125;,</span><br><span class="line">    chars (text) &#123;</span><br><span class="line">      // 保存文本</span><br><span class="line">      <span class="keyword">if</span> (!currentParent) &#123;</span><br><span class="line">        console.error(<span class="string">'Component template requires a root element, rather than just text.'</span>);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        const children = currentParent.children;</span><br><span class="line">        <span class="keyword">if</span> (text) &#123;</span><br><span class="line">          <span class="built_in">let</span> res;</span><br><span class="line">          // 如果文本节点包含表达式</span><br><span class="line">          <span class="keyword">if</span> (res = parseText(text, opt.delimiters)) &#123;</span><br><span class="line">            children.push(&#123;</span><br><span class="line">              <span class="built_in">type</span>: 2,</span><br><span class="line">              expression: res.expression,</span><br><span class="line">              tokens: res.tokens,</span><br><span class="line">              text</span><br><span class="line">            &#125;)</span><br><span class="line">          &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            children.push(&#123;</span><br><span class="line">              <span class="built_in">type</span>: 3,</span><br><span class="line">              text</span><br><span class="line">            &#125;)</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    comment (text) &#123;</span><br><span class="line">      // 保存注释</span><br><span class="line">      <span class="keyword">if</span> (currentParent) &#123;</span><br><span class="line">        currentParent.children.push(&#123;</span><br><span class="line">          <span class="built_in">type</span>: 3,</span><br><span class="line">          text,</span><br><span class="line">          isComment: <span class="literal">true</span></span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="built_in">return</span> root;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>从上面的可以看出：在parse函数中，主要用来解析template模板，形成AST结构，生成一个最终的root根元素，并返回。<br>而对于标签、文本、注释type也是不同的。<br>其中：<br>标签：type为1<br>含有表达式文本：type为2<br>不含表达式文本：type为3<br>注释： type为3，同时isComment为true</p>
+<p>同时，options参数对象上添加了start、end、chars和comment四个方法，用来处理当匹配到开始标签、结束标签、文本以及注释时，匹配对应的开始标签，设置相应的currentParent以及parent等，生成成AST。</p>
+<p>当调用parseHTML后，会在处理标签的不同情况下，调用对应的这四个方法。</p>
+<p>在start中：每次处理开始标签时，会设置一个root节点（只会设置一次），当标签并且不是自闭合标签时（没有对应的结束标签），加入stack中，并将当前元素设置为currentParent，一层层往内匹配，最终的currentParent为最内层的元素标签，并将当前元素保存到为currentParent的children中及parent为currentParent。<br>在end中：在stack中找到最近的相同标签（栈中的最后一个），设置为currentParent，并出栈，一层层往外匹配。<br>形如： html:<div><p></p></div>   stack:[‘div’, ‘p’]  pop: p =&gt; pop: div<br>而对于chars和comment，则分别是保存文本以及注释到对应的currentParent的children中。</p>
+<p>其中parseHTML：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line">// 定义几个全局变量</span><br><span class="line"><span class="built_in">let</span> stack = []; // 保存开始标签tag，和上面类似</span><br><span class="line"><span class="built_in">let</span> lastTag; // 保存前一个标签，类似于currentParent</span><br><span class="line"><span class="built_in">let</span> index = 0; // template开始解析索引</span><br><span class="line"><span class="built_in">let</span> html; // 剩余的template模板</span><br><span class="line"><span class="built_in">let</span> opt; // 保存对options的引用，方便调用start、end、chars、comment方法</span><br><span class="line"><span class="keyword">function</span> parseHTML (template, options) &#123;</span><br><span class="line">  html = template;</span><br><span class="line">  opt = options;</span><br><span class="line">  // 不断循环解析html，直到为<span class="string">""</span></span><br><span class="line">  <span class="keyword">while</span>(html) &#123;</span><br><span class="line">    // 如果标签tag不是script/style/textarea</span><br><span class="line">    <span class="keyword">if</span> (!lastTag || !isPlainTextElement(lastTag)) &#123;</span><br><span class="line">      // 刚开始或tag不为script/style/textarea</span><br><span class="line">      <span class="built_in">let</span> textEnd = html.indexOf(<span class="string">'&lt;'</span>);</span><br><span class="line">      <span class="keyword">if</span> (textEnd === 0) &#123;</span><br><span class="line">        // html以<span class="string">"&lt;"</span>开始</span><br><span class="line">        </span><br><span class="line">        // 处理html注释</span><br><span class="line">        <span class="keyword">if</span> (html.match(comment)) &#123;</span><br><span class="line">          <span class="built_in">let</span> commentEnd = html.indexOf(<span class="string">'--&gt;'</span>);</span><br><span class="line">          <span class="keyword">if</span> (commentEnd &gt;= 0) &#123;</span><br><span class="line">            <span class="keyword">if</span> (opt.shouldKeepComment &amp;&amp; opt.comment) &#123;</span><br><span class="line">              // 保存注释内容</span><br><span class="line">              opt.comment(html.substring(4, commentEnd))</span><br><span class="line">            &#125;</span><br><span class="line">            // 调整index以及html</span><br><span class="line">            advance(commentEnd + 3);</span><br><span class="line">            <span class="built_in">continue</span>;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        // 处理 html条件注释, 如&lt;![<span class="keyword">if</span> !IE]&gt;</span><br><span class="line"></span><br><span class="line">        // 处理html声明Doctype</span><br><span class="line"></span><br><span class="line">        // 处理开始标签startTaga</span><br><span class="line">        const startTagMatch = parseStartTag();</span><br><span class="line">        <span class="keyword">if</span> (startTagMatch) &#123;</span><br><span class="line">          handleStartTag(startTagMatch);</span><br><span class="line">          <span class="built_in">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // 匹配结束标签endTag</span><br><span class="line">        const endTagMatch = html.match(endTag);</span><br><span class="line">        <span class="keyword">if</span> (endTagMatch) &#123;</span><br><span class="line">          // 调整index以及html</span><br><span class="line">          advance(endTagMatch[0].length);</span><br><span class="line">          // 处理结束标签</span><br><span class="line">          parseEndTag(endTagMatch[1]);</span><br><span class="line">          <span class="built_in">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="built_in">let</span> text;</span><br><span class="line">      <span class="keyword">if</span> (textEnd &gt; 0) &#123;</span><br><span class="line">        // html为纯文本，需要考虑文本中含有<span class="string">"&lt;"</span>的情况，此处省略，请自行查看源码</span><br><span class="line">        text = html.slice(0, textEnd);</span><br><span class="line">         // 调整index以及html</span><br><span class="line">        advance(textEnd);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (textEnd &lt; 0) &#123;</span><br><span class="line">        // htlml以文本开始</span><br><span class="line">        text = html;</span><br><span class="line">        html = <span class="string">''</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      // 保存文本内容</span><br><span class="line">      <span class="keyword">if</span> (opt.chars) &#123;</span><br><span class="line">        opt.chars(text);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      // tag为script/style/textarea</span><br><span class="line">      <span class="built_in">let</span> stackedTag = lastTag.toLowerCase();</span><br><span class="line">      <span class="built_in">let</span> tagReg = new RegExp(<span class="string">'([\\s\\S]*?)(&lt;/'</span> + stackedTag + <span class="string">'[^&gt;]*&gt;)'</span>, <span class="string">'i'</span>);</span><br><span class="line"></span><br><span class="line">      // 简单处理下，详情请查看源码</span><br><span class="line">      <span class="built_in">let</span> match = html.match(tagReg);</span><br><span class="line">      <span class="keyword">if</span> (match) &#123;</span><br><span class="line">        <span class="built_in">let</span> text = match[1];</span><br><span class="line">        <span class="keyword">if</span> (opt.chars) &#123;</span><br><span class="line">          // 保存script/style/textarea中的内容</span><br><span class="line">          opt.chars(text);</span><br><span class="line">        &#125;</span><br><span class="line">        // 调整index以及html</span><br><span class="line">        advance(text.length + match[2].length);</span><br><span class="line">        // 处理结束标签&lt;/script&gt;/&lt;/style&gt;/&lt;/textarea&gt;</span><br><span class="line">        parseEndTag(stackedTag);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>定义advance:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 修改模板不断解析后的位置，以及截取模板字符串，保留未解析的template</span><br><span class="line"><span class="keyword">function</span> advance (n) &#123;</span><br><span class="line">  index += n;</span><br><span class="line">  html = html.substring(n)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在parseHTML中，可以看到：通过不断循环，修改当前未知的索引index以及不断截取html模板，并分情况处理、解析，直到最后剩下空字符串为止。<br>其中的advance负责修改index以及截取剩余html模板字符串。<br>下面主要看看解析开始标签和结束标签：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">parseStartTag</span></span> () &#123;</span><br><span class="line">  <span class="built_in">let</span> start = html.match(startTagOpen);</span><br><span class="line">  <span class="keyword">if</span> (start) &#123;</span><br><span class="line">    // 结构：[<span class="string">"&lt;div"</span>, <span class="string">"div"</span>, index: 0, groups: undefined, input: <span class="string">"..."</span>]</span><br><span class="line">    <span class="built_in">let</span> match = &#123;</span><br><span class="line">      tagName: start[1],</span><br><span class="line">      attrs: [],</span><br><span class="line">      start: index</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">     // 调整index以及html</span><br><span class="line">    advance(start[0].length);</span><br><span class="line"></span><br><span class="line">    // 循环匹配属性</span><br><span class="line">    <span class="built_in">let</span> end, attr;</span><br><span class="line">    <span class="keyword">while</span> (!(end = html.match(startTagClose))&amp;&amp; (attr = html.match(attribute))) &#123;</span><br><span class="line">      // 结构：[<span class="string">"id="</span>app<span class="string">""</span>, <span class="string">"id"</span>, <span class="string">"="</span>, <span class="string">"app"</span>, undefined, undefined, groups: undefined, index: 0, input: <span class="string">"..."</span>]</span><br><span class="line">      advance(attr[0].length);</span><br><span class="line">      match.attrs.push(attr);</span><br><span class="line">    &#125;</span><br><span class="line">    // 匹配到开始标签的结束位置</span><br><span class="line">    <span class="keyword">if</span> (end) &#123;</span><br><span class="line">      match.unarySlash = end[1]; // end[1]匹配的是<span class="string">"/"</span>,如&lt;br/&gt;</span><br><span class="line">      // 调整index以及html</span><br><span class="line">      advance(end[0].length)</span><br><span class="line">      match.end = index;</span><br><span class="line">      <span class="built_in">return</span> match;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在parseStartTag中，将开始标签处理成特定的结构，包括标签名、所有的属性名，开始位置、结束位置及是否是自闭和标签。<br>结构如：{<br>  tagName,<br>  attrs,<br>  start,<br>  end,<br>  unarySlash<br>}<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> handleStartTag(match) &#123;</span><br><span class="line">  const tagName = match.tagName;</span><br><span class="line">  const unarySlash = match.unarySlash;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">if</span> (opt.expectHTML) &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (lastTag === <span class="string">'p'</span> &amp;&amp; isNonPhrasingTag(tagName)) &#123;</span><br><span class="line">      // 如果p标签包含了段落标签，如div、h1、h2等</span><br><span class="line">      // 形如: &lt;p&gt;&lt;h1&gt;&lt;/h1&gt;&lt;/p&gt;</span><br><span class="line">      // 与parseEndTag中tagName为p时相对应，处理&lt;/p&gt;，添加&lt;p&gt;</span><br><span class="line">      // 处理结果: &lt;p&gt;&lt;/p&gt;&lt;h1&gt;&lt;/h1&gt;&lt;p&gt;&lt;/p&gt;</span><br><span class="line">      parseEndTag(lastTag);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (canBeLeftOpenTag(tagName) &amp;&amp; lastTag === tagName) &#123;</span><br><span class="line">      // 如果标签闭合标签可以省略<span class="string">"/"</span></span><br><span class="line">      // 形如：&lt;li&gt;&lt;li&gt;</span><br><span class="line">      // 处理结果: &lt;li&gt;&lt;/li&gt;</span><br><span class="line">      parseEndTag(tagName);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  // 处理属性结构（name和vulue形式）</span><br><span class="line">  <span class="built_in">let</span> attrs = [];</span><br><span class="line">  attrs.length = match.attrs.length;</span><br><span class="line">  <span class="keyword">for</span> (<span class="built_in">let</span> i = 0, len = match.attrs.length; i &lt; len; i++) &#123;</span><br><span class="line">    attrs[i] = &#123;</span><br><span class="line">      name: match.attrs[i][1],</span><br><span class="line">      value: match.attrs[i][3]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  // 判断是不是自闭和标签，如&lt;br&gt;</span><br><span class="line">  <span class="built_in">let</span> unary = isUnaryTag(tagName) || !!unarySlash;</span><br><span class="line"></span><br><span class="line">  // 如果不是自闭合标签，保存到stack中，用于endTag匹配，</span><br><span class="line">  <span class="keyword">if</span> (!unary) &#123;</span><br><span class="line">    stack.push(&#123;</span><br><span class="line">      tag: tagName,</span><br><span class="line">      lowerCasedTag: tagName.toLowerCase(),</span><br><span class="line">      attrs: attrs</span><br><span class="line">    &#125;)</span><br><span class="line">    // 重新设置上一个标签</span><br><span class="line">    lastTag = tagName;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (opt.start) &#123;</span><br><span class="line">    opt.start(tagName, attrs, unary)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>将开始标签处理成特定结构后，再通过handleStartTag，将attrs进一步处理，成name、value结构形式。<br>结构如：attrs: [<br>  {<br>    name: ‘id’,<br>    value: ‘app’<br>  }<br>]<br>保持和之前处理一致，非自闭和标签时，从外标签往内标签，一层层入栈，需要保存到stack中，并设置lastTag为当前标签。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> parseEndTag (tagName) &#123;</span><br><span class="line">  <span class="built_in">let</span> pos = 0;</span><br><span class="line"></span><br><span class="line">  // 匹配stack中开始标签中，最近的匹配标签位置</span><br><span class="line">  <span class="keyword">if</span> (tagName) &#123;</span><br><span class="line">    tagName = tagName.toLowerCase();</span><br><span class="line">    <span class="keyword">for</span> (pos = stack.length - 1; pos &gt;= 0; pos--) &#123;</span><br><span class="line">      <span class="keyword">if</span> (stack[pos].lowerCasedTag === tagName) &#123;</span><br><span class="line">        <span class="built_in">break</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  // 如果可以匹配成功</span><br><span class="line">  <span class="keyword">if</span> (pos &gt;= 0) &#123;</span><br><span class="line">    <span class="built_in">let</span> i = stack.length - 1;</span><br><span class="line">    <span class="keyword">if</span> (i &gt; pos || !tagName) &#123;</span><br><span class="line">      console.error(`tag &lt;<span class="variable">$&#123;stack[i - 1].tag&#125;</span>&gt; has no matching end tag.`)</span><br><span class="line">    &#125;</span><br><span class="line">    // 如果匹配正确: pos === i</span><br><span class="line">    <span class="keyword">if</span> (opt.end) &#123;</span><br><span class="line">      opt.end();</span><br><span class="line">    &#125;</span><br><span class="line">    // 将匹配成功的开始标签出栈，并修改lastTag为之前的标签</span><br><span class="line">    stack.length = pos;</span><br><span class="line">    lastTag = pos &amp;&amp; stack[stack.length - 1].tagName;</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (tagName === <span class="string">'br'</span>) &#123;</span><br><span class="line">    // 处理: &lt;/br&gt;</span><br><span class="line">    <span class="keyword">if</span> (opt.start) &#123;</span><br><span class="line">      opt.start(tagName, [], <span class="literal">true</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (tagName === <span class="string">'p'</span>) &#123;</span><br><span class="line">    // 处理上面说的情况：&lt;p&gt;&lt;h1&gt;&lt;/h1&gt;&lt;/p&gt;</span><br><span class="line">    <span class="keyword">if</span> (opt.start) &#123;</span><br><span class="line">      opt.start(tagName, [], <span class="literal">false</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (opt.end) &#123;</span><br><span class="line">      opt.end();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>parseEndTag中，处理结束标签时，需要一层层往外，在stack中找到当前标签最近的相同标签，获取stack中的位置，如果标签匹配正确，一般为stack中的最后一个（否则缺少结束标签），如果匹配成功，将栈中的匹配标签出栈，并重新设置lastTag为栈中的最后一个。<br>注意：需要特殊处理br或p标签，<br>标签在stack中找不到对应的匹配标签，需要单独保存到AST结构中，而</p>标签主要是为了处理特殊情况，和之前开始标签中处理相关，此时会多一个<p></p>标签，在stack中最近的标签不是p，也需要单独保存到AST结构中。<p></p>
+<p>差点忘了还有一个parseText函数。<br>其中parseText：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> parseText (text, delimiters) &#123;</span><br><span class="line">  <span class="built_in">let</span> open;</span><br><span class="line">  <span class="built_in">let</span> close;</span><br><span class="line">  <span class="built_in">let</span> resDelimiters;</span><br><span class="line">  // 处理自定义的分隔符</span><br><span class="line">  <span class="keyword">if</span> (delimiters) &#123;</span><br><span class="line">    open = delimiters[0].replace(regexEscapeRE, <span class="string">'\\$&amp;'</span>);</span><br><span class="line">    close = delimiters[1].replace(regexEscapeRE, <span class="string">'\\$&amp;'</span>);</span><br><span class="line">    resDelimiters = new RegExp(open + <span class="string">'((?:.|\\n)+?)'</span> + close, <span class="string">'g'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  const tagRE = delimiters ? resDelimiters : defaultTagRE;</span><br><span class="line">  // 没有匹配，文本中不含表达式，返回</span><br><span class="line">  <span class="keyword">if</span> (!tagRE.test(text)) &#123;</span><br><span class="line">    <span class="built_in">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  const tokens = []</span><br><span class="line">  const rawTokens = [];</span><br><span class="line"></span><br><span class="line">  <span class="built_in">let</span> lastIndex = tagRE.lastIndex = 0;</span><br><span class="line">  <span class="built_in">let</span> index;</span><br><span class="line">  <span class="built_in">let</span> match;</span><br><span class="line">  // 循环匹配本文中的表达式</span><br><span class="line">  <span class="keyword">while</span>(match = tagRE.exec(text)) &#123;</span><br><span class="line">    index = match.index;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (index &gt; lastIndex) &#123;</span><br><span class="line">      <span class="built_in">let</span> value = text.slice(lastIndex, index);</span><br><span class="line">      tokens.push(JSON.stringify(value));</span><br><span class="line">      rawTokens.push(value)</span><br><span class="line">    &#125;</span><br><span class="line">    // 此处需要处理过滤器，暂不处理，请查看源码</span><br><span class="line">    <span class="built_in">let</span> exp = match[1].trim();</span><br><span class="line">    tokens.push(`_s(<span class="variable">$&#123;exp&#125;</span>)`);</span><br><span class="line">    rawTokens.push(&#123;<span class="string">'@binding'</span>: exp&#125;)</span><br><span class="line">    lastIndex = index + match[0].length;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (lastIndex &lt; text.length) &#123;</span><br><span class="line">    <span class="built_in">let</span> value = text.slice(lastIndex);</span><br><span class="line">    tokens.push(JSON.stringify(value));</span><br><span class="line">    rawTokens.push(value);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">return</span> &#123;</span><br><span class="line">    expression: tokens.join(<span class="string">'+'</span>),</span><br><span class="line">    tokens: rawTokens</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>最后，附上以上原理简略分析图：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">  &lt;div id=<span class="string">"app"</span> class=<span class="string">"demo"</span>&gt;</span><br><span class="line">    &lt;!-- 注意看注释 --&gt;</span><br><span class="line">    &lt;p&gt;</span><br><span class="line">        &lt;b&gt;很粗&lt;/b&gt;</span><br><span class="line">    &lt;/p&gt;</span><br><span class="line">    很简单，我就是一程序员</span><br><span class="line">    &lt;br/&gt;</span><br><span class="line">    &lt;h1&gt;</span><br><span class="line">      姓名：&#123;&#123;name&#125;&#125;，年龄：&#123;&#123;age&#125;&#125;，</span><br><span class="line">      请联系我吧</span><br><span class="line">    &lt;/h1&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line"></span><br><span class="line">解析流程如下：</span><br><span class="line"></span><br><span class="line">分析过程：tagName    stack1      lastTag    currentParent    stack2       root     children       parent    操作</span><br><span class="line"></span><br><span class="line">  div	   div	    [div]	   div          div         [div]          div	   div:[p]	  null	    入栈</span><br><span class="line">  comment  注释 ---&gt; 保存到currentParent.children中</span><br><span class="line">  p	   p	    [div,p]	   p          	p	    [div,p]	   div	   p:[b]          div       入栈</span><br><span class="line">  b        b	    [div,p,b]      b            b           [div,p,b]      div     b:[text]	  p         入栈</span><br><span class="line">  /b       b        [div,p]        p            p           [div,p]        div     ---            ---       出栈</span><br><span class="line">  /p       p        [div]          div          div         [div]          div	   ---            ---       出栈</span><br><span class="line">  text    文本 ---&gt; 经过处理后，保存到currentParent.children中</span><br><span class="line">  h1       h1       [div,h1]       h1           h1          [div,h1]       div    h1:[text]      div        入栈</span><br><span class="line">  text    文本 ---&gt; 经过处理后，保存到currentParent.children中</span><br><span class="line">  /h1      h1       [div]         div           div         [div]          div    ---      	  ---       出栈</span><br><span class="line">  /div     div      []            null          null        []             div    ---      	  ---       出栈</span><br><span class="line"></span><br><span class="line">最终:root = div:[p,h1]</span><br></pre></td></tr></table></figure></p>
+<p>最终AST结构如下：<br><img src="/images/technology/AST1.png" alt="AST结构"><br><img src="/images/technology/AST2.png" alt="AST结构"></p>
+<p>以上是我根据vue源码分析，抽出来的简单的template转化AST，文中若有什么不对的地方请大家帮忙指正，本人最近也一直在学习Vue的源码，希望能够拿出来与大家一起分享经验，接下来会继续更新后续的源码，如果觉得有需要可以相互交流。</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -259,73 +338,160 @@
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
         		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/04/24/welcome/" class="archive-article-date">
-  	<time datetime="2018-04-23T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-24</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/04/24/welcome/">Hi， Welcome to my blog</a>
-    </h1>
-  
-
-
-
-  <a href="javascript:;" class="archive-article-date">
-      <i class="icon-smile icon"></i> 阅读数:<span id="/2018/04/24/welcome/" class="pageViews">0</span>次
-  </a>
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
+      		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">welcome</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">template</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">intoduction</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">AST</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">源码</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/06/29/vue分析之template模板解析AST/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2018/06/11/Nodejs开发简单的脚手架工具/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Nodejs开发简单的脚手架工具</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是AST"><span class="toc-number">1.</span> <span class="toc-text">什么是AST</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#代码分析"><span class="toc-number">2.</span> <span class="toc-text">代码分析</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="vue分析之template模板解析AST" data-title="vue分析之template模板解析AST" data-url="http://yoursite.com/2018/06/29/vue分析之template模板解析AST/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
+<script>
+  $('.blog-check img').zoomify();
+</script>
           </div>
         </div>
       </div>
@@ -346,8 +512,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
