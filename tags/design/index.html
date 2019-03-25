@@ -17,20 +17,19 @@
   <link rel="stylesheet" href="/./zoomify/zoomify.min.css">
   <script src="/./zoomify/zoomify.min.js"></script>
   
-  <title>readline模块的使用 | Jeffery的博客</title>
+  <title>Tag: design | Jeffery的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="什么是readline  readline允许从可读流中以逐行的方式读取数据，比如process.stdin等。  在node.js命令行模式下默认引入了readline模块，但如果是使用node.js运行脚本的话，则需要自己通过require(‘readline’)方式手动引入该模块。 怎么使用readline">
-<meta name="keywords" content="nodejs,readline">
-<meta property="og:type" content="article">
-<meta property="og:title" content="readline模块的使用">
-<meta property="og:url" content="http://yoursite.com/2018/05/22/readline模块的使用/index.html">
+  <meta name="description" content="前端开发工程师一枚">
+<meta name="keywords" content="Jeffery">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Jeffery的博客">
+<meta property="og:url" content="http://yoursite.com/tags/design/index.html">
 <meta property="og:site_name" content="Jeffery的博客">
-<meta property="og:description" content="什么是readline  readline允许从可读流中以逐行的方式读取数据，比如process.stdin等。  在node.js命令行模式下默认引入了readline模块，但如果是使用node.js运行脚本的话，则需要自己通过require(‘readline’)方式手动引入该模块。 怎么使用readline">
+<meta property="og:description" content="前端开发工程师一枚">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-06-11T11:22:34.382Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="readline模块的使用">
-<meta name="twitter:description" content="什么是readline  readline允许从可读流中以逐行的方式读取数据，比如process.stdin等。  在node.js命令行模式下默认引入了readline模块，但如果是使用node.js运行脚本的话，则需要自己通过require(‘readline’)方式手动引入该模块。 怎么使用readline">
+<meta name="twitter:title" content="Jeffery的博客">
+<meta name="twitter:description" content="前端开发工程师一枚">
   
     <link rel="alternative" href="/atom.xml" title="Jeffery的博客" type="application/atom+xml">
   
@@ -213,276 +212,72 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-readline模块的使用" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      readline模块的使用
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2019" class="archive-year">2019</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2019/03/25/JS常见设计模式总结/" class="archive-article-date">
+  	<time datetime="2019-03-24T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-25</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2019/03/25/JS常见设计模式总结/">JavaScript设计模式总结</a>
     </h1>
   
 
 
 
   <a href="javascript:;" class="archive-article-date">
-      <i class="icon-smile icon"></i> 阅读数:<span id="/2018/05/22/readline模块的使用/" class="pageViews">0</span>次
+      <i class="icon-smile icon"></i> 阅读数:<span id="/2019/03/25/JS常见设计模式总结/" class="pageViews">0</span>次
   </a>
 
-        
-        <a href="/2018/05/22/readline模块的使用/" class="archive-article-date">
-  	<time datetime="2018-05-21T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-22</time>
-</a>
-        
-      </header>
-    
-    <!-- 目录内容 -->
-    
-      <div class="doc-pc" id="container">
-        <p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
-          <span class="btn-bg"></span>
-          <span class="btn-text">文章导航</span>
-        </p>
-        <div id="toc-article" class="toc-article">
-          <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
-          <strong class="toc-title">文章目录</strong>
-          <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是readline"><span class="toc-number">1.</span> <span class="toc-text">什么是readline</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#怎么使用readline"><span class="toc-number">2.</span> <span class="toc-text">怎么使用readline</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#创建实例"><span class="toc-number">2.1.</span> <span class="toc-text">创建实例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#第一种方式：只传入两个必传参数"><span class="toc-number">2.2.</span> <span class="toc-text">第一种方式：只传入两个必传参数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#第二种方式：可以传入其他非必需参数"><span class="toc-number">2.3.</span> <span class="toc-text">第二种方式：可以传入其他非必需参数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#实例"><span class="toc-number">2.4.</span> <span class="toc-text">实例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#方法"><span class="toc-number">2.5.</span> <span class="toc-text">方法</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1、rl-setPrompt-prompt"><span class="toc-number">2.5.1.</span> <span class="toc-text">1、rl.setPrompt([prompt])</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2、rl-prompt-preserveCursor"><span class="toc-number">2.5.2.</span> <span class="toc-text">2、rl.prompt([preserveCursor])</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3、rl-write-data-key"><span class="toc-number">2.5.3.</span> <span class="toc-text">3、rl.write(data[, key])</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4、rl-question-query-callback"><span class="toc-number">2.5.4.</span> <span class="toc-text">4、rl.question(query, callback)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5、rl-pause"><span class="toc-number">2.5.5.</span> <span class="toc-text">5、rl.pause()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6、rl-resume"><span class="toc-number">2.5.6.</span> <span class="toc-text">6、rl.resume()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#7、rl-close"><span class="toc-number">2.5.7.</span> <span class="toc-text">7、rl.close()</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#事件"><span class="toc-number">2.6.</span> <span class="toc-text">事件</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1、line事件"><span class="toc-number">2.6.1.</span> <span class="toc-text">1、line事件</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2、pause事件"><span class="toc-number">2.6.2.</span> <span class="toc-text">2、pause事件</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3、resume事件"><span class="toc-number">2.6.3.</span> <span class="toc-text">3、resume事件</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4、close事件"><span class="toc-number">2.6.4.</span> <span class="toc-text">4、close事件</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5、SIGCOUT（该事件在window系统上不起作用）"><span class="toc-number">2.6.5.</span> <span class="toc-text">5、SIGCOUT（该事件在window系统上不起作用）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6、SIGINT"><span class="toc-number">2.6.6.</span> <span class="toc-text">6、SIGINT</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#7、SIGTSTP（该事件在window系统上不起作用）"><span class="toc-number">2.6.7.</span> <span class="toc-text">7、SIGTSTP（该事件在window系统上不起作用）</span></a></li></ol></li></ol></li></ol>
-        </div>
-      </div>
-      <script type="text/javascript">
-      function showToc(){
-        var toc_article = document.getElementById("toc-article");
-        var show_toc_btn = document.getElementById("show-toc-btn");
-        toc_article.setAttribute("style","display:block");
-        show_toc_btn.setAttribute("style","display:none");
-        };
-      function showBtn(){
-        var toc_article = document.getElementById("toc-article");
-        var show_toc_btn = document.getElementById("show-toc-btn");
-        toc_article.setAttribute("style","display:none");
-        show_toc_btn.setAttribute("style","display:block");
-        };
-      </script>
+        <div class="article-info info-on-right">
           
-    <!-- 目录内容结束 -->
-    <div class="article-entry blog-check" itemprop="articleBody">
-      
-        <h3 id="什么是readline"><a href="#什么是readline" class="headerlink" title="什么是readline"></a>什么是readline</h3><p>  readline允许从可读流中以逐行的方式读取数据，比如process.stdin等。<br>  在node.js命令行模式下默认引入了readline模块，但如果是使用node.js运行脚本的话，则需要自己通过require(‘readline’)方式手动引入该模块。</p>
-<h3 id="怎么使用readline"><a href="#怎么使用readline" class="headerlink" title="怎么使用readline"></a>怎么使用readline</h3><a id="more"></a>
-<h4 id="创建实例"><a href="#创建实例" class="headerlink" title="创建实例"></a>创建实例</h4><p>&nbsp;&nbsp;首先、创建一个接口实例，提供一个Object类型的参数。参数如下：<br>input: 监听的可读流（必需）<br>output: 写入readline的可写流（必需）<br>completer: 用于 Tab 自动补全的可选函数（不常用）<br>terminal: 如果希望 input 和 output 流像 TTY 一样对待，那么传递参数 true ，并且经由 ANSI/VT100 转码。 默认情况下检查 isTTY 是否在 output 流上实例化。(不常用)<br>historySize: 保留行历史纪录最大值，为了禁用该值被设置为0，默认为30，只有在terminal被设置为true或通过一个内部输出检查时，这个选项才有作用，否则历史缓存机制不会初始化。(不常用)</p>
-<h4 id="第一种方式：只传入两个必传参数"><a href="#第一种方式：只传入两个必传参数" class="headerlink" title="第一种方式：只传入两个必传参数"></a>第一种方式：只传入两个必传参数</h4>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const readLine = require(<span class="string">'readline'</span>);</span><br><span class="line"><span class="built_in">let</span> rl = readLine.createInterface(process.stdin, process.stdout);</span><br></pre></td></tr></table></figure>
-<h4 id="第二种方式：可以传入其他非必需参数"><a href="#第二种方式：可以传入其他非必需参数" class="headerlink" title="第二种方式：可以传入其他非必需参数"></a>第二种方式：可以传入其他非必需参数</h4>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const readLine = require(<span class="string">'readline'</span>);</span><br><span class="line"><span class="built_in">let</span> rl = readLine.createInterface(&#123;</span><br><span class="line">  input: process.stdin,</span><br><span class="line">  output: process.stdout,</span><br><span class="line">  // 其他参数省略</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<h4 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h4>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">const readLine = require(<span class="string">'readline'</span>);</span><br><span class="line"><span class="built_in">let</span> rl = readLine.createInterface(&#123;</span><br><span class="line">  input: process.stdin,</span><br><span class="line">  output: process.stdout,</span><br><span class="line">  prompt: <span class="string">'&gt; 请输入'</span></span><br><span class="line">&#125;)</span><br><span class="line">// 调用</span><br><span class="line">rl.prompt(); // 控制台结果显示：&gt;请输入</span><br></pre></td></tr></table></figure>
-<p>   <font color="#f00">注意：一旦该代码被调用，Node.js程序将不会终止知道readline接口被关闭，因为接口会在输入流中不停的等待数据。</font></p>
-<h4 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h4><p>以下所有的实例均依据如下rl所创建：<br>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">const readLine = require(<span class="string">'readline'</span>);</span><br><span class="line"><span class="built_in">let</span> rl = readLine.createInterface(&#123;</span><br><span class="line">  input: process.stdin,</span><br><span class="line">  output: process.stdout</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
-<h5 id="1、rl-setPrompt-prompt"><a href="#1、rl-setPrompt-prompt" class="headerlink" title="1、rl.setPrompt([prompt])"></a>1、rl.setPrompt([prompt])</h5><p>&nbsp;&nbsp;设置提示符，当你使用node运行该文件，并且调用rl.prompt()时，会在终端看到你设置的提示prompt，即“&gt; 请输入”<br>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rl.setPrompt(<span class="string">'&gt; 请输入'</span>)</span><br></pre></td></tr></table></figure></p>
-<p>  <font color="#f00">注意：该方法和上面的实例参数配置是一样的效果</font></p>
-<h5 id="2、rl-prompt-preserveCursor"><a href="#2、rl-prompt-preserveCursor" class="headerlink" title="2、rl.prompt([preserveCursor])"></a>2、rl.prompt([preserveCursor])</h5><p>&nbsp;&nbsp;为用户输入准备好readline，将现有的setPrompt选项放到新的一行，让用户有一个新的地方开始输入。将preserveCursor设为true来防止光标位置被重新设定成0。<br>&nbsp;&nbsp;如需要换行输入，即在新的一行，输入信息，可在prompt中加入\n。<br>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rl.prompt(); // 控制台结果显示：&gt;请输入</span><br></pre></td></tr></table></figure></p>
-<h5 id="3、rl-write-data-key"><a href="#3、rl-write-data-key" class="headerlink" title="3、rl.write(data[, key])"></a>3、rl.write(data[, key])</h5><p>&nbsp;&nbsp;当使用readline.createInterface()创建实例时，，如果输入流为null或者undefined，则写入数据到输出流。<br>&nbsp;&nbsp;key是一个表示键序列的字面量对象，如果终端是TTY，则可用。<br>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rl.write(<span class="string">'Delete me!'</span>);</span><br><span class="line">// Simulate ctrl+u to delete the line written previously</span><br><span class="line">rl.write(null, &#123;ctrl: <span class="literal">true</span>, name: <span class="string">'u'</span>&#125;);</span><br></pre></td></tr></table></figure></p>
-<h5 id="4、rl-question-query-callback"><a href="#4、rl-question-query-callback" class="headerlink" title="4、rl.question(query, callback)"></a>4、rl.question(query, callback)</h5><p>&nbsp;&nbsp;预先制定提示内容query，将会在用户输入被应答后，触发执行指定的回掉函数callback。<br>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">rl.question(<span class="string">'你今年多大了?\n'</span>, <span class="keyword">function</span>(prompt) &#123;</span><br><span class="line">  console.log(<span class="string">'这是你输入的回答结果：'</span> + prompt);</span><br><span class="line">  rl.close();</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
-<h5 id="5、rl-pause"><a href="#5、rl-pause" class="headerlink" title="5、rl.pause()"></a>5、rl.pause()</h5><p>&nbsp;&nbsp;暂停readline的输入流，可以恢复，rl.resume()、rl.write()、rl.question()和rl.prompt()均可以恢复该输入流。<br>&nbsp;&nbsp;调用该方法会触发pause事件。</p>
-<h5 id="6、rl-resume"><a href="#6、rl-resume" class="headerlink" title="6、rl.resume()"></a>6、rl.resume()</h5><p>&nbsp;&nbsp;恢复readline的输入流。<br>&nbsp;&nbsp;调用该方法会触发resume事件。</p>
-<h5 id="7、rl-close"><a href="#7、rl-close" class="headerlink" title="7、rl.close()"></a>7、rl.close()</h5><p>&nbsp;&nbsp;关闭readline创建的实例，不控制输入输出流。<br>&nbsp;&nbsp;调用该方法会触发close事件。</p>
-<h4 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h4><h5 id="1、line事件"><a href="#1、line事件" class="headerlink" title="1、line事件"></a>1、line事件</h5><p>&nbsp;&nbsp;无论何时，在输入流接收了一个行结束符（\n, \r, 或者 \r\n）时触发，即在用户输入后，按了回车或者返回键时触发该事件。可以用来监听用户输入。<br>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rl.on(<span class="string">'line'</span>, <span class="keyword">function</span> (line) &#123;</span><br><span class="line">  console.log(<span class="string">'这是用户输入的内容：'</span> + line);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
-<h5 id="2、pause事件"><a href="#2、pause事件" class="headerlink" title="2、pause事件"></a>2、pause事件</h5><p>&nbsp;&nbsp;输入流被暂停时触发，即调用了rl.pause()，或者没有暂停输入流，在收到 <font color="#f00">SIGCONT/SIGINT</font>，且readline.Interfacce实例上并没有注册<font color="#f00">SIGCONT/SIGINT</font>监听器时，也会被触发，并且如果输入流在收到SIGTSIP之前就已经被暂停了，那么该事件也不会触发。<br>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rl.on(<span class="string">'pause'</span>, <span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">  console.log(<span class="string">'暂停输入流...'</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
-<h5 id="3、resume事件"><a href="#3、resume事件" class="headerlink" title="3、resume事件"></a>3、resume事件</h5><p>&nbsp;&nbsp;输入流重新启动时被触发，即调用了rl.resume()、或者rl.write()、rl.question()和rl.prompt()。<br>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rl.on(<span class="string">'resume'</span>, <span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">  console.log(<span class="string">'恢复输入流...'</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
-<h5 id="4、close事件"><a href="#4、close事件" class="headerlink" title="4、close事件"></a>4、close事件</h5><p>&nbsp;&nbsp;调用rl.close()方法时会触发该事件，或者输入流接收到“结束”事件。以下的任意一种情况都会触发close事件。<br>一旦close事件被触发，则认为readline.Interaface实例已经终止。<br>  1）、rl.close()方法被调用后，readline.Interaface实例便会放弃输入输出流的控制权。<br>  2）、输入流接收到自己的“end”事件。<br>  3）、输入流接收到<ctrl>-C，发送<font color="#f00">SIGINT</font>信号，并且在readline.Interfacce实例上并没有注册<font color="#f00">SIGINT</font>事件的监听器。<br>  4）、输入流接收到<ctrl>-D，发送传输结束信号（EOF，end-of-transmission）；<br>  5）、EOT：定界符，即输入单个或多个“&gt;”，并按下回车时。<br>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">rl.on(<span class="string">'close'</span>, <span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">  console.log(<span class="string">'关闭输入流...'</span>);</span><br><span class="line">  process.exit(0); // 退出当前进程</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></ctrl></ctrl></p>
-<h5 id="5、SIGCOUT（该事件在window系统上不起作用）"><a href="#5、SIGCOUT（该事件在window系统上不起作用）" class="headerlink" title="5、SIGCOUT（该事件在window系统上不起作用）"></a>5、SIGCOUT（该事件在window系统上不起作用）</h5><p>&nbsp;&nbsp;当使用<ctrl>-Z将Node.js进程移动到后台时，SIGCONT事件将会被触发。然后可以使用 fg(1) 命令将它移动到前台。<br>&nbsp;&nbsp;如果输入流在收到SIGTSIP之前就已经被暂停了，那么该事件就不会触发。</ctrl></p>
-<h5 id="6、SIGINT"><a href="#6、SIGINT" class="headerlink" title="6、SIGINT"></a>6、SIGINT</h5><p>&nbsp;&nbsp;当输入流收到<ctrl>-C命令时，我们熟知的SIGINT事件就会被触发。如果当时并没有注册任何SIGINT事件监听器，那么当输入流接收到SIGINT信号时，’pause’事件和’close’事件均会被触发。</ctrl></p>
-<h5 id="7、SIGTSTP（该事件在window系统上不起作用）"><a href="#7、SIGTSTP（该事件在window系统上不起作用）" class="headerlink" title="7、SIGTSTP（该事件在window系统上不起作用）"></a>7、SIGTSTP（该事件在window系统上不起作用）</h5><p>&nbsp;&nbsp;当输入流收到<ctrl>-Z命令时，我们熟知的SIGTSTP事件就会被触发。如果没有注册SIGTSTP事件监听器，那么当输入流收到SIGTSTP事件时，Node.js进程就将会被移动到后台。<br>&nbsp;&nbsp;如果输入在进程被发送到后台之前就已经被暂停了，那么’pause’和’SIGCONT’事件就将不会被触发。</ctrl></p>
-<p>参见<a href="http://nodejs.cn/doc/node/readline.html" target="_blank" rel="noopener">官方文档</a><br>参考案例<a href="https://mp.weixin.qq.com/s/ri7P0sJ_wh6bFoYwNeKPNQ" target="_blank" rel="noopener">看笑话</a></p>
-
-      
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">nodejs</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">readline</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">design</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/05/22/readline模块的使用/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2018/05/22/path模块的使用/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          path模块的使用
-        
-      </div>
-    </a>
   
   
-    <a href="/2018/05/17/vue插件之轮播/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">vue插件之轮播</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-        <div class="toc-container tooltip-left">
-            <i class="icon-font icon-category"></i>
-            <div class="tooltip tooltip-east">
-                <span class="tooltip-item">
-                </span>
-                <span class="tooltip-content">
-                    <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是readline"><span class="toc-number">1.</span> <span class="toc-text">什么是readline</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#怎么使用readline"><span class="toc-number">2.</span> <span class="toc-text">怎么使用readline</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#创建实例"><span class="toc-number">2.1.</span> <span class="toc-text">创建实例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#第一种方式：只传入两个必传参数"><span class="toc-number">2.2.</span> <span class="toc-text">第一种方式：只传入两个必传参数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#第二种方式：可以传入其他非必需参数"><span class="toc-number">2.3.</span> <span class="toc-text">第二种方式：可以传入其他非必需参数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#实例"><span class="toc-number">2.4.</span> <span class="toc-text">实例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#方法"><span class="toc-number">2.5.</span> <span class="toc-text">方法</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1、rl-setPrompt-prompt"><span class="toc-number">2.5.1.</span> <span class="toc-text">1、rl.setPrompt([prompt])</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2、rl-prompt-preserveCursor"><span class="toc-number">2.5.2.</span> <span class="toc-text">2、rl.prompt([preserveCursor])</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3、rl-write-data-key"><span class="toc-number">2.5.3.</span> <span class="toc-text">3、rl.write(data[, key])</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4、rl-question-query-callback"><span class="toc-number">2.5.4.</span> <span class="toc-text">4、rl.question(query, callback)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5、rl-pause"><span class="toc-number">2.5.5.</span> <span class="toc-text">5、rl.pause()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6、rl-resume"><span class="toc-number">2.5.6.</span> <span class="toc-text">6、rl.resume()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#7、rl-close"><span class="toc-number">2.5.7.</span> <span class="toc-text">7、rl.close()</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#事件"><span class="toc-number">2.6.</span> <span class="toc-text">事件</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1、line事件"><span class="toc-number">2.6.1.</span> <span class="toc-text">1、line事件</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2、pause事件"><span class="toc-number">2.6.2.</span> <span class="toc-text">2、pause事件</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3、resume事件"><span class="toc-number">2.6.3.</span> <span class="toc-text">3、resume事件</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4、close事件"><span class="toc-number">2.6.4.</span> <span class="toc-text">4、close事件</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5、SIGCOUT（该事件在window系统上不起作用）"><span class="toc-number">2.6.5.</span> <span class="toc-text">5、SIGCOUT（该事件在window系统上不起作用）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6、SIGINT"><span class="toc-number">2.6.6.</span> <span class="toc-text">6、SIGINT</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#7、SIGTSTP（该事件在window系统上不起作用）"><span class="toc-number">2.6.7.</span> <span class="toc-text">7、SIGTSTP（该事件在window系统上不起作用）</span></a></li></ol></li></ol></li></ol>
-                    </div>
-                </span>
-            </div>
-        </div>
-        
-    </div>
-</aside>
-
-
-
-  
-  <div class="duoshuo">
-	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="readline模块的使用" data-title="readline模块的使用" data-url="http://yoursite.com/2018/05/22/readline模块的使用/"></div>
-	<!-- 多说评论框 end -->
-	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-	<script type="text/javascript">
-	var duoshuoQuery = {short_name:"true"};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] 
-		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
-	</script>
-	<!-- 多说公共JS代码 end -->
-</div>
-
-  
-  
+    </div></section>
   
 
-  
-
-  
-
-  
+    
 
 
-<script>
-  $('.blog-check img').zoomify();
-</script>
           </div>
         </div>
       </div>
@@ -503,9 +298,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
