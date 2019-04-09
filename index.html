@@ -214,6 +214,144 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-聊聊vue2.5的patch过程（diff算法）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/09/聊聊vue2.5的patch过程（diff算法）/">聊聊vue2.5的patch过程（diff算法）</a>
+    </h1>
+  
+
+
+
+  <a href="javascript:;" class="archive-article-date">
+      <i class="icon-smile icon"></i> 阅读数:<span id="/2019/04/09/聊聊vue2.5的patch过程（diff算法）/" class="pageViews">0</span>次
+  </a>
+
+        
+        <a href="/2019/04/09/聊聊vue2.5的patch过程（diff算法）/" class="archive-article-date">
+  	<time datetime="2019-04-08T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-09</time>
+</a>
+        
+      </header>
+    
+    <!-- 目录内容 -->
+    
+    <!-- 目录内容结束 -->
+    <div class="article-entry blog-check" itemprop="articleBody">
+      
+        <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>Vue2.0开始，引入了Virtual Dom，了解diff过程可以让我们更高效的使用框架，必要时可以进行手工优化，本文针对的是Vue2.5.7版本中的Virtual Dom进行分析，力求以图文并茂的方式来分析diff的过程。</p>
+<p>其中patch过程中所用到的diff算法来源于<a href="https://github.com/snabbdom/snabbdom" target="_blank" rel="noopener">snabbdom</a></p>
+<p>PS: 如有不对之处，还望指正。</p>
+<h3 id="什么是VNode？"><a href="#什么是VNode？" class="headerlink" title="什么是VNode？"></a>什么是VNode？</h3><p>我们知道，浏览器中真实的DOM节点对象上的属性和方法比较多，如果每次都生成新的DOM对象，对性能是一种浪费，在这种情况下，Virtual Dom出现了，而VNode是用来模拟真实DOM节点，即把真实DOM树抽象成用JavaScript对象构成的抽象树，从而可以对这颗抽象树进行创建节点、删除节点以及修改节点等操作，在这过程中都不需要操作真实DOM，只需要操作JavaScript对象，当数据发生改变时，在改变真实DOM节点之前，会先比较相应的VNode的的数据，如果需要改变，才更新真实DOM，大大提升了性能。同时VNode不依赖平台。</p>
+<p>具体可以通过以下代码查看标准DOM对象上的方法和属性<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> dom = <span class="built_in">document</span>.createElement(<span class="string">'div'</span>);</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">in</span> dom) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(key)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>VNode构造函数具体结构如下（具体见源码）：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">VNode</span> </span>&#123;</span><br><span class="line">  tag: string | <span class="keyword">void</span>;</span><br><span class="line">  data: VNodeData | <span class="keyword">void</span>;</span><br><span class="line">  children: ?<span class="built_in">Array</span>&lt;VNode&gt;;</span><br><span class="line">  text: string | <span class="keyword">void</span>;</span><br><span class="line">  elm: Node | <span class="keyword">void</span>;</span><br><span class="line">  ns: string | <span class="keyword">void</span>;</span><br><span class="line">  context: Component | <span class="keyword">void</span>; <span class="comment">// rendered in this component's scope</span></span><br><span class="line">  key: string | number | <span class="keyword">void</span>;</span><br><span class="line">  componentOptions: VNodeComponentOptions | <span class="keyword">void</span>;</span><br><span class="line">  componentInstance: Component | <span class="keyword">void</span>; <span class="comment">// component instance</span></span><br><span class="line">  parent: VNode | <span class="keyword">void</span>; <span class="comment">// component placeholder node</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// strictly internal</span></span><br><span class="line">  raw: boolean; <span class="comment">// contains raw HTML? (server only)</span></span><br><span class="line">  isStatic: boolean; <span class="comment">// hoisted static node</span></span><br><span class="line">  isRootInsert: boolean; <span class="comment">// necessary for enter transition check</span></span><br><span class="line">  isComment: boolean; <span class="comment">// empty comment placeholder?</span></span><br><span class="line">  isCloned: boolean; <span class="comment">// is a cloned node?</span></span><br><span class="line">  isOnce: boolean; <span class="comment">// is a v-once node?</span></span><br><span class="line">  asyncFactory: <span class="built_in">Function</span> | <span class="keyword">void</span>; <span class="comment">// async component factory function</span></span><br><span class="line">  asyncMeta: <span class="built_in">Object</span> | <span class="keyword">void</span>;</span><br><span class="line">  isAsyncPlaceholder: boolean;</span><br><span class="line">  ssrContext: <span class="built_in">Object</span> | <span class="keyword">void</span>;</span><br><span class="line">  fnContext: Component | <span class="keyword">void</span>; <span class="comment">// real context vm for functional nodes</span></span><br><span class="line">  fnOptions: ?ComponentOptions; <span class="comment">// for SSR caching</span></span><br><span class="line">  fnScopeId: ?string; <span class="comment">// functional scope id support</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="mounted过程都发生了什么？"><a href="#mounted过程都发生了什么？" class="headerlink" title="mounted过程都发生了什么？"></a>mounted过程都发生了什么？</h3><p>在了解patch过程之前，先来大概了解下mounted过程，我们知道，Vue最终会调用$mounted方法来进行挂载。<br>一般来说，Vue有两条渲染路径，分别对应生命周期中mounted和updated两个钩子函数，分别如下：</p>
+<h4 id="emsp-1）组件实例初始化创建生成DOM"><a href="#emsp-1）组件实例初始化创建生成DOM" class="headerlink" title="&emsp;1）组件实例初始化创建生成DOM"></a>&emsp;1）组件实例初始化创建生成DOM</h4><p>  在该过程时，初始的Vnode为一个真实的DOM节点或者undefined（创建组件）</p>
+<blockquote>
+<p>$mounted =&gt; mountComponent =&gt; updateComponent =&gt; _render =&gt; _update =&gt; patch =&gt; createElm =&gt; nodeOps.insert =&gt;  removeVnodes </p>
+</blockquote>
+<h4 id="emsp-1）组件数据更新时更新DOM"><a href="#emsp-1）组件数据更新时更新DOM" class="headerlink" title="&emsp;1）组件数据更新时更新DOM"></a>&emsp;1）组件数据更新时更新DOM</h4><p>  在该过程，初始化Vnode为之前的prevVnode，不是真实DOM节点</p>
+<blockquote>
+<p>flushSchedulerQueue =&gt; watcher.run =&gt; watcher.get =&gt; updateComponent =&gt; _render =&gt; _update =&gt; patch =&gt; patchVnode =&gt; updateChildren</p>
+</blockquote>
+<p>其中，_render函数内部则是调用createElement方法将渲染函数转为VNode，而_update函数则是在内部调用patch方法将VNode转化为真实的DOM节点。</p>
+<p>createElement和patch过程是一个深度遍历过程，也就是”先子后父”，即先调用子类的mounted或updated钩子方法，在调用父类的该钩子。</p>
+<p>附上一张\$mounted流程图：</p>
+<p><img src="images/technology/mounted.png" alt="\$mounted过程"></p>
+<h3 id="patch原理分析"><a href="#patch原理分析" class="headerlink" title="patch原理分析"></a>patch原理分析</h3><p>patch过程也是一个深度遍历过程，比较只会在同层级进行，不会跨层级比较，借用一篇相当经典的文章<br><a href="https://calendar.perfplanet.com/2013/diff/" target="_blank" rel="noopener">React’s diff algorithm</a>中的图，图能很好的解释该过程，如下：</p>
+<p><img src="images/technology/diff.png" alt="React’s diff algorith"><br>patch接收6个参数，其中两个主要参数是vnode和oldVnode，也就是新旧两个虚拟节点，下面详细介绍下patch过程</p>
+<h4 id="1、patch逻辑"><a href="#1、patch逻辑" class="headerlink" title="1、patch逻辑"></a>1、patch逻辑</h4><p>1、如果vnode不存在，而oldVnode存在，则调用invodeDestoryHook进行销毁旧的节点<br><br>2、如果oldVnode不存在，而vnode存在，则调用createElm创建新的节点<br><br>3、如果oldVnode和vnode都存在<br><br>  &emsp;1）如果oldVnode不是真实节点且和vnode是相同节点（调用sameVnode比较），则调用<font color="#f00">patchVnode</font>进行patch<br><br>  &emsp;2）如果oldVnode是真实DOM节点，则先把真实DOM节点转为Vnode，再调用createElm创建新的DOM节点，并插入到真实的父节点中，同时调用removeVnodes将旧的节点从父节点中移除。<br></p>
+<h4 id="2、patchVnode逻辑"><a href="#2、patchVnode逻辑" class="headerlink" title="2、patchVnode逻辑"></a>2、patchVnode逻辑</h4><p>1、如果vnode和oldVnode完全一致，则什么都不做处理，直接返回<br><br>2、如果oldVnode和vnode都是静态节点，且具有相同的key，并且当vnode是克隆节点或是v-once指令控制的节点时，只需要把oldVnode的elm和oldVnode.children都复制到vnode上即可<br><br>3、如果vnode不是文本节点或注释节点<br><br>  &emsp;1）如果vnode的children和oldVnode的children都存在，且不完全相等，则调用<font color="#f00">updateChildren</font>更新子节点<br><br>  &emsp;2）如果只有vnode存在子节点，则调用addVnodes添加这些子节点<br><br>  &emsp;3）如果只有oldVnode存在子节点，则调用removeVnodes移除这些子节点<br><br>  &emsp;4）如果oldVnode和vnode都不存在子节点，但是oldVnode为文本节点或注释节点，则把oldVnode.elm的文本内容置为空<br></p>
+<p>4、如果vnode是文本节点或注释节点，并且vnode.text和oldVnode.text不相等，则更新oldVnode的文本内容为vnode.text</p>
+<h4 id="3、updateChildren逻辑"><a href="#3、updateChildren逻辑" class="headerlink" title="3、updateChildren逻辑"></a>3、updateChildren逻辑</h4><p>updateChildren方法主要通过while循环去对比2棵树的子节点来更新dom,通过对比新的来改变旧的，以达到新旧统一的目的。</p>
+<p>1、如果oldStartVnode不存在，则将oldStartVnode设置为下一个节点<br><br>2、如果oldEndVnode不存在，则将oldEndVnode设置为上一个节点<br><br>3、如果oldStartVnode和newStartVnode是同一个节点（sameVnode），则调用patchVnode进行patch重复流程，同时将oldStartVnode和newStartVnode设置为下一个节点<br><br>4、如果oldEndVnode和newEndVnode是同一个节点（sameVnode），则调用patchVnode进行patch重复流程，同时将oldEndVnode和newEndVnode设置为上一个节点<br><br>5、如果oldStartVnode和newEndVnode是同一个节点（sameVnode），则调用patchVnode进行patch重复流程，同时将oldStartVnode设置为下一个节点，newEndVnode设置为上一个节点，需要对DOM进行移动<br><br>6、如果oldEndVnode和newStartVnode是同一个节点（sameVnode），则调用patchVnode进行patch重复流程，同时将oldEndVnode设置为上一个节点，newStartVnode设置为下一个节点，需要对DOM进行移动<br><br>7、否则，尝试在oldChildren中查找与newStartVnode具有相同key的节点<br><br>  &emsp;1）如果没有找到，则说明newStartVnode是一个新节点，则调用createElem创建一个新节点，同时将newStartVnode设置为下一个节点<br><br>  &emsp;2）如果找到了具有相同key的节点<br><br>           &emsp;&emsp;（1）如果找到的节点与newStartVnode是同一个节点（sameVnode），则调用patchVnode进行patch重复流程，同时把newStartVnode.elm移动到oldStartVnode.elm之前，并把newStartVnode设置为下一个节点，需要对DOM进行移动<br><br>           &emsp;&emsp;（2）否则，调用createElm创建一个新的节点，同时把newStartVnode设置为下一个节点<br></p>
+<p>上述过程中，如果oldStartIdx &lt;= oldEndIdx &amp;&amp; newStartIdx &lt;= newEndIdx，即oldChildren和newChildren节点在遍历过程中如果任意一个的开始索引和结束索引重合，则表明遍历结束。</p>
+<p>遍历结束后，还需针对oldChildren和newChildren没有遍历的节点进行处理，分为以下两种情况：</p>
+<p>1）如果oldStartIdx大于oldEndIdx，说明newChildren可能还未遍历完，则需要调用addVnodes添加newStartIdx到newEndIdx之间的节点<br><br>2）如果newStartIdx大于newEndIdx，说明oldChildren可能还未遍历完，则需要调用removeVnodes移除oldStartIdx到oldEndIdx之间的节点<br></p>
+<p>附上一张流程图：</p>
+<p><img src="images/technology/patch.png" alt="patch过程"><br>针对以上过程，对其中的各个情况都分别简单举个例子，进行分析，可以自行debugger</p>
+<p><strong><em>情况一：oldStartVnode和newStartVnode是相同节点</em></strong></p>
+<p><img src="images/technology/sutation1.png" alt="情况一"><br><strong><em>情况二：oldEndVnode和newEndVnode是相同节点</em></strong></p>
+<p><img src="images/technology/sutation2.png" alt="情况二"><br><strong><em>情况三：oldStartVnode和newEndVnode是相同节点</em></strong></p>
+<p><img src="images/technology/sutation3.png" alt="情况三"><br><strong><em>情况四：oldEndVnode和newStartVnode是相同节点</em></strong></p>
+<p><img src="images/technology/sutation4.png" alt="情况四"><br><strong><em>情况五：oldStartVnode、oldEndVnode、newStartVnode和newEndVnode都不是相同节点</em></strong></p>
+<p><img src="images/technology/sutation5.png" alt="情况五"><br>附上总图：</p>
+<p><img src="images/technology/sutation1.png" alt="总图"></p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>1、不设key，newCh和oldCh只会进行头尾两端的相互比较，设key后，除了头尾两端的比较外，还会从用key生成的对象oldKeyToIdx中查找匹配的节点，所以为节点设置key可以更高效的利用dom。</p>
+<p>2、diff的遍历过程中，只要是对dom进行的操作都调用nodeOps.insertBefore，nodeOps.insertBefore只是原生insertBefore的简单封装。<br><br>比较分为两种，一种是有vnode.key的，一种是没有的。但这两种比较对真实dom的操作是一致的。</p>
+<p>3、对于与sameVnode(oldStartVnode, newStartVnode)和sameVnode(oldEndVnode,newEndVnode)为true的情况，不需要对dom进行移动。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">vnode</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">patch</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">diff</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/04/09/聊聊vue2.5的patch过程（diff算法）/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+<script>
+  $('.blog-check img').zoomify();
+</script>
+  
     <article id="post-常见的Web安全及其攻防姿势" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -681,15 +819,15 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">cli</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">nodejs</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">cli</a>
         		</li>
       		
 		</ul>
@@ -870,11 +1008,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">path</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">nodejs</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">nodejs</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">path</a>
         		</li>
       		
 		</ul>
@@ -1213,99 +1351,6 @@
   $('.blog-check img').zoomify();
 </script>
   
-    <article id="post-welcome" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/24/welcome/">Hi， Welcome to my blog</a>
-    </h1>
-  
-
-
-
-  <a href="javascript:;" class="archive-article-date">
-      <i class="icon-smile icon"></i> 阅读数:<span id="/2018/04/24/welcome/" class="pageViews">0</span>次
-  </a>
-
-        
-        <a href="/2018/04/24/welcome/" class="archive-article-date">
-  	<time datetime="2018-04-23T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-24</time>
-</a>
-        
-      </header>
-    
-    <!-- 目录内容 -->
-    
-    <!-- 目录内容结束 -->
-    <div class="article-entry blog-check" itemprop="articleBody">
-      
-        <p>This is my first blog on github from Blog Park, I’ll sharing technology blog irregularlly and discuss problems together.</p>
-<h3 id="分享一个面试题"><a href="#分享一个面试题" class="headerlink" title="分享一个面试题"></a>分享一个面试题</h3><p>// 编写一个javscript函数 fn，该函数有一个参数 n（数字类型），其返回值是一个数组，该数组内是 n 个随机且不重复的整数，且整数取值范围是 [2, 32]。</p>
-        
-          <a class="article-more-a" href="/2018/04/24/welcome/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">welcome</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">intoduction</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/24/welcome/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-<script>
-  $('.blog-check img').zoomify();
-</script>
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1464,7 +1509,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">cli</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">javascript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">nodejs</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1476,23 +1529,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">path</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">nodejs</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">readline</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">cli</a>
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+                <a href="javascript:void(0)" class="js-tag color5">path</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1536,6 +1581,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">vnode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">patch</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">diff</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
               </li>
              
@@ -1549,18 +1606,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">惰性模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">vnode</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">patch</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">diff</a>
               </li>
              
               <li class="article-tag-list-item">
